@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>{% block title %}Projet Bootstrap!{% endblock %}</title>
+        <title>{% block title %}BomberMan!{% endblock %}</title>
         <link rel="stylesheet" href="{{asset('css/style.css')}}">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -22,9 +22,9 @@
 
         {% include('AppBundle::header.html.twig') %}
         <div class="container">
-            <div class="row">
+            
             {% block body %}{% endblock %}
-        </div>
+        
     </div>
     {% include'AppBundle::footer.html.twig'%}
 
