@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="board")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BoardRepository")
  */
-class Board
-{
+class Board {
+
     /**
      * @var int
      *
@@ -20,6 +20,13 @@ class Board
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="grid", type="array")
+     */
+    private $grid;
 
     /**
      * @var array
@@ -35,14 +42,12 @@ class Board
      */
     private $players;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -53,8 +58,7 @@ class Board
      *
      * @return Board
      */
-    public function setCases($cases)
-    {
+    public function setCases($cases) {
         $this->cases = $cases;
 
         return $this;
@@ -65,8 +69,7 @@ class Board
      *
      * @return array
      */
-    public function getCases()
-    {
+    public function getCases() {
         return $this->cases;
     }
 
@@ -77,8 +80,7 @@ class Board
      *
      * @return Board
      */
-    public function setPlayers($players)
-    {
+    public function setPlayers($players) {
         $this->players = $players;
 
         return $this;
@@ -89,9 +91,32 @@ class Board
      *
      * @return array
      */
-    public function getPlayers()
-    {
+    public function getPlayers() {
         return $this->players;
     }
-}
 
+
+    /**
+     * Set grid
+     *
+     * @param array $grid
+     *
+     * @return Board
+     */
+    public function setGrid($grid)
+    {
+        $this->grid = $grid;
+
+        return $this;
+    }
+
+    /**
+     * Get grid
+     *
+     * @return array
+     */
+    public function getGrid()
+    {
+        return $this->grid;
+    }
+}
