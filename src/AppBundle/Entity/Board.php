@@ -94,4 +94,3 @@ class Board
         return $this->players;
     }
 }
-

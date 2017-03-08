@@ -2,18 +2,17 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class BoardController extends Controller
-{
+class BoardController extends Controller {
+
     /**
-     * @Route("/do")
+     * @Route("/do", name="doBoard")
      */
-    public function doAction()
-    {
+    public function doAction() {
         return $this->render('AppBundle:Board:do.html.twig', array(
-            // ...
+                        // ...
         ));
     }
 
