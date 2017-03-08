@@ -42,6 +42,10 @@ class Board {
      */
     private $players;
 
+    function __construct() {
+        $this->setGrid();
+    }
+
     /**
      * Get id
      *
@@ -95,7 +99,6 @@ class Board {
         return $this->players;
     }
 
-
     /**
      * Set grid
      *
@@ -103,9 +106,20 @@ class Board {
      *
      * @return Board
      */
-    public function setGrid($grid)
-    {
-        $this->grid = $grid;
+    public function setGrid() {
+// Génération de la grille 15X12
+        $aBoard = [];
+        $iCases = 0;
+        for ($y = 0; $y <= 12; $y++) {
+            $aBoard = array("y" => $y);
+            $iCases++;
+
+            for ($x = 0; $x <= 17; $x++) {
+                $aBoard = array("x" => $x);
+                $iCases++;
+            }
+        }
+        $this->grid = $aBoard;
 
         return $this;
     }
@@ -115,8 +129,8 @@ class Board {
      *
      * @return array
      */
-    public function getGrid()
-    {
+    public function getGrid() {
         return $this->grid;
     }
+
 }
