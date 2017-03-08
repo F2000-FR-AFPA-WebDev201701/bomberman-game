@@ -12,8 +12,7 @@ class DefaultController extends Controller {
      * @Route("/index", name="index")
      */
     public function indexAction() {
-        // replace this example code with whatever you need
-        return;
+        return $this->render("AppBundle::index.html.twig");
     }
 
 }
