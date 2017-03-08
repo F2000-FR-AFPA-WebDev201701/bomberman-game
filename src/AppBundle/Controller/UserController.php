@@ -2,12 +2,14 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\User;
+use AppBundle\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\User;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\UserType;
 
 class UserController extends Controller {
 
@@ -31,6 +33,22 @@ class UserController extends Controller {
             }
             return $this->redirectToRoute('index');
         }
+        return array('form' => $oForm->createView());
+    }
+
+    /**
+     * @Route("/modifUser", name="modifUser")
+     * @Template
+     */
+    public function modifUserAction(Request $request) {
+        $oUserForm = new User;
+        $oForm = $this->createFormBuilder($oUserForm)
+                ->add('login', TextType::class)
+                ->add('password', TextType::class)
+                ->add('save', SubmitType::class, array('label' => 'modifier'))
+                ->getForm();
+        $oForm->handleRequest($request);
+
         return array('form' => $oForm->createView());
     }
 

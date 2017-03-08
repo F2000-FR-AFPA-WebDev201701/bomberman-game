@@ -2,8 +2,12 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Game;
+use AppBundle\Form\GameType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class GameController extends Controller {
 
@@ -32,6 +36,18 @@ class GameController extends Controller {
         return $this->render('AppBundle:Game:join.html.twig', array(
                         // ...
         ));
+    }
+
+    /**
+     * @Route("/lobby", name="lobby")
+     * @Template
+     */
+    public function lobbyAction(Request $request) {
+        $oGame = new Game;
+        $oForm = $oForm = $this->createForm(GameType::class, $oGame);
+        $oForm->handleRequest($request);
+
+        return array('form' => $oForm->createView());
     }
 
 }
