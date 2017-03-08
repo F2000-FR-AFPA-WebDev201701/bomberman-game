@@ -47,6 +47,18 @@ class GameController extends Controller {
         $oForm = $oForm = $this->createForm(GameType::class, $oGame);
         $oForm->handleRequest($request);
 
+
+        if ($oForm->isSubmitted() && $oForm->isValid()) {
+            $oGame->setName($oGame->getName());
+            $oGame->setStatus(0);
+            $oGame->setNbPlayers($oGame->getNbPlayers());
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($oGame);
+            $em->flush();
+
+
+            return $this->redirectToRoute('doBoard', array('id' => $oGame->getId()));
+        }
         return array('form' => $oForm->createView());
     }
 

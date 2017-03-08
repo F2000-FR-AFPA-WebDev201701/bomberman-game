@@ -125,4 +125,3 @@ class Player
         return $this->hp;
     }
 }
-
