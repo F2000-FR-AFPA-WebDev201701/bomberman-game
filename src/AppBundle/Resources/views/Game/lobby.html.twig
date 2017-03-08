@@ -1,0 +1,36 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <div>
+        <h3>Créé votre partie !!!</h3>
+    </div>
+    <div>
+        {{form_start(form)}}
+        {{form_widget(form)}}
+        {{form_end(form)}}
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>Nom de la partie</th>
+                <th>Nombre de joueurs</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>partie de moi</td>
+                <td>1/4</td>
+                <td>Salut salut !</td>
+            </tr>
+            <tr>
+                <td>partie de lui</td>
+                <td>2/4</td>
+                <td>Coucou pouet</td>
+            </tr>
+            <tr>
+                <td>partie de l'autre</td>
+                <td>3/4</td>
+                <td>trydrthdrty</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
