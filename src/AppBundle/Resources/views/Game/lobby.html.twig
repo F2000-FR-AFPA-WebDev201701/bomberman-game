@@ -16,21 +16,13 @@
                 <th>Nombre de joueurs</th>
                 <th>Description</th>
             </tr>
-            <tr>
-                <td>partie de moi</td>
-                <td>1/4</td>
-                <td>Salut salut !</td>
-            </tr>
-            <tr>
-                <td>partie de lui</td>
-                <td>2/4</td>
-                <td>Coucou pouet</td>
-            </tr>
-            <tr>
-                <td>partie de l'autre</td>
-                <td>3/4</td>
-                <td>trydrthdrty</td>
-            </tr>
+            {% for game in allGame%}
+                <tr>
+                    <td>{{game.name}}</td>
+                    <td>{{game.nbPlayers}}</td>
+                    <td>Salut salut !</td>
+                </tr>
+            {% endfor %}
         </table>
     </div>
 {% endblock %}
