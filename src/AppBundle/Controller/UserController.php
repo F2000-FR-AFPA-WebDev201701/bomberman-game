@@ -41,6 +41,7 @@ class UserController extends Controller {
      * @Template
      */
     public function modifUserAction(Request $request) {
+        $sLogin = $request->getSession()->get('login');
         $oUserForm = new User;
         $oForm = $this->createFormBuilder($oUserForm)
                 ->add('login', TextType::class)
@@ -48,6 +49,52 @@ class UserController extends Controller {
                 ->add('save', SubmitType::class, array('label' => 'modifier'))
                 ->getForm();
         $oForm->handleRequest($request);
+
+        if ($oForm->isSubmitted()) {
+            $em = $this->getDoctrine()->getManager();
+            $repo = $em->getRepository('AppBundle:User');
+            $oUser = $repo->findOneByLogin($sLogin);
+            if ($oUser) {
+                $oUser->setLogin($oUserForm->getLogin());
+                $oUser->setPassword($oUserForm->getPassword());
+                $em->flush();
+                $sLog = $oUserForm->getLogin();
+                $request->getSession()->set('login', $sLog);
+                return $this->redirectToRoute('index');
+            }
+        }
+
+
+        return array('form' => $oForm->createView());
+    }
+
+    /**
+     * @Route("/createUser", name="createUser")
+     * @Template
+     */
+    public function createUserAction(Request $request) {
+        $oUserForm = new User;
+        $oForm = $this->createFormBuilder($oUserForm)
+                ->add('login', TextType::class)
+                ->add('password', TextType::class)
+                ->add('save', SubmitType::class, array('label' => 'Soumettre'))
+                ->getForm();
+        $oForm->handleRequest($request);
+        $sLogin = $oUserForm->getLogin();
+
+        if ($oForm->isSubmitted() && $oForm->isValid()) {
+            $repo = $this->getDoctrine()->getRepository('AppBundle:User');
+            $oUser = $repo->findOneByLogin($sLogin);
+            if (!$oUser) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($oUserForm);
+                $em->flush();
+                $request->getSession()->set('isConnected', 'true');
+                $sLog = $oUserForm->getLogin();
+                $request->getSession()->set('login', $sLog);
+                return $this->redirectToRoute('index');
+            }
+        }
 
         return array('form' => $oForm->createView());
     }
