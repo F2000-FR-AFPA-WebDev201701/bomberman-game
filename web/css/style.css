@@ -3,5 +3,9 @@ section {
 }
 
 header {
-    background: url("../image/Super-Bomberman-R.jpg") no-repeat -200px -200px;
+    background: url("../image/Super-Bomberman-R.jpg") no-repeat 0px -200px;
+}
+
+body{
+    height: 800px;
 }
