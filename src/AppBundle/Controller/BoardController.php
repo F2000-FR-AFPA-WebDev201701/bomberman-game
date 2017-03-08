@@ -11,8 +11,9 @@ class BoardController extends Controller {
     /**
      * @Route("/do")
      */
-    public function generateBoardAction() {
-
+    public function doAction() {
+        $oBoard = new Board;
+        return['board' => $oBoard];
     }
 
 }

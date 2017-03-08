@@ -140,7 +140,6 @@ class Board {
         return $this->grid;
     }
 
-
     /**
      * Set walls
      *
@@ -148,8 +147,8 @@ class Board {
      *
      * @return Board
      */
-    public function setWalls($walls)
-    {
+    public function setWalls() {
+
         $this->walls = $walls;
 
         return $this;
@@ -160,8 +159,8 @@ class Board {
      *
      * @return array
      */
-    public function getWalls()
-    {
+    public function getWalls() {
         return $this->walls;
     }
+
 }
