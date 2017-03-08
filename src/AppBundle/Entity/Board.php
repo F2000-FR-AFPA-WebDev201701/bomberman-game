@@ -31,6 +31,13 @@ class Board {
     /**
      * @var array
      *
+     * @ORM\Column(name="wall", type="array")
+     */
+    private $walls;
+
+    /**
+     * @var array
+     *
      * @ORM\Column(name="cases", type="array")
      */
     private $cases;
@@ -41,6 +48,10 @@ class Board {
      * @ORM\Column(name="players", type="array")
      */
     private $players;
+
+    function __construct() {
+        $this->setGrid();
+    }
 
     /**
      * Get id
@@ -95,7 +106,6 @@ class Board {
         return $this->players;
     }
 
-
     /**
      * Set grid
      *
@@ -103,9 +113,16 @@ class Board {
      *
      * @return Board
      */
-    public function setGrid($grid)
-    {
-        $this->grid = $grid;
+    public function setGrid() {
+        // Génération de la grille 15X12
+        $aBoard = [];
+        for ($y = 0; $y <= 12; $y++) {
+            $aBoard[$y] = [];
+            for ($x = 0; $x <= 17; $x++) {
+                $aBoard[$y][$x] = new BCase();
+            }
+        }
+        $this->grid = $aBoard;
 
         return $this;
     }
@@ -115,8 +132,31 @@ class Board {
      *
      * @return array
      */
-    public function getGrid()
-    {
+    public function getGrid() {
         return $this->grid;
     }
+
+    /**
+     * Set walls
+     *
+     * @param array $walls
+     *
+     * @return Board
+     */
+    public function setWalls() {
+
+        $this->walls = $walls;
+
+        return $this;
+    }
+
+    /**
+     * Get walls
+     *
+     * @return array
+     */
+    public function getWalls() {
+        return $this->walls;
+    }
+
 }
