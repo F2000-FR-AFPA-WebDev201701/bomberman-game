@@ -31,6 +31,13 @@ class Board {
     /**
      * @var array
      *
+     * @ORM\Column(name="wall", type="array")
+     */
+    private $walls;
+
+    /**
+     * @var array
+     *
      * @ORM\Column(name="cases", type="array")
      */
     private $cases;
@@ -133,4 +140,28 @@ class Board {
         return $this->grid;
     }
 
+
+    /**
+     * Set walls
+     *
+     * @param array $walls
+     *
+     * @return Board
+     */
+    public function setWalls($walls)
+    {
+        $this->walls = $walls;
+
+        return $this;
+    }
+
+    /**
+     * Get walls
+     *
+     * @return array
+     */
+    public function getWalls()
+    {
+        return $this->walls;
+    }
 }
