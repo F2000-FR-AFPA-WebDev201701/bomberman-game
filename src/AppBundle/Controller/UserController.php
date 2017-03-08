@@ -99,4 +99,13 @@ class UserController extends Controller {
         return array('form' => $oForm->createView());
     }
 
+    /**
+     * @Route("/logout", name="logout")
+     * @Template
+     */
+    public function logoutAction(Request $request) {
+        $request->getSession()->invalidate();
+        return $this->redirectToRoute('index');
+    }
+
 }
