@@ -33,3 +33,8 @@ body{
     background: url("../image/wall.png") no-repeat;
     background-size: cover;
 }
+
+.player {
+    background: url("../image/player.png") no-repeat;
+    background-size: cover;
+}

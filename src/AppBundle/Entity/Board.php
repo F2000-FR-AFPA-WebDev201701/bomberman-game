@@ -121,7 +121,8 @@ class Board {
             $aBoard[$y] = [];
             for ($x = 0; $x <= 17; $x++) {
                 $aBoard[$y][$x] = new BCase();
-                $aBoard[$y][$x]->setId($i++);
+                $aBoard[$y][$x]->setX($x);
+                $aBoard[$y][$x]->setY($y);
             }
         }
         $this->grid = $this->generateWall($aBoard);
