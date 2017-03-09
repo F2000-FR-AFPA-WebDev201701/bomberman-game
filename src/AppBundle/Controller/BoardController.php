@@ -12,10 +12,10 @@ class BoardController extends Controller {
      * @Route("/do", name="doBoard")
      */
     public function doAction() {
-        /*    $oBoard = new Board;
-          $aBoard = $oBoard->getGrid(); */
-        return $this->render('AppBundle:Board:do.html.twig'//, array('board' => $aBoard
-        );
+        $oBoard = new Board;
+        $aBoard = $oBoard->getGrid();
+        return $this->render('AppBundle:Board:do.html.twig', array('board' => $aBoard
+        ));
     }
 
 }
