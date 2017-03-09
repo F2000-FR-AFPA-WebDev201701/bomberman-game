@@ -114,12 +114,14 @@ class Board {
      * @return Board
      */
     public function setGrid() {
-        // Génération de la grille 15X12
+        // Génération de la grille 17X12
         $aBoard = [];
+        $i = 0;
         for ($y = 0; $y <= 12; $y++) {
             $aBoard[$y] = [];
             for ($x = 0; $x <= 17; $x++) {
                 $aBoard[$y][$x] = new BCase();
+                $aBoard[$y][$x]->setId($i++);
             }
         }
         $this->grid = $aBoard;

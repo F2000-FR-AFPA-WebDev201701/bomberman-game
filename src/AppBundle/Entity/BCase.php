@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="b_case")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BCaseRepository")
  */
-class BCase
-{
+class BCase {
+
     /**
      * @var int
      *
@@ -35,15 +35,24 @@ class BCase
      */
     private $player;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param \stdClass $id
+     *
+     * @return BCase
+     */
+    function setId($id) {
+        $this->id = $id;
     }
 
     /**
@@ -53,8 +62,7 @@ class BCase
      *
      * @return BCase
      */
-    public function setItem($item)
-    {
+    public function setItem($item) {
         $this->item = $item;
 
         return $this;
@@ -65,8 +73,7 @@ class BCase
      *
      * @return \stdClass
      */
-    public function getItem()
-    {
+    public function getItem() {
         return $this->item;
     }
 
@@ -77,8 +84,7 @@ class BCase
      *
      * @return BCase
      */
-    public function setPlayer($player)
-    {
+    public function setPlayer($player) {
         $this->player = $player;
 
         return $this;
@@ -89,8 +95,8 @@ class BCase
      *
      * @return \stdClass
      */
-    public function getPlayer()
-    {
+    public function getPlayer() {
         return $this->player;
     }
+
 }
