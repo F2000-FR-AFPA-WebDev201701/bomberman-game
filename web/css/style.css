@@ -27,3 +27,7 @@ body{
     background: yellow;
     border: solid black 1px;
 }
+
+.wall {
+    background: lightgrey;
+}
