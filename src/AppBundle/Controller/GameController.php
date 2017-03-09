@@ -47,7 +47,30 @@ class GameController extends Controller {
         $oForm = $oForm = $this->createForm(GameType::class, $oGame);
         $oForm->handleRequest($request);
 
-        return array('form' => $oForm->createView());
+
+        if ($oForm->isSubmitted() && $oForm->isValid()) {
+            $oGame->setStatus(0);
+
+
+            $repo = $this->getDoctrine()->getRepository('AppBundle:User');
+            $sUserLogin = $request->getSession()->get('login');
+            $oUser = $repo->findOneByLogin($sUserLogin);
+            $oGame->setUsers($oUser->getId());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($oGame);
+            $em->flush();
+
+
+            return $this->redirectToRoute('doBoard', array('id' => $oGame->getId()));
+        }
+
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Game');
+
+        $oAllGame = $repo->findAll();
+
+        return array('form' => $oForm->createView(),
+            'allGame' => $oAllGame);
     }
 
 }

@@ -31,6 +31,13 @@ class Board {
     /**
      * @var array
      *
+     * @ORM\Column(name="wall", type="array")
+     */
+    private $walls;
+
+    /**
+     * @var array
+     *
      * @ORM\Column(name="cases", type="array")
      */
     private $cases;
@@ -41,6 +48,10 @@ class Board {
      * @ORM\Column(name="players", type="array")
      */
     private $players;
+
+    function __construct() {
+        $this->setGrid();
+    }
 
     /**
      * Get id
@@ -95,7 +106,6 @@ class Board {
         return $this->players;
     }
 
-
     /**
      * Set grid
      *
@@ -103,9 +113,19 @@ class Board {
      *
      * @return Board
      */
-    public function setGrid($grid)
-    {
-        $this->grid = $grid;
+    public function setGrid() {
+        // Génération de la grille 17X12
+        $aBoard = [];
+        $i = 0;
+        for ($y = 0; $y <= 12; $y++) {
+            $aBoard[$y] = [];
+            for ($x = 0; $x <= 16; $x++) {
+                $aBoard[$y][$x] = new BCase();
+                $aBoard[$y][$x]->setX($x);
+                $aBoard[$y][$x]->setY($y);
+            }
+        }
+        $this->grid = $this->generateWall($aBoard);
 
         return $this;
     }
@@ -115,8 +135,48 @@ class Board {
      *
      * @return array
      */
-    public function getGrid()
-    {
+    public function getGrid() {
         return $this->grid;
     }
+
+    /**
+     * Set walls
+     *
+     * @param array $walls
+     *
+     * @return Board
+     */
+    public function setWalls() {
+
+        $this->walls = $walls;
+
+        return $this;
+    }
+
+    /**
+     * Get walls
+     *
+     * @return array
+     */
+    public function getWalls() {
+        return $this->walls;
+    }
+
+    public function generateWall($aBoard) {
+        for ($y = 0; $y <= 12; $y++) {
+            for ($x = 0; $x <= 16; $x++) {
+                if ($y == 0 || $y == 12 || $x == 0 || $x == 16) {
+                    $oItem = new Item();
+                    $oItem->setNom('wall');
+                    $aBoard[$y][$x]->setItem($oItem);
+                } elseif ($x % 2 == 0 && $y % 2 == 0) {
+                    $oItem = new Item();
+                    $oItem->setNom('wall');
+                    $aBoard[$y][$x]->setItem($oItem);
+                }
+            }
+        }
+        return $aBoard;
+    }
+
 }

@@ -1,0 +1,16 @@
+{% extends "AppBundle::base.html.twig" %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <section class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-list"></span> Créer votre compte </h3>
+            </div><br>
+            {{form_start(form)}}
+            {{form_widget(form)}}
+            {{form_end(form)}}
+        </div>
+    </section>
+{% endblock %}

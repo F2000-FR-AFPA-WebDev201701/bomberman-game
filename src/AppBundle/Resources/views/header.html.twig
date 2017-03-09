@@ -9,7 +9,7 @@
         {%else%}
             <div class="well col-md-3">
                 <span >Bonjour {{ app.request.session.get('login') }} !</span><br>
-                <a  href="#">Déconnexion</a>
+                <a  href="{{path('logout')}}">Déconnexion</a>
             </div>
         {%endif%}
 

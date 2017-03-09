@@ -3,9 +3,9 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type as FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type as FormType;
 
 class GameType extends AbstractType {
 
@@ -13,10 +13,13 @@ class GameType extends AbstractType {
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('name')
-                ->add('status')
-                ->add('data')
-                ->add('create', FormType\SubmitType::class, array('label' => 'creer'))
+        $builder->add('name', FormType\TextType::class)
+                ->add('nbPlayers', FormType\ChoiceType::class, array('choices' => array(
+                        '1' => '1',
+                        '2' => '2',
+                        '3' => '3',
+                        '4' => '4')))
+                ->add('create', FormType\SubmitType::class, array('label' => 'create'))
                 ->getForm();
     }
 

@@ -2,16 +2,17 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Game
  *
  * @ORM\Table(name="game")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\GameRepository")
+ * @ORM\Entity(repositoryClass="GameRepository")
  */
-class Game
-{
+class Game {
+
     /**
      * @var int
      *
@@ -29,6 +30,21 @@ class Game
     private $name;
 
     /**
+     *
+     * @var integer
+     *
+     * @ORM\Column(name="nbPlayers", type="integer", length=1)
+     */
+    private $nbPlayers;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="users", type="string", length=255, nullable=true)
+     */
+    private $users;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="status", type="integer")
@@ -38,18 +54,16 @@ class Game
     /**
      * @var string
      *
-     * @ORM\Column(name="data", type="string", length=255)
+     * @ORM\Column(name="data", type="string", length=255, nullable=true)
      */
     private $data;
-
 
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -60,8 +74,7 @@ class Game
      *
      * @return Game
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -72,8 +85,7 @@ class Game
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -84,8 +96,7 @@ class Game
      *
      * @return Game
      */
-    public function setStatus($status)
-    {
+    public function setStatus($status) {
         $this->status = $status;
 
         return $this;
@@ -96,8 +107,7 @@ class Game
      *
      * @return int
      */
-    public function getStatus()
-    {
+    public function getStatus() {
         return $this->status;
     }
 
@@ -108,8 +118,7 @@ class Game
      *
      * @return Game
      */
-    public function setData($data)
-    {
+    public function setData($data) {
         $this->data = $data;
 
         return $this;
@@ -120,9 +129,52 @@ class Game
      *
      * @return string
      */
-    public function getData()
-    {
+    public function getData() {
         return $this->data;
     }
-}
 
+    /**
+     * Set nbPlayers
+     *
+     * @param integer $nbPlayers
+     *
+     * @return Game
+     */
+    public function setNbPlayers($nbPlayers) {
+        $this->nbPlayers = $nbPlayers;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPlayers
+     *
+     * @return integer
+     */
+    public function getNbPlayers() {
+        return $this->nbPlayers;
+    }
+
+    /**
+     * Set users
+     *
+     * @param string $users
+     *
+     * @return Game
+     */
+    public function setUsers($users) {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return string
+     */
+    public function getUsers() {
+        return $this->users;
+    }
+
+}

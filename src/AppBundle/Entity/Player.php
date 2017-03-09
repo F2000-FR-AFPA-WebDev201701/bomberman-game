@@ -2,16 +2,17 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Repository\PlayerRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Player
  *
  * @ORM\Table(name="player")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PlayerRepository")
+ * @ORM\Entity(repositoryClass="PlayerRepository")
  */
-class Player
-{
+class Player {
+
     /**
      * @var int
      *
@@ -42,14 +43,12 @@ class Player
      */
     private $hp;
 
-
     /**
      * Get id
      *
      * @return int
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -60,8 +59,7 @@ class Player
      *
      * @return Player
      */
-    public function setPseudo($pseudo)
-    {
+    public function setPseudo($pseudo) {
         $this->pseudo = $pseudo;
 
         return $this;
@@ -72,8 +70,7 @@ class Player
      *
      * @return string
      */
-    public function getPseudo()
-    {
+    public function getPseudo() {
         return $this->pseudo;
     }
 
@@ -84,8 +81,7 @@ class Player
      *
      * @return Player
      */
-    public function setScore($score)
-    {
+    public function setScore($score) {
         $this->score = $score;
 
         return $this;
@@ -96,8 +92,7 @@ class Player
      *
      * @return int
      */
-    public function getScore()
-    {
+    public function getScore() {
         return $this->score;
     }
 
@@ -108,8 +103,7 @@ class Player
      *
      * @return Player
      */
-    public function setHp($hp)
-    {
+    public function setHp($hp) {
         $this->hp = $hp;
 
         return $this;
@@ -120,9 +114,8 @@ class Player
      *
      * @return int
      */
-    public function getHp()
-    {
+    public function getHp() {
         return $this->hp;
     }
-}
 
+}

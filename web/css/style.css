@@ -9,3 +9,32 @@ header {
 body{
     height: 800px;
 }
+
+.jeu {
+    display: flex;
+    flex-direction:column;
+}
+
+.ligne {
+    justify-content: center;
+    display: flex;
+}
+
+.case {
+    justify-content: center;
+    height: 2.6em;
+    width: 2.6em;
+    background: url("../image/green.png") no-repeat;
+    background-size: cover;
+    /*border: solid lightslategray 1px;*/
+}
+
+.wall {
+    background: url("../image/wall.png") no-repeat;
+    background-size: cover;
+}
+
+.player {
+    background: url("../image/player.png") no-repeat;
+    background-size: cover;
+}
