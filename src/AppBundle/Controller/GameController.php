@@ -49,16 +49,14 @@ class GameController extends Controller {
 
 
         if ($oForm->isSubmitted() && $oForm->isValid()) {
-            $oGame->setName($oGame->getName());
             $oGame->setStatus(0);
-            $oGame->setNbPlayers($oGame->getNbPlayers());
 
-            /*
-              $repo = $this->getDoctrine()->getRepository('AppBundle:User');
-              $sUserLogin = $request->getSession()->get('login');
-              $oUser = $repo->findOneBy(array('login' => $sUserLogin));
-              $oGame->setUsers($oUser->getId());
-             */
+
+            $repo = $this->getDoctrine()->getRepository('AppBundle:User');
+            $sUserLogin = $request->getSession()->get('login');
+            $oUser = $repo->findOneByLogin($sUserLogin);
+            $oGame->setUsers($oUser->getId());
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($oGame);
             $em->flush();

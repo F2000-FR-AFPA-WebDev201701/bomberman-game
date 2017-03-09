@@ -119,7 +119,7 @@ class Board {
         $i = 0;
         for ($y = 0; $y <= 12; $y++) {
             $aBoard[$y] = [];
-            for ($x = 0; $x <= 17; $x++) {
+            for ($x = 0; $x <= 16; $x++) {
                 $aBoard[$y][$x] = new BCase();
                 $aBoard[$y][$x]->setId($i++);
             }
@@ -163,8 +163,12 @@ class Board {
 
     public function generateWall($aBoard) {
         for ($y = 0; $y <= 12; $y++) {
-            for ($x = 0; $x <= 17; $x++) {
-                if ($y == 0 || $y == 12 || $x == 0 || $x == 17) {
+            for ($x = 0; $x <= 16; $x++) {
+                if ($y == 0 || $y == 12 || $x == 0 || $x == 16) {
+                    $oItem = new Item();
+                    $oItem->setNom('wall');
+                    $aBoard[$y][$x]->setItem($oItem);
+                } elseif ($x % 2 == 0 && $y % 2 == 0) {
                     $oItem = new Item();
                     $oItem->setNom('wall');
                     $aBoard[$y][$x]->setItem($oItem);
