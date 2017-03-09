@@ -10,9 +10,20 @@ body{
     height: 800px;
 }
 
+.jeu {
+    display: flex;
+    flex-direction:column;
+}
+
+.ligne {
+    justify-content: center;
+    display: flex;
+}
+
 .case {
-    height: 58px;
-    width: 58px;
+    justify-content: center;
+    height: 2.6em;
+    width: 2.6em;
     background: yellow;
     border: solid black 1px;
 }
