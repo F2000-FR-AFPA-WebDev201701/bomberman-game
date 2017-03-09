@@ -38,6 +38,13 @@ class Game {
     private $nbPlayers;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="users", type="string", length=255)
+     */
+    private $users;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="status", type="integer")
@@ -146,6 +153,28 @@ class Game {
      */
     public function getNbPlayers() {
         return $this->nbPlayers;
+    }
+
+    /**
+     * Set users
+     *
+     * @param string $users
+     *
+     * @return Game
+     */
+    public function setUsers($users) {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    /**
+     * Get users
+     *
+     * @return string
+     */
+    public function getUsers() {
+        return $this->users;
     }
 
 }
