@@ -30,12 +30,43 @@
     </div>
 
 
+    <script src="{{asset('js/jquery-3.1.1.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    {% block javascripts %}
+        <script>
+
+            $(document).ready(function () {
+                $(window).keyup(function (event) {
+                    var keypress = event.which;
+                    switch (keypress) {
+                        case 90:
+                            console.log("On monte !");
+                            /*
+                             $.ajax({
+                             async: true,
+                             type:'GET'
+                             });
+                             */
+                            break;
+                        case 81:
+                            console.log("On va à gauche !");
+                            break;
+                        case 83:
+                            console.log("On descends !");
+                            break;
+                        case 68:
+                            console.log("On va à droite !");
+                            break;
+                    }
+                });
+            });
+
+        </script>
+    {% endblock %}
     {% include'AppBundle::footer.html.twig'%}
 
 
-{% block javascripts %}{% endblock %}
-<script src="{{asset('js/jquery-3.1.1.js')}}"></script>
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
+
 </body>
 
 </html>
