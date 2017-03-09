@@ -20,6 +20,25 @@ class BCase {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    private $x;
+
+    function getX() {
+        return $this->x;
+    }
+
+    function getY() {
+        return $this->y;
+    }
+
+    function setX($x) {
+        $this->x = $x;
+    }
+
+    function setY($y) {
+        $this->y = $y;
+    }
+
+    private $y;
 
     /**
      * @var \stdClass
