@@ -15,6 +15,7 @@ class GameController extends Controller {
      * @Route("/begin")
      */
     public function beginAction() {
+
         return $this->render('AppBundle:Game:begin.html.twig', array(
                         // ...
         ));
@@ -71,6 +72,24 @@ class GameController extends Controller {
 
         return array('form' => $oForm->createView(),
             'allGame' => $oAllGame);
+    }
+
+    /**
+     * @Route("/play/{id}/{id_game}", name="play")
+     * @Template
+     */
+    public function playAction($id, $action) {
+        switch ($action) {
+
+        }
+    }
+
+    /**
+     * @Route("/refresh", name="refresh")
+     * @Template
+     */
+    public function refreshAction() {
+        
     }
 
 }
