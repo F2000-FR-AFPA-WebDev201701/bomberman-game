@@ -124,7 +124,7 @@ class Board {
                 $aBoard[$y][$x]->setId($i++);
             }
         }
-        $this->grid = $aBoard;
+        $this->grid = $this->generateWall($aBoard);
 
         return $this;
     }
@@ -159,6 +159,19 @@ class Board {
      */
     public function getWalls() {
         return $this->walls;
+    }
+
+    public function generateWall($aBoard) {
+        for ($y = 0; $y <= 12; $y++) {
+            for ($x = 0; $x <= 17; $x++) {
+                if ($y == 0 || $y == 12 || $x == 0 || $x == 17) {
+                    $oItem = new Item();
+                    $oItem->setNom('wall');
+                    $aBoard[$y][$x]->setItem($oItem);
+                }
+            }
+        }
+        return $aBoard;
     }
 
 }
