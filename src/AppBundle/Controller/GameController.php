@@ -59,7 +59,13 @@ class GameController extends Controller {
 
             return $this->redirectToRoute('doBoard', array('id' => $oGame->getId()));
         }
-        return array('form' => $oForm->createView());
+
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Game');
+
+        $oAllGame = $repo->findAll();
+
+        return array('form' => $oForm->createView(),
+            'allGame' => $oAllGame);
     }
 
 }
