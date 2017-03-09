@@ -6,7 +6,15 @@
     <h2 class="text-center">Let's Play!</h2>
     <div class="row jumbotron">
         <section class="col-md-8">
-
+            <table>
+                {% for y, ligne in board%}
+                    <tr>
+                        {% for x, case in ligne %}
+                            <td id="case_{{x}}_{{y}}" class="case"></td>
+                        {% endfor%}
+                    </tr>
+                {% endfor %}
+            </table>
         </section>
         <section class="col-md-4">
             <img src="{{asset('image/hud_screenshot.png')}} "title="logo" alt="logo" />
