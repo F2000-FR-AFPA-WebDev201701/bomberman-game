@@ -23,5 +23,50 @@
     </div>
 
 {% endblock %}
+{% block javascripts %}
+    <script>
 
+        $(document).ready(function () {
+            $(window).keyup(function (event) {
+
+                var action;
+                var keypress = event.which;
+                switch (keypress) {
+                    case 90:
+                        //console.log("On monte !");
+
+                        action = 'up';
+
+                        break;
+                    case 81:
+                        //console.log("On va à gauche !");
+
+                        action = 'left';
+
+                        break;
+                    case 83:
+                        //console.log("On descends !");
+
+                        action = 'down';
+
+                        break;
+                    case 68:
+                        //console.log("On va à droite !");
+
+                        action = 'right';
+
+                        break;
+                }
+                var path = {{ path('play', {'action': action, 'id': id}) }};
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: path
+                        });
+
+            });
+        });
+
+    </script>
+{% endblock %}
 
