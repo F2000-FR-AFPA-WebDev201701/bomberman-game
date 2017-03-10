@@ -79,10 +79,13 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/play/{id}/{id_game}", name="play")
+     * @Route("/play/{action}/{id_game}", name="play")
      * @Template
      */
     public function playAction($id, $action) {
+        //recup game en BDD
+        //unserialize $oGame->data
+        //test action
         switch ($action) {
 
         }
