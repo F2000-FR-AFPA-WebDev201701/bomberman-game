@@ -48,6 +48,7 @@ class Board {
      * @ORM\Column(name="players", type="array")
      */
     private $players;
+    private $idGame;
 
     function __construct() {
         $this->setGrid();
@@ -167,6 +168,14 @@ class Board {
      */
     public function getWalls() {
         return $this->walls;
+    }
+
+    function getIdGame() {
+        return $this->idGame;
+    }
+
+    function setIdGame($idGame) {
+        $this->idGame = $idGame;
     }
 
     public function generateWall($aBoard) {

@@ -3,11 +3,10 @@
 {% block title %}Let's Play !!!!{% endblock %}
 
 {% block body %}
-    <h2 class="text-center">Let's Play!</h2>
+    <h2 class="text-center">Let's Play!</h2>{{id}}
     <div class="row jumbotron">
 
         <section class="col-md-8">
-
             {% for y, ligne in board%}
                 <div class="ligne">
                     {% for x, case in ligne %}
