@@ -60,11 +60,13 @@ class GameController extends Controller {
             $oUser = $repo->findOneByLogin($sUserLogin);
             $oGame->setUsers($oUser->getId());
 
-            $this->createBoard($oGame);
-
             $em = $this->getDoctrine()->getManager();
             $em->persist($oGame);
             $em->flush();
+
+            $this->createBoard($oGame);
+            $em->flush();
+
 
 
             return $this->redirectToRoute('refresh', array('id' => $oGame->getId()));
@@ -117,14 +119,16 @@ class GameController extends Controller {
         //unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
         $aBoard = $oBoard->getGrid();
+        $idBoard = $oBoard->getIdGame();
 
-        return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard));
+        return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $idBoard));
     }
 
     public function createBoard($oGame) {
 
         $oBoard = new Board;
         $oBoard->setPlayers($oGame->getUsers());
+        $oBoard->setIdGame($oGame->getId());
         $seriaBoard = serialize($oBoard);
         $oGame->setData($seriaBoard);
     }
