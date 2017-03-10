@@ -16,6 +16,8 @@ class BoardController extends Controller {
         $oBoard = new Board;
         $oPlayer = new Player;
         $aBoard = $oBoard->getGrid();
+        $oPlayer->setX(1);
+        $oPlayer->setY(1);
         $aBoard[1][1]->setPlayer($oPlayer);
         return $this->render('AppBundle:Board:do.html.twig', array('board' => $aBoard
         ));

@@ -44,10 +44,19 @@ class Player {
     private $hp;
 
     /**
-     * Get id
+     * @var int
      *
-     * @return int
+     * @ORM\Column(name="y", type="integer")
      */
+    private $y;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="x", type="integer")
+     */
+    private $x;
+
     public function getId() {
         return $this->id;
     }
@@ -118,4 +127,52 @@ class Player {
         return $this->hp;
     }
 
+
+    /**
+     * Set y
+     *
+     * @param integer $y
+     *
+     * @return Player
+     */
+    public function setY($y)
+    {
+        $this->y = $y;
+
+        return $this;
+    }
+
+    /**
+     * Get y
+     *
+     * @return integer
+     */
+    public function getY()
+    {
+        return $this->y;
+    }
+
+    /**
+     * Set x
+     *
+     * @param integer $x
+     *
+     * @return Player
+     */
+    public function setX($x)
+    {
+        $this->x = $x;
+
+        return $this;
+    }
+
+    /**
+     * Get x
+     *
+     * @return integer
+     */
+    public function getX()
+    {
+        return $this->x;
+    }
 }
