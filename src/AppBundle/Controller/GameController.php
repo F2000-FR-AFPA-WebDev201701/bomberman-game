@@ -2,7 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Board;
 use AppBundle\Entity\Game;
+use AppBundle\Entity\Player;
 use AppBundle\Form\GameType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -58,6 +60,8 @@ class GameController extends Controller {
             $oUser = $repo->findOneByLogin($sUserLogin);
             $oGame->setUsers($oUser->getId());
 
+            $this->createBoard($oGame);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($oGame);
             $em->flush();
@@ -89,7 +93,15 @@ class GameController extends Controller {
      * @Template
      */
     public function refreshAction() {
-        
+
+    }
+
+    public function createBoard($oGame) {
+
+        $oBoard = new Board;
+        $oBoard->setPlayers($oGame->getUsers());
+        $seriaBoard = serialize($oBoard);
+        $oGame->setData($seriaBoard);
     }
 
 }

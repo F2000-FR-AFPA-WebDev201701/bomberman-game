@@ -51,6 +51,7 @@ class Board {
 
     function __construct() {
         $this->setGrid();
+        $this->setPlayers();
     }
 
     /**
@@ -91,7 +92,13 @@ class Board {
      *
      * @return Board
      */
-    public function setPlayers($players) {
+    public function setPlayers() {
+        $aBoard = $this->getGrid();
+        $oPlayer = new Player;
+        $oPlayer->setX(1);
+        $oPlayer->setY(1);
+        $aBoard[1][1]->setPlayer($oPlayer);
+        $players['1'] = $oPlayer;
         $this->players = $players;
 
         return $this;
@@ -114,7 +121,7 @@ class Board {
      * @return Board
      */
     public function setGrid() {
-        // Génération de la grille 17X12
+        // Génération de la grille 16X12
         $aBoard = [];
         $i = 0;
         for ($y = 0; $y <= 12; $y++) {

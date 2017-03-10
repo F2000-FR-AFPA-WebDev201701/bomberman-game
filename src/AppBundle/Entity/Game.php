@@ -54,7 +54,7 @@ class Game {
     /**
      * @var string
      *
-     * @ORM\Column(name="data", type="string", length=255, nullable=true)
+     * @ORM\Column(name="data", type="text", nullable=true)
      */
     private $data;
 
