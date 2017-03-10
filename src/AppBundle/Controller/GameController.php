@@ -67,7 +67,7 @@ class GameController extends Controller {
             $em->flush();
 
 
-            return $this->redirectToRoute('doBoard', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('refresh', array('id' => $oGame->getId()));
         }
 
         $repo = $this->getDoctrine()->getRepository('AppBundle:Game');
@@ -84,19 +84,41 @@ class GameController extends Controller {
      */
     public function playAction($id, $action) {
         //recup game en BDD
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id);
+
         //unserialize $oGame->data
+        $oBoard = unserialize($oGame->getData());
+
         //test action
         switch ($action) {
-
+            case 'up' :
+                break;
+            case 'down' :
+                break;
+            case 'right' :
+                break;
+            case 'left' :
+                break;
         }
     }
 
     /**
-     * @Route("/refresh", name="refresh")
+     * @Route("/refresh/{id}", name="refresh")
      * @Template
      */
-    public function refreshAction() {
+    public function refreshAction($id) {
 
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id);
+
+        //unserialize $oGame->data
+        $oBoard = unserialize($oGame->getData());
+        $aBoard = $oBoard->getGrid();
+
+        return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard));
     }
 
     public function createBoard($oGame) {
