@@ -20,24 +20,19 @@ class BCase {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="x", type="integer", nullable=true)
+     */
     private $x;
 
-    function getX() {
-        return $this->x;
-    }
-
-    function getY() {
-        return $this->y;
-    }
-
-    function setX($x) {
-        $this->x = $x;
-    }
-
-    function setY($y) {
-        $this->y = $y;
-    }
-
+    /**
+     * @var \stdClass
+     *
+     * @ORM\Column(name="y", type="integer", nullable=true)
+     */
     private $y;
 
     /**
@@ -116,6 +111,46 @@ class BCase {
      */
     public function getPlayer() {
         return $this->player;
+    }
+
+    /**
+     * Get x
+     *
+     * @return \stdClass
+     */
+    function getX() {
+        return $this->x;
+    }
+
+    /**
+     * Get y
+     *
+     * @return \stdClass
+     */
+    function getY() {
+        return $this->y;
+    }
+
+    /**
+     * Set player
+     *
+     * @param \stdClass $x
+     *
+     * @return BCase
+     */
+    function setX($x) {
+        $this->x = $x;
+    }
+
+    /**
+     * Set player
+     *
+     * @param \stdClass $y
+     *
+     * @return BCase
+     */
+    function setY($y) {
+        $this->y = $y;
     }
 
 }
