@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Player
  *
  * @ORM\Table(name="player")
- * @ORM\Entity(repositoryClass="PlayerRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PlayerRepository")
  */
 class Player {
 
@@ -127,7 +127,6 @@ class Player {
         return $this->hp;
     }
 
-
     /**
      * Set y
      *
@@ -135,8 +134,7 @@ class Player {
      *
      * @return Player
      */
-    public function setY($y)
-    {
+    public function setY($y) {
         $this->y = $y;
 
         return $this;
@@ -147,8 +145,7 @@ class Player {
      *
      * @return integer
      */
-    public function getY()
-    {
+    public function getY() {
         return $this->y;
     }
 
@@ -159,8 +156,7 @@ class Player {
      *
      * @return Player
      */
-    public function setX($x)
-    {
+    public function setX($x) {
         $this->x = $x;
 
         return $this;
@@ -171,8 +167,8 @@ class Player {
      *
      * @return integer
      */
-    public function getX()
-    {
+    public function getX() {
         return $this->x;
     }
+
 }
