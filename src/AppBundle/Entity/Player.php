@@ -2,58 +2,45 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Repository\PlayerRepository;
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Player
  *
- * @ORM\Table(name="player")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\PlayerRepository")
  */
 class Player {
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=255)
      */
     private $pseudo;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="score", type="integer", nullable=true)
      */
     private $score;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="hp", type="integer")
      */
     private $hp;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="y", type="integer")
      */
     private $y;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="x", type="integer")
      */
     private $x;
 

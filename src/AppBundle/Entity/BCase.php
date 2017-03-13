@@ -2,57 +2,45 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * BCase
  *
- * @ORM\Table(name="b_case")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BCaseRepository")
  */
 class BCase {
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="x", type="integer", nullable=true)
      */
     private $x;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="y", type="integer", nullable=true)
      */
     private $y;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="item", type="object", nullable=true)
      */
     private $item;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="player", type="object", nullable=true)
      */
     private $player;
 
     /**
      * Get id
      *
-     * @return int
      */
     public function getId() {
         return $this->id;

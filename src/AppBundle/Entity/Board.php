@@ -2,50 +2,39 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Board
  *
- * @ORM\Table(name="board")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BoardRepository")
  */
 class Board {
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="grid", type="array")
      */
     private $grid;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="wall", type="array")
      */
     private $walls;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="cases", type="array")
      */
     private $cases;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="players", type="array")
      */
     private $players;
     private $idGame;
