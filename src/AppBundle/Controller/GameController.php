@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Request;
 class GameController extends Controller {
 
     /**
-     * @Route("/begin")
+     * @Route("/begin/{id}", name="begin")
      */
-    public function beginAction() {
-
-        return $this->render('AppBundle:Game:begin.html.twig', array(
+    public function beginAction($id) {
+        $iGameId = $id;
+        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId
                         // ...
         ));
     }
@@ -69,7 +69,7 @@ class GameController extends Controller {
 
 
 
-            return $this->redirectToRoute('refresh', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('begin', array('id' => $oGame->getId()));
         }
 
         $repo = $this->getDoctrine()->getRepository('AppBundle:Game');

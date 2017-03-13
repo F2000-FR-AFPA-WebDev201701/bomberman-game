@@ -34,7 +34,7 @@ body{
     background-size: cover;
 }
 
-.player {
-    background: url("../image/player.png") no-repeat;
-    background-size: cover;
+#player {
+    width: 100%;
+    padding: 7%;
 }
