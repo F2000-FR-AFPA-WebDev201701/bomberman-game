@@ -2,9 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Board;
+use AppBundle\Model\Board;
 use AppBundle\Entity\Game;
-use AppBundle\Entity\Player;
+use AppBundle\Model\Player;
 use AppBundle\Form\GameType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
