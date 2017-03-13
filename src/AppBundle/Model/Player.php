@@ -43,7 +43,18 @@ class Player {
      *
      */
     private $x;
+
+    /**
+     * @var int
+     *
+     */
     private $idUser;
+
+    /**
+     * @var string
+     *
+     */
+    private $prevMouv;
 
     public function getId() {
         return $this->id;
@@ -165,6 +176,14 @@ class Player {
 
     function setIdUser($idUser) {
         $this->idUser = $idUser;
+    }
+
+    function getPrevMouv() {
+        return $this->prevMouv;
+    }
+
+    function setPrevMouv($prevMouv) {
+        $this->prevMouv = $prevMouv;
     }
 
 }
