@@ -82,7 +82,6 @@ class GameController extends Controller {
 
     /**
      * @Route("/play/{action}/{id_game}", name="play")
-     * @Template
      */
     public function playAction($action, $id_game) {
         //recup game en BDD
@@ -98,11 +97,13 @@ class GameController extends Controller {
         $seriaBoard = serialize($oBoard);
         $oGame->setData($seriaBoard);
         $em->flush();
+
+        $rend = $this->refreshAction($id_game);
+        return $rend;
     }
 
     /**
      * @Route("/refresh/{id}", name="refresh")
-     * @Template
      */
     public function refreshAction($id) {
 
