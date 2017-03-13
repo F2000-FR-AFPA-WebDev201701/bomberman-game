@@ -84,26 +84,20 @@ class GameController extends Controller {
      * @Route("/play/{action}/{id_game}", name="play")
      * @Template
      */
-    public function playAction($id, $action) {
+    public function playAction($action, $id_game) {
         //recup game en BDD
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Game');
-        $oGame = $repo->findOneById($id);
+        $oGame = $repo->findOneById($id_game);
 
         //unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
-
-        //test action
-        switch ($action) {
-            case 'up' :
-                break;
-            case 'down' :
-                break;
-            case 'right' :
-                break;
-            case 'left' :
-                break;
-        }
+        //test doAction
+        $oBoard->doAction($action);
+        //renvoie en BDD
+        $seriaBoard = serialize($oBoard);
+        $oGame->setData($seriaBoard);
+        $em->flush();
     }
 
     /**

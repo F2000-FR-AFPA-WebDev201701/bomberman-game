@@ -56,6 +56,7 @@ class Player {
      * @ORM\Column(name="x", type="integer")
      */
     private $x;
+    private $idUser;
 
     public function getId() {
         return $this->id;
@@ -169,6 +170,14 @@ class Player {
      */
     public function getX() {
         return $this->x;
+    }
+
+    function getIdUser() {
+        return $this->idUser;
+    }
+
+    function setIdUser($idUser) {
+        $this->idUser = $idUser;
     }
 
 }

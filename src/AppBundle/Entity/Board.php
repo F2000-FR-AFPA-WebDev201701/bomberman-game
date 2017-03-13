@@ -195,4 +195,44 @@ class Board {
         return $aBoard;
     }
 
+    public function doAction($action) {
+        $player = $this->players['1'];
+        $playerX = $player->getX();
+        $playerY = $player->getY();
+        $aBoard = $this->getGrid();
+        switch ($action) {
+            case 'up' :
+                $player = $this->players['1'];
+                if ($this->grid[$player->getX()][$player->getY() - 1]->getItem()->getNom() != 'wall') {
+                    $playerY = $player->getY() - 1;
+                    $player->setY($playerY);
+                    $this->grid[$player->getX()][$player->getY() - 1]->setPlayer($player);
+                }
+                break;
+            case 'down' :
+                $player = $this->players['1'];
+                if ($this->grid[$player->getX()][$player->getY() + 1]->getItem()->getNom() != 'wall') {
+                    $playerY = $player->getY() + 1;
+                    $player->setY($playerY);
+                    $this->grid[$player->getX()][$player->getY() + 1]->setPlayer($player);
+                }
+                break;
+            case 'right' :
+                if ($aBoard[$playerX + 1][$playerY]->getItem()->getNom() != 'wall') {
+                    $playerX = $player->getX() + 1;
+                    $player->setX($playerX);
+                    $this->grid[$player->getX() + 1][$player->getY()]->setPlayer($player);
+                }
+                break;
+            case 'left' :
+                $player = $this->players['1'];
+                if ($this->grid[$player->getX() - 1][$player->getY()]->getItem()->getNom() != 'wall') {
+                    $playerX = $player->getX() - 1;
+                    $player->setX($playerX);
+                    $this->grid[$player->getX() - 1][$player->getY()]->setPlayer($player);
+                }
+                break;
+        }
+    }
+
 }
