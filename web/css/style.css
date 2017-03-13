@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'aurulent_sans_monoregular';
+    src: url('aurulentsansmono-regular-webfont.eot');
+    src: url('aurulentsansmono-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('aurulentsansmono-regular-webfont.woff2') format('woff2'),
+        url('aurulentsansmono-regular-webfont.woff') format('woff'),
+        url('aurulentsansmono-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 section {
     margin-bottom: 10px;
 }
@@ -38,3 +50,26 @@ body{
     width: 100%;
     padding: 7%;
 }
+
+.form-item {
+    padding: 5px;
+    margin: 2px;
+}
+
+principal-container {
+    margin-top: 15px;
+}
+
+#lobby {
+    font-family: sans-serif;
+    background: #262626;
+    color: #5CFF62;
+    font-size: 1.2em;
+}
+
+td>a:focus, td>a:hover, td>a {
+    width: 100%;
+    color: #5CFF62 ;
+    text-decoration: none;
+}
+

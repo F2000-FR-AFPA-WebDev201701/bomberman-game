@@ -1,26 +1,40 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    <div>
-        <h3>Créé votre partie !!!</h3>
-    </div>
-    <div>
+    <div class="row well">
+        <h3>Créez votre partie !!!</h3>
+
         {{form_start(form)}}
-        {{form_widget(form)}}
+        <div class="form-item">
+            {{form_widget(form.name, {'attr': {'placeholder': 'Nom de la partie'}})}}
+        </div>
+        <div class="form-item">
+            {{ form_label (form.nbPlayers, 'Nombre de joueurs', {'label_attr': {'class': 'attr'}}) }}
+            {{form_widget(form.nbPlayers)}}
+        </div>
+        <div class="form-item">
+            {% if app.request.session.get('isConnected')%}
+                {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary active'}} )}}
+            {% else %}
+                {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary disabled', 'disabled': 'disabled'}} )}}
+            {% endif %}
+        </div>
         {{form_end(form)}}
     </div>
-    <div>
-        <table>
+    <div class="row">
+        <table id="lobby" class="col-md-12 text-center">
             <tr>
-                <th>Nom de la partie</th>
-                <th>Nombre de joueurs</th>
-                <th>Description</th>
+                <th class="text-center">Nom de la partie</th>
+                <th class="text-center">Nombre de joueurs</th>
+                <th class="text-center">Description</th>
+                <th class="text-center"></th>
             </tr>
             {% for game in allGame%}
                 <tr>
-                    <td>{{game.name}}</td>
+                    <td><a>{{game.name}}</a></td>
                     <td>{{game.nbPlayers}}</td>
                     <td>Salut salut !</td>
+                    <td><a class="btn btn-success">Rejoindre</a></td>
                 </tr>
             {% endfor %}
         </table>
