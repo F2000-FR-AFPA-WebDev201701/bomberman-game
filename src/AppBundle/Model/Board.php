@@ -189,9 +189,11 @@ class Board {
         $playerY = $player->getY();
         $playerX = $player->getX();
         $aBoard = $this->getGrid();
-        $this->grid[$playerY][$playerX]->setPlayer(NULL);
         switch ($action) {
             case 'up' :
+                $this->grid[$playerY][$playerX]->setPlayer(NULL);
+                $player->setPrevMouv($action);
+
                 if (!$aBoard[$playerY - 1][$playerX]->getItem()) {
                     $playerY = $playerY - 1;
                     $player->setY($playerY);
@@ -201,6 +203,9 @@ class Board {
                 }
                 break;
             case 'down' :
+                $this->grid[$playerY][$playerX]->setPlayer(NULL);
+                $player->setPrevMouv($action);
+
                 if (!$aBoard[$playerY + 1][$playerX]->getItem()) {
                     $playerY = $playerY + 1;
                     $player->setY($playerY);
@@ -210,6 +215,9 @@ class Board {
                 }
                 break;
             case 'right' :
+                $this->grid[$playerY][$playerX]->setPlayer(NULL);
+                $player->setPrevMouv($action);
+
                 if (!$aBoard[$playerY][$playerX + 1]->getItem()) {
                     $playerX = $playerX + 1;
                     $player->setX($playerX);
@@ -219,6 +227,9 @@ class Board {
                 }
                 break;
             case 'left' :
+                $this->grid[$playerY][$playerX]->setPlayer(NULL);
+                $player->setPrevMouv($action);
+
                 if (!$aBoard[$playerY][$playerX - 1]->getItem()) {
                     $playerX = $playerX - 1;
                     $player->setX($playerX);
@@ -226,6 +237,35 @@ class Board {
                 } else {
                     $this->grid[$playerY][$playerX]->setPlayer($player);
                 }
+                break;
+
+            case 'bomb':
+                $oItem = new Item();
+                $oItem->setNom('bomb');
+
+                switch ($player->getPrevMouv()) {
+                    case 'up' :
+                        if (!$aBoard[$playerY - 1][$playerX]->getItem()) {
+                            $aBoard[$playerY - 1][$playerX]->setItem($oItem);
+                        }
+                        break;
+                    case 'down' :
+                        if (!$aBoard[$playerY + 1][$playerX]->getItem()) {
+                            $aBoard[$playerY + 1][$playerX]->setItem($oItem);
+                        }
+                        break;
+                    case 'right' :
+                        if (!$aBoard[$playerY][$playerX + 1]->getItem($oItem)) {
+                            $aBoard[$playerY][$playerX + 1]->setItem($oItem);
+                        }
+                        break;
+                    case 'left' :
+                        if (!$aBoard[$playerY][$playerX - 1]->getItem($oItem)) {
+                            $aBoard[$playerY][$playerX - 1]->setItem($oItem);
+                        }
+                        break;
+                }
+
                 break;
         }
     }
