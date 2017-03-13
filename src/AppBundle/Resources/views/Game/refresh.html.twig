@@ -1,67 +1,7 @@
-{% extends "AppBundle::base.html.twig" %}
-
-{% block title %}Let's Play !!!!{% endblock %}
-
-{% block body %}
-    <h2 class="text-center">Let's Play!</h2>{{id}}
-    <div class="row jumbotron">
-
-        <section class="col-md-8">
-            {% for y, ligne in board%}
-                <div class="ligne">
-                    {% for x, case in ligne %}
-                        <div id="case_{{x}}_{{y}}" class="case  {% if case.item and case.item.nom == 'wall' %}wall{% elseif case.player %}player{% else %}field{%endif%}"></div>
-                    {% endfor%}
-                </div>
-            {% endfor %}
-
-        </section>
-        <section class="col-md-4">
-            <img src="{{asset('image/hud_screenshot.png')}} "title="logo" alt="logo" />
-        </section>
+{% for y, ligne in board%}
+    <div class="ligne">
+        {% for x, case in ligne %}
+            <div id="case_{{x}}_{{y}}" class="case  {% if case.item and case.item.nom == 'wall' %}wall{% else %}field{%endif%}">{% if case.player %}<img id="player" src="{{asset('image/sprites/face.png')}}"/>{%endif%}</div>
+            {% endfor%}
     </div>
-
-{% endblock %}
-{% block javascripts %}
-    <script>
-
-        $(document).ready(function () {
-            $(window).keyup(function (event) {
-                var keypress = event.which;
-                switch (keypress) {
-                    case 90:
-                        $.ajax({
-                            async: true,
-                            type: 'POST',
-                            url: '{{ path('play', {'action': 'up', 'id_game': id }) }}'
-                        });
-                        break;
-                    case 81:
-                        $.ajax({
-                            async: true,
-                            type: 'POST',
-                            url: '{{ path('play', {'action': 'left', 'id_game': id}) }}'
-                        })
-                        break;
-                    case 83:
-                        $.ajax({
-                            async: true,
-                            type: 'POST',
-                            url: '{{ path('play', {'action': 'down', 'id_game': id}) }}'
-                        })
-                        break;
-                    case 68:
-                        $.ajax({
-                            async: true,
-                            type: 'POST',
-                            url: '{{ path('play', {'action': 'right', 'id_game': id}) }}'
-                        })
-                        break;
-                }
-                ;
-            });
-        });
-
-    </script>
-{% endblock %}
-
+{% endfor %}

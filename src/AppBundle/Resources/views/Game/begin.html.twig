@@ -1,7 +1,61 @@
-{% extends "::base.html.twig" %}
+{% extends "AppBundle::base.html.twig" %}
 
-{% block title %}AppBundle:Game:begin{% endblock %}
+{% block title %}Let's Play !!!!{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Game:begin page</h1>
+    <h2 class="text-center">Let's Play!</h2>{{id}}
+    <div class="row jumbotron">
+
+        <section class="col-md-8">
+            {{ render(controller('AppBundle:Game:refresh',{'id':id}))}}
+
+        </section>
+        <section class="col-md-4">
+            <img src="{{asset('image/hud_screenshot.png')}} "title="logo" alt="logo" />
+        </section>
+    </div>
+
 {% endblock %}
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function () {
+            $(window).keyup(function (event) {
+                var keypress = event.which;
+                switch (keypress) {
+                    case 90:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: '{{ path('play', {'action': 'up', 'id_game': id }) }}'
+                        });
+                        break;
+                    case 81:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: '{{ path('play', {'action': 'left', 'id_game': id}) }}'
+                        })
+                        break;
+                    case 83:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: '{{ path('play', {'action': 'down', 'id_game': id}) }}'
+                        })
+                        break;
+                    case 68:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: '{{ path('play', {'action': 'right', 'id_game': id}) }}'
+                        })
+                        break;
+                }
+                ;
+            });
+        });
+
+    </script>
+{% endblock %}
+
