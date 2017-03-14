@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
@@ -12,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="UserRepository")
+ * @ORM\Entity(repositoryClass="User")
  */
 class User {
 
@@ -100,7 +99,6 @@ class User {
         return $this->password;
     }
 
-
     /**
      * Set game
      *
@@ -108,8 +106,7 @@ class User {
      *
      * @return User
      */
-    public function setGame(\AppBundle\Entity\Game $game = null)
-    {
+    public function setGame(\AppBundle\Entity\Game $game = null) {
         $this->game = $game;
 
         return $this;
@@ -120,8 +117,8 @@ class User {
      *
      * @return \AppBundle\Entity\Game
      */
-    public function getGame()
-    {
+    public function getGame() {
         return $this->game;
     }
+
 }

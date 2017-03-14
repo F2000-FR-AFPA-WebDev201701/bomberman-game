@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\OneToMany;
 
@@ -10,7 +9,7 @@ use Doctrine\ORM\Mapping\OneToMany;
  * Game
  *
  * @ORM\Table(name="game")
- * @ORM\Entity(repositoryClass="GameRepository")
+ * @ORM\Entity(repositoryClass="Game")
  */
 class Game {
 
