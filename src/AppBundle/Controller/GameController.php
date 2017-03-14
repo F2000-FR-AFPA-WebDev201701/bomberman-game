@@ -33,12 +33,12 @@ class GameController extends Controller {
 
 
         if ($oForm->isSubmitted() && $oForm->isValid()) {
-            // renvoie sur la fonction createGame($oGame)
-            $repo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $sUserLogin = $request->getSession()->get('login');
-            $oUser = $repo->findOneByLogin($sUserLogin);
-
-            return $this->redirectToRoute('create', array('game' => $oGame));
+            $oGame->setStatus(0);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($oGame);
+            $em->flush();
+            // renvoie sur la route createAction($oGame)
+            return $this->redirectToRoute('create', array('id_game' => $oGame->getId()));
         }
 
         $repo = $this->getDoctrine()->getRepository('AppBundle:Game');
@@ -50,11 +50,15 @@ class GameController extends Controller {
         );
     }
 
-    /*
-     * @Route("/create/{game}", name="create")
+    /**
+     * @Route("/create/{id_game}", name="create")
+     * @Template
      */
+    public function createAction($id_game) {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id_game);
 
-    public function createAction($oGame) {
         $oGame->setStatus(0);
 
         $oBoard = new Board();
