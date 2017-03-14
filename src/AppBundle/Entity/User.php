@@ -44,7 +44,7 @@ class User {
      * @ManyToOne(targetEntity="Game", inversedBy="users")
      * @JoinColumn(name="game_id", referencedColumnName="id")
      */
-    public $game;
+    private $game;
 
     /**
      * Get id
