@@ -26,7 +26,15 @@ class GameController extends Controller {
      * @Route("/join/{id_game}/{id_user}"), name="join")
      */
     public function joinAction($id_game, $id_user) {
+        //recup game en BDD
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id_game);
 
+        $aUsers[] = $id_user;
+        $oGame->setUsers($aUsers);
+
+        $em->flush();
     }
 
     /**
