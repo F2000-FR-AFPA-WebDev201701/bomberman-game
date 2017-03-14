@@ -23,15 +23,6 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/close")
-     */
-    public function closeAction() {
-        return $this->render('AppBundle:Game:close.html.twig', array(
-                        // ...
-        ));
-    }
-
-    /**
      * @Route("/join/{id}"), name="join")
      * @Template
      */

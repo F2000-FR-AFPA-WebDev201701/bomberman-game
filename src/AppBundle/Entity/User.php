@@ -3,13 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="User")
  */
 class User {
 
@@ -37,6 +39,12 @@ class User {
      * @Assert\NotBlank
      */
     private $password;
+
+    /**
+     * @ManyToOne(targetEntity="Game", inversedBy="users")
+     * @JoinColumn(name="game_id", referencedColumnName="id")
+     */
+    private $game;
 
     /**
      * Get id
@@ -89,6 +97,28 @@ class User {
      */
     public function getPassword() {
         return $this->password;
+    }
+
+    /**
+     * Set game
+     *
+     * @param \AppBundle\Entity\Game $game
+     *
+     * @return User
+     */
+    public function setGame(\AppBundle\Entity\Game $game = null) {
+        $this->game = $game;
+
+        return $this;
+    }
+
+    /**
+     * Get game
+     *
+     * @return \AppBundle\Entity\Game
+     */
+    public function getGame() {
+        return $this->game;
     }
 
 }
