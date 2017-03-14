@@ -4,12 +4,13 @@ namespace AppBundle\Entity;
 
 use AppBundle\Repository\GameRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\OneToMany;
 
 /**
  * Game
  *
  * @ORM\Table(name="game")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\GameRepository")
+ * @ORM\Entity(repositoryClass="GameRepository")
  */
 class Game {
 
@@ -41,6 +42,7 @@ class Game {
      * @var string
      *
      * @ORM\Column(name="users", type="string", length=255, nullable=true)
+     * @OneToMany(targetEntity="User", mappedBy="game")
      */
     private $users;
 
