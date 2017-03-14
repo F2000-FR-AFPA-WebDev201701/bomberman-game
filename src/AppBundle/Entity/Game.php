@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Game
  *
  * @ORM\Table(name="game")
- * @ORM\Entity(repositoryClass="Game")
+ * @ORM\Entity()
  */
 class Game {
 
@@ -39,7 +39,6 @@ class Game {
     /**
      * @var string
      *
-     * @ORM\Column(name="users", type="string", length=255, nullable=true)
      * @ORM\OneToMany(targetEntity="User", mappedBy="game")
      */
     private $users;
@@ -59,11 +58,20 @@ class Game {
     private $data;
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -74,7 +82,8 @@ class Game {
      *
      * @return Game
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
 
         return $this;
@@ -85,52 +94,9 @@ class Game {
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return Game
-     */
-    public function setStatus($status) {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return int
-     */
-    public function getStatus() {
-        return $this->status;
-    }
-
-    /**
-     * Set data
-     *
-     * @param string $data
-     *
-     * @return Game
-     */
-    public function setData($data) {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    /**
-     * Get data
-     *
-     * @return string
-     */
-    public function getData() {
-        return $this->data;
     }
 
     /**
@@ -140,7 +106,8 @@ class Game {
      *
      * @return Game
      */
-    public function setNbPlayers($nbPlayers) {
+    public function setNbPlayers($nbPlayers)
+    {
         $this->nbPlayers = $nbPlayers;
 
         return $this;
@@ -151,30 +118,90 @@ class Game {
      *
      * @return integer
      */
-    public function getNbPlayers() {
+    public function getNbPlayers()
+    {
         return $this->nbPlayers;
     }
 
     /**
-     * Set users
+     * Set status
      *
-     * @param string $users
+     * @param integer $status
      *
      * @return Game
      */
-    public function setUsers($users) {
-        $this->users = $users;
+    public function setStatus($status)
+    {
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get users
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set data
+     *
+     * @param string $data
+     *
+     * @return Game
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
      *
      * @return string
      */
-    public function getUsers() {
-        return $this->users;
+    public function getData()
+    {
+        return $this->data;
     }
 
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Game
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
 }

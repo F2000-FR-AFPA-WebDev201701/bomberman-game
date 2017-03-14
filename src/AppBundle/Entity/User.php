@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="User")
+ * @ORM\Entity()
  */
 class User {
 
@@ -41,18 +41,19 @@ class User {
     /**
      * @var integer
      *
-     * @ORM\Column(name="game", type="integer")
      * @ORM\ManyToOne(targetEntity="Game", inversedBy="users")
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
      */
     private $game;
 
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -63,7 +64,8 @@ class User {
      *
      * @return User
      */
-    public function setLogin($login) {
+    public function setLogin($login)
+    {
         $this->login = $login;
 
         return $this;
@@ -74,7 +76,8 @@ class User {
      *
      * @return string
      */
-    public function getLogin() {
+    public function getLogin()
+    {
         return $this->login;
     }
 
@@ -85,7 +88,8 @@ class User {
      *
      * @return User
      */
-    public function setPassword($password) {
+    public function setPassword($password)
+    {
         $this->password = $password;
 
         return $this;
@@ -96,18 +100,20 @@ class User {
      *
      * @return string
      */
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
     /**
      * Set game
      *
-     * @param Game $game
+     * @param \AppBundle\Entity\Game $game
      *
      * @return User
      */
-    public function setGame(Game $game = null) {
+    public function setGame(\AppBundle\Entity\Game $game = null)
+    {
         $this->game = $game;
 
         return $this;
@@ -116,10 +122,10 @@ class User {
     /**
      * Get game
      *
-     * @return Game
+     * @return \AppBundle\Entity\Game
      */
-    public function getGame() {
+    public function getGame()
+    {
         return $this->game;
     }
-
 }
