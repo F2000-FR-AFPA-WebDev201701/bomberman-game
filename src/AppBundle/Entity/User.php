@@ -112,8 +112,7 @@ class User {
      *
      * @return User
      */
-    public function setGame(\AppBundle\Entity\Game $game = null)
-    {
+    public function setGame(\AppBundle\Entity\Game $game = null) {
         $this->game = $game;
 
         return $this;

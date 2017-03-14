@@ -60,8 +60,7 @@ class Game {
     /**
      * Constructor
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -70,8 +69,7 @@ class Game {
      *
      * @return integer
      */
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
@@ -82,8 +80,7 @@ class Game {
      *
      * @return Game
      */
-    public function setName($name)
-    {
+    public function setName($name) {
         $this->name = $name;
 
         return $this;
@@ -94,8 +91,7 @@ class Game {
      *
      * @return string
      */
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
@@ -106,8 +102,8 @@ class Game {
      *
      * @return Game
      */
-    public function setNbPlayers($nbPlayers)
-    {
+    public function setNbPlayers($nbPlayers) {
+
         $this->nbPlayers = $nbPlayers;
 
         return $this;
@@ -118,8 +114,8 @@ class Game {
      *
      * @return integer
      */
-    public function getNbPlayers()
-    {
+    public function getNbPlayers() {
+
         return $this->nbPlayers;
     }
 
@@ -130,8 +126,7 @@ class Game {
      *
      * @return Game
      */
-    public function setStatus($status)
-    {
+    public function setStatus($status) {
         $this->status = $status;
 
         return $this;
@@ -142,8 +137,7 @@ class Game {
      *
      * @return integer
      */
-    public function getStatus()
-    {
+    public function getStatus() {
         return $this->status;
     }
 
@@ -154,8 +148,7 @@ class Game {
      *
      * @return Game
      */
-    public function setData($data)
-    {
+    public function setData($data) {
         $this->data = $data;
 
         return $this;
@@ -166,8 +159,7 @@ class Game {
      *
      * @return string
      */
-    public function getData()
-    {
+    public function getData() {
         return $this->data;
     }
 
@@ -178,8 +170,8 @@ class Game {
      *
      * @return Game
      */
-    public function addUser(\AppBundle\Entity\User $user)
-    {
+    public function addUser(\AppBundle\Entity\User $user) {
+
         $this->users[] = $user;
 
         return $this;
@@ -190,8 +182,8 @@ class Game {
      *
      * @param \AppBundle\Entity\User $user
      */
-    public function removeUser(\AppBundle\Entity\User $user)
-    {
+    public function removeUser(\AppBundle\Entity\User $user) {
+
         $this->users->removeElement($user);
     }
 
@@ -200,8 +192,8 @@ class Game {
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getUsers()
-    {
+    public function getUsers() {
         return $this->users;
     }
+
 }

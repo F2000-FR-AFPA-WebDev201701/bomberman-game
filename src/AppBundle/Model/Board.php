@@ -41,7 +41,6 @@ class Board {
 
     function __construct() {
         $this->setGrid();
-        $this->setPlayers();
     }
 
     /**
@@ -82,14 +81,41 @@ class Board {
      *
      * @return Board
      */
-    public function setPlayers() {
+    public function setPlayers($aUsers) {
         $aBoard = $this->getGrid();
-        $oPlayer = new Player;
-        $oPlayer->setX(1);
-        $oPlayer->setY(1);
-        $aBoard[1][1]->setPlayer($oPlayer);
-        $players['1'] = $oPlayer;
-        $this->players = $players;
+        $i = 1;
+        foreach ($aUsers as $oPlayer) {
+            $oPlayer = new Player;
+            $players[$i] = $oPlayer;
+            $i++;
+        }
+        switch ($this->getPlayers()) {
+            case '1':
+                $oPlayer->setY(1);
+                $oPlayer->setX(1);
+                $aBoard[1][1]->setPlayer($oPlayer);
+                $this->players = $players;
+                break;
+            case '2':
+                $oPlayer->setY(1);
+                $oPlayer->setX(16);
+                $aBoard[1][16]->setPlayer($oPlayer);
+                $this->players = $players;
+                break;
+            case '3':
+                $oPlayer->setY(11);
+                $oPlayer->setX(1);
+                $aBoard[11][1]->setPlayer($oPlayer);
+                $this->players = $players;
+                break;
+            case '4':
+                $oPlayer->setY(11);
+                $oPlayer->setX(16);
+                $aBoard[11][16]->setPlayer($oPlayer);
+                $this->players = $players;
+                break;
+        }
+
 
         return $this;
     }

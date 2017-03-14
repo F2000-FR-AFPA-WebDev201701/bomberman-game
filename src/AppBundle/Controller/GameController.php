@@ -23,14 +23,6 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/join/{id}"), name="join")
-     * @Template
-     */
-    public function joinAction() {
-
-    }
-
-    /**
      * @Route("/lobby", name="lobby")
      * @Template
      */
@@ -46,41 +38,65 @@ class GameController extends Controller {
             $sUserLogin = $request->getSession()->get('login');
             $oUser = $repo->findOneByLogin($sUserLogin);
 
-            $this->createGame($oGame, $oUser);
-
-
-            return $this->redirectToRoute('waiting', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('create', array('game' => $oGame));
         }
 
         $repo = $this->getDoctrine()->getRepository('AppBundle:Game');
-
         $oAllGame = $repo->findAll();
 
-        return array('form' => $oForm->createView(),
-            'allGame' => $oAllGame);
+        return array(
+            'form' => $oForm->createView(),
+            'allGame' => $oAllGame
+        );
     }
 
-    public function createGame($oGame, $oUser) {
+    /*
+     * @Route("/create/{game}", name="create")
+     */
+
+    public function createAction($oGame) {
         $oGame->setStatus(0);
+
+        $oBoard = new Board();
+        $sSerial = serialize($oBoard);
+        $oGame->setData($sSerial);
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($oGame);
         $em->flush();
 
-        $this->joinGame($oGame, $oUser);
-
-        $this->createBoard($oGame);
-        $em->flush();
+        return $this->redirectToRoute('join', array('id_game' => $oGame->getId()));
     }
 
-    public function joinGame($oGame, $oUser) {
-        $temp = null;
-        if ($oGame->getUsers()) {
-            $temp = $oGame->getUsers() . ',';
+    /**
+     * @Route("/join/{id_game}", name="join")
+     * @Template
+     */
+    public function joinAction($id_game, Request $request) {
+        //recup game et user en BDD
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id_game);
+        $repoUser = $em->getRepository('AppBundle:User');
+        $iIdUser = $request->getSession()->get('id_user');
+        $oUser = $repoUser->findOneById($iIdUser);
+
+        $oGame->addUser($oUser);
+
+        $em->flush();
+
+        if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
+            $oGame->setStatus(1);
+            $oBoard = unserialize($oGame->getData);
+            $oBoard->setPlayers($oGame->getUsers());
+            $sSerial = serialize($oBoard);
+            $oGame->setData($sSerial);
+            $em->flush();
+
+            return $this->redirectToRoute('refresh', array('id' => $oGame->getId()));
         }
 
-        $oGame->setUsers($temp . $oUser->getId());
-        $this->isReady($oGame);
+        return $this->redirectToRoute('waiting', array('id' => $oGame->getId()));
     }
 
     public function isReady($oGame) {
@@ -132,15 +148,6 @@ class GameController extends Controller {
         $idBoard = $oBoard->getIdGame();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $idBoard));
-    }
-
-    public function createBoard($oGame) {
-
-        $oBoard = new Board;
-        $oBoard->setPlayers($oGame->getUsers());
-        $oBoard->setIdGame($oGame->getId());
-        $seriaBoard = serialize($oBoard);
-        $oGame->setData($seriaBoard);
     }
 
     /**
