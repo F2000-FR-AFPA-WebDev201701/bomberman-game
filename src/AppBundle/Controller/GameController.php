@@ -33,7 +33,6 @@ class GameController extends Controller {
 
         $aUsers[] = $id_user;
         $oGame->setUsers($aUsers);
-
         $em->flush();
     }
 
@@ -55,16 +54,16 @@ class GameController extends Controller {
 
             $this->createGame($oGame, $oUser);
 
-
-            return $this->redirectToRoute('waiting', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('join', array('id' => $oGame->getId()));
         }
 
         $repo = $this->getDoctrine()->getRepository('AppBundle:Game');
-
         $oAllGame = $repo->findAll();
 
-        return array('form' => $oForm->createView(),
-            'allGame' => $oAllGame);
+        return array(
+            'form' => $oForm->createView(),
+            'allGame' => $oAllGame
+        );
     }
 
     public function createGame($oGame, $oUser) {
@@ -73,8 +72,6 @@ class GameController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->persist($oGame);
         $em->flush();
-
-        $this->joinGame($oGame, $oUser);
 
         $this->createBoard($oGame);
         $em->flush();

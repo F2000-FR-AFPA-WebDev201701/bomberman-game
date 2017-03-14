@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Game
  *
  * @ORM\Table(name="game")
- * @ORM\Entity(repositoryClass="Game")
+ * @ORM\Entity()
  */
 class Game {
 
@@ -39,7 +39,6 @@ class Game {
     /**
      * @var string
      *
-     * @ORM\Column(name="users", type="string", length=255, nullable=true)
      * @ORM\OneToMany(targetEntity="User", mappedBy="game")
      */
     private $users;
@@ -59,9 +58,16 @@ class Game {
     private $data;
 
     /**
+     * Constructor
+     */
+    public function __construct() {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId() {
         return $this->id;
@@ -90,6 +96,28 @@ class Game {
     }
 
     /**
+     * Set nbPlayers
+     *
+     * @param integer $nbPlayers
+     *
+     * @return Game
+     */
+    public function setNbPlayers($nbPlayers) {
+        $this->nbPlayers = $nbPlayers;
+
+        return $this;
+    }
+
+    /**
+     * Get nbPlayers
+     *
+     * @return integer
+     */
+    public function getNbPlayers() {
+        return $this->nbPlayers;
+    }
+
+    /**
      * Set status
      *
      * @param integer $status
@@ -105,7 +133,7 @@ class Game {
     /**
      * Get status
      *
-     * @return int
+     * @return integer
      */
     public function getStatus() {
         return $this->status;
@@ -134,44 +162,31 @@ class Game {
     }
 
     /**
-     * Set nbPlayers
+     * Add user
      *
-     * @param integer $nbPlayers
+     * @param \AppBundle\Entity\User $user
      *
      * @return Game
      */
-    public function setNbPlayers($nbPlayers) {
-        $this->nbPlayers = $nbPlayers;
+    public function addUser(\AppBundle\Entity\User $user) {
+        $this->users[] = $user;
 
         return $this;
     }
 
     /**
-     * Get nbPlayers
+     * Remove user
      *
-     * @return integer
+     * @param \AppBundle\Entity\User $user
      */
-    public function getNbPlayers() {
-        return $this->nbPlayers;
-    }
-
-    /**
-     * Set users
-     *
-     * @param string $users
-     *
-     * @return Game
-     */
-    public function setUsers($users) {
-        $this->users = $users;
-
-        return $this;
+    public function removeUser(\AppBundle\Entity\User $user) {
+        $this->users->removeElement($user);
     }
 
     /**
      * Get users
      *
-     * @return string
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getUsers() {
         return $this->users;
