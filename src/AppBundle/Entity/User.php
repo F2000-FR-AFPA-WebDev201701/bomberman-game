@@ -3,8 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -41,8 +39,11 @@ class User {
     private $password;
 
     /**
-     * @ManyToOne(targetEntity="Game", inversedBy="users")
-     * @JoinColumn(name="game_id", referencedColumnName="id")
+     * @var integer
+     *
+     * @ORM\Column(name="game", type="integer")
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="users")
+     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
      */
     private $game;
 
@@ -102,11 +103,11 @@ class User {
     /**
      * Set game
      *
-     * @param \AppBundle\Entity\Game $game
+     * @param Game $game
      *
      * @return User
      */
-    public function setGame(\AppBundle\Entity\Game $game = null) {
+    public function setGame(Game $game = null) {
         $this->game = $game;
 
         return $this;
@@ -115,7 +116,7 @@ class User {
     /**
      * Get game
      *
-     * @return \AppBundle\Entity\Game
+     * @return Game
      */
     public function getGame() {
         return $this->game;
