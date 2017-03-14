@@ -23,19 +23,20 @@
     <body>
 
         {% include('AppBundle::header.html.twig') %}
-        <div class="container">
+        <div class="container principal-container">
 
         {% block body %}{% endblock %}
 
     </div>
 
-</div>
-{% include'AppBundle:app:footer.html.twig'%}
+
+    <script src="{{asset('js/jquery-3.1.1.js')}}"></script>
+    <script src="{{asset('js/bootstrap.min.js')}}"></script>
+    {% block javascripts %} {% endblock %}
+    {% include'AppBundle::footer.html.twig'%}
 
 
-{% block javascripts %}{% endblock %}
-<script src="{{asset('js/jquery-3.1.1.js')}}"></script>
-<script src="{{asset('js/bootstrap.min.js')}}"></script>
+
 </body>
 
 </html>
