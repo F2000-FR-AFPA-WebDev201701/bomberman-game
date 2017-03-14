@@ -23,10 +23,9 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/join/{id}"), name="join")
-     * @Template
+     * @Route("/join/{id_game}/{id_user}"), name="join")
      */
-    public function joinAction() {
+    public function joinAction($id_game, $id_user) {
 
     }
 
