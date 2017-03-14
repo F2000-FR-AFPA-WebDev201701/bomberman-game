@@ -89,15 +89,17 @@ class GameController extends Controller {
 
         $em->flush();
 
+
         if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
             $oGame->setStatus(1);
-            $oBoard = unserialize($oGame->getData);
+            $oBoard = unserialize($oGame->getData());
             $oBoard->setPlayers($oGame->getUsers());
             $sSerial = serialize($oBoard);
             $oGame->setData($sSerial);
+
             $em->flush();
 
-            return $this->redirectToRoute('refresh', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('begin', array('id' => $oGame->getId()));
         }
 
         return $this->redirectToRoute('waiting', array('id' => $oGame->getId()));
