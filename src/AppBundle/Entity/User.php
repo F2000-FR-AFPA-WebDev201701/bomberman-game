@@ -9,7 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity(repositoryClass="User")
+ * @ORM\Entity()
  */
 class User {
 
@@ -41,7 +41,6 @@ class User {
     /**
      * @var integer
      *
-     * @ORM\Column(name="game", type="integer")
      * @ORM\ManyToOne(targetEntity="Game", inversedBy="users")
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
      */
@@ -109,11 +108,11 @@ class User {
     /**
      * Set game
      *
-     * @param integer $game
+     * @param \AppBundle\Entity\Game $game
      *
      * @return User
      */
-    public function setGame($game)
+    public function setGame(\AppBundle\Entity\Game $game = null)
     {
         $this->game = $game;
 
@@ -123,7 +122,7 @@ class User {
     /**
      * Get game
      *
-     * @return integer
+     * @return \AppBundle\Entity\Game
      */
     public function getGame()
     {

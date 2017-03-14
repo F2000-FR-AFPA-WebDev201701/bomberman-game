@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Game
  *
  * @ORM\Table(name="game")
- * @ORM\Entity(repositoryClass="Game")
+ * @ORM\Entity()
  */
 class Game {
 
@@ -39,7 +39,6 @@ class Game {
     /**
      * @var string
      *
-     * @ORM\Column(name="users", type="string", length=255, nullable=true)
      * @ORM\OneToMany(targetEntity="User", mappedBy="game")
      */
     private $users;
@@ -58,6 +57,13 @@ class Game {
      */
     private $data;
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -118,30 +124,6 @@ class Game {
     }
 
     /**
-     * Set users
-     *
-     * @param string $users
-     *
-     * @return Game
-     */
-    public function setUsers($users)
-    {
-        $this->users = $users;
-
-        return $this;
-    }
-
-    /**
-     * Get users
-     *
-     * @return string
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    /**
      * Set status
      *
      * @param integer $status
@@ -187,5 +169,39 @@ class Game {
     public function getData()
     {
         return $this->data;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \AppBundle\Entity\User $user
+     *
+     * @return Game
+     */
+    public function addUser(\AppBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \AppBundle\Entity\User $user
+     */
+    public function removeUser(\AppBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }
