@@ -33,7 +33,7 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/join")
+     * @Route("/join/{id}"), name="join")
      */
     public function joinAction() {
         return $this->render('AppBundle:Game:join.html.twig', array(

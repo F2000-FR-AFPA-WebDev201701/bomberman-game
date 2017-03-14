@@ -31,10 +31,10 @@
             </tr>
             {% for game in allGame%}
                 <tr>
-                    <td><a>{{game.name}}</a></td>
+                    <td>{{game.name}}</td>
                     <td>{{game.nbPlayers}}</td>
                     <td>Salut salut !</td>
-                    <td><a class="btn btn-success">Rejoindre</a></td>
+                    <td><a href="{{path('join', {'id':game.id})}}" class="btn btn-success">Rejoindre</a></td>
                 </tr>
             {% endfor %}
         </table>
