@@ -123,6 +123,7 @@ class Board {
             }
         }
         $this->grid = $this->generateWall($aBoard);
+        $this->grid = $this->generateDestruWall($aBoard);
 
         return $this;
     }
@@ -184,7 +185,22 @@ class Board {
         return $aBoard;
     }
 
-    public function doAction($action) {
+    public function generateDestruWall($aBoard) {
+        for ($y = 0; $y <= 12; $y++) {
+            for ($x = 0; $x <= 16; $x++) {
+                if ($y > 4 && $y < 8 || $x > 4 && $x < 12) {
+                    if (!$aBoard[$y][$x]->getItem()) {
+                        $oItem = new Item();
+                        $oItem->setNom('destruwall');
+                        $aBoard[$y][$x]->setItem($oItem);
+                    }
+                }
+            }
+        }
+        return $aBoard;
+    }
+
+    function doAction($action) {
         $player = $this->players['1'];
         $playerY = $player->getY();
         $playerX = $player->getX();
