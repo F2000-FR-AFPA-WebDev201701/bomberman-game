@@ -47,12 +47,14 @@ class User {
      */
     private $game;
 
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -63,7 +65,8 @@ class User {
      *
      * @return User
      */
-    public function setLogin($login) {
+    public function setLogin($login)
+    {
         $this->login = $login;
 
         return $this;
@@ -74,7 +77,8 @@ class User {
      *
      * @return string
      */
-    public function getLogin() {
+    public function getLogin()
+    {
         return $this->login;
     }
 
@@ -85,7 +89,8 @@ class User {
      *
      * @return User
      */
-    public function setPassword($password) {
+    public function setPassword($password)
+    {
         $this->password = $password;
 
         return $this;
@@ -96,18 +101,20 @@ class User {
      *
      * @return string
      */
-    public function getPassword() {
+    public function getPassword()
+    {
         return $this->password;
     }
 
     /**
      * Set game
      *
-     * @param Game $game
+     * @param integer $game
      *
      * @return User
      */
-    public function setGame(Game $game = null) {
+    public function setGame($game)
+    {
         $this->game = $game;
 
         return $this;
@@ -116,10 +123,10 @@ class User {
     /**
      * Get game
      *
-     * @return Game
+     * @return integer
      */
-    public function getGame() {
+    public function getGame()
+    {
         return $this->game;
     }
-
 }

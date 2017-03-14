@@ -58,12 +58,14 @@ class Game {
      */
     private $data;
 
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -74,7 +76,8 @@ class Game {
      *
      * @return Game
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
 
         return $this;
@@ -85,52 +88,9 @@ class Game {
      *
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return Game
-     */
-    public function setStatus($status) {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return int
-     */
-    public function getStatus() {
-        return $this->status;
-    }
-
-    /**
-     * Set data
-     *
-     * @param string $data
-     *
-     * @return Game
-     */
-    public function setData($data) {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    /**
-     * Get data
-     *
-     * @return string
-     */
-    public function getData() {
-        return $this->data;
     }
 
     /**
@@ -140,7 +100,8 @@ class Game {
      *
      * @return Game
      */
-    public function setNbPlayers($nbPlayers) {
+    public function setNbPlayers($nbPlayers)
+    {
         $this->nbPlayers = $nbPlayers;
 
         return $this;
@@ -151,7 +112,8 @@ class Game {
      *
      * @return integer
      */
-    public function getNbPlayers() {
+    public function getNbPlayers()
+    {
         return $this->nbPlayers;
     }
 
@@ -162,7 +124,8 @@ class Game {
      *
      * @return Game
      */
-    public function setUsers($users) {
+    public function setUsers($users)
+    {
         $this->users = $users;
 
         return $this;
@@ -173,8 +136,56 @@ class Game {
      *
      * @return string
      */
-    public function getUsers() {
+    public function getUsers()
+    {
         return $this->users;
     }
 
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Game
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set data
+     *
+     * @param string $data
+     *
+     * @return Game
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
+     *
+     * @return string
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
 }
