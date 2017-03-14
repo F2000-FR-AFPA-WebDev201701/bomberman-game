@@ -46,6 +46,11 @@ body{
     background-size: cover;
 }
 
+.destruwall {
+    background: url("../image/destruwall.png") no-repeat;
+    background-size: cover;
+}
+
 #player, #bomb {
     width: 100%;
     padding: 7%;
