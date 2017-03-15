@@ -39,7 +39,7 @@ class Board {
     private $players;
     private $idGame;
 
-    function __construct() {
+    public function __construct() {
         $this->setGrid();
     }
 
@@ -212,6 +212,35 @@ class Board {
         return $aBoard;
     }
 
+    public function bomb($player, $aBoard) {
+        $oItem = new Item();
+        $oItem->setNom('bomb');
+        $Y = $player->getY();
+        $X = $player->getX();
+        switch ($player->getPrevMouv()) {
+            case 'up' :
+                if (!$aBoard[$Y - 1][$X]->getItem()) {
+                    $aBoard[$Y - 1][$X]->setItem($oItem);
+                }
+                break;
+            case 'down' :
+                if (!$aBoard[$Y + 1][$X]->getItem()) {
+                    $aBoard[$Y + 1][$X]->setItem($oItem);
+                }
+                break;
+            case 'right' :
+                if (!$aBoard[$Y][$X + 1]->getItem($oItem)) {
+                    $aBoard[$Y][$X + 1]->setItem($oItem);
+                }
+                break;
+            case 'left' :
+                if (!$aBoard[$Y][$X - 1]->getItem($oItem)) {
+                    $aBoard[$Y][$X - 1]->setItem($oItem);
+                }
+                break;
+        }
+    }
+
     public function doAction($action, $id_user) {
         foreach ($this->players as $key => $value) {
             if ($id_user == $value->getIdUser()) {
@@ -259,30 +288,7 @@ class Board {
                 }
                 break;
             case 'bomb':
-                $oItem = new Item();
-                $oItem->setNom('bomb');
-                switch ($player->getPrevMouv()) {
-                    case 'up' :
-                        if (!$aBoard[$playerY - 1][$playerX]->getItem()) {
-                            $aBoard[$playerY - 1][$playerX]->setItem($oItem);
-                        }
-                        break;
-                    case 'down' :
-                        if (!$aBoard[$playerY + 1][$playerX]->getItem()) {
-                            $aBoard[$playerY + 1][$playerX]->setItem($oItem);
-                        }
-                        break;
-                    case 'right' :
-                        if (!$aBoard[$playerY][$playerX + 1]->getItem($oItem)) {
-                            $aBoard[$playerY][$playerX + 1]->setItem($oItem);
-                        }
-                        break;
-                    case 'left' :
-                        if (!$aBoard[$playerY][$playerX - 1]->getItem($oItem)) {
-                            $aBoard[$playerY][$playerX - 1]->setItem($oItem);
-                        }
-                        break;
-                }
+                $this->bomb($player, $aBoard);
                 break;
         }
     }
