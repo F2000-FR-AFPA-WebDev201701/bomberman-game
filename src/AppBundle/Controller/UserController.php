@@ -29,7 +29,9 @@ class UserController extends Controller {
             if ($oUser && $oUser->getPassword() == $oUserForm->getPassword()) {
                 $request->getSession()->set('isConnected', 'true');
                 $sLog = $oUser->getLogin();
+                $iIdLog = $oUser->getId();
                 $request->getSession()->set('login', $sLog);
+                $request->getSession()->set('id_user', $iIdLog);
             }
             return $this->redirectToRoute('index');
         }

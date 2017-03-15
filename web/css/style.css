@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'aurulent_sans_monoregular';
+    src: url('aurulentsansmono-regular-webfont.eot');
+    src: url('aurulentsansmono-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('aurulentsansmono-regular-webfont.woff2') format('woff2'),
+        url('aurulentsansmono-regular-webfont.woff') format('woff'),
+        url('aurulentsansmono-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 section {
     margin-bottom: 10px;
 }
@@ -34,7 +46,53 @@ body{
     background-size: cover;
 }
 
-.player {
-    background: url("../image/player.png") no-repeat;
+.destruwall {
+    background: url("../image/destruwall.png") no-repeat;
     background-size: cover;
+}
+
+#player, #bomb {
+    width: 100%;
+    padding: 7%;
+}
+
+.form-item {
+    padding: 5px;
+    margin: 2px;
+}
+
+principal-container {
+    margin-top: 15px;
+}
+
+#lobby {
+    font-family: sans-serif;
+    background: #262626;
+    color: #5CFF62;
+    font-size: 1.2em;
+}
+
+td>a:focus, td>a:hover, td>a {
+    width: 100%;
+    color: #5CFF62 ;
+    text-decoration: none;
+}
+
+.blur {
+    filter : blur(5px);
+}
+
+#attente {
+    z-index: 1;
+    position: absolute;
+    color: snow;
+    font-size: xx-large;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    margin-top: 30%;
+}
+
+#waitContainer {
+    background: #FFF;
 }

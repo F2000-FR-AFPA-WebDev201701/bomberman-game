@@ -1,0 +1,19 @@
+{% for y, ligne in board%}
+    <div class="ligne">
+        {% for x, case in ligne %}
+            <div id="case_{{x}}_{{y}}" class="case  {% if case.item and case.item.nom == 'wall' %}
+                 wall
+                 {% elseif case.item and case.item.nom == 'destruwall' %}
+                     destruwall
+                     {% else %}
+                         field
+                         {%endif%}">
+                             {% if case.player %}
+                                 <img id="player" src="{{asset('image/sprites/face.png')}}"/>
+                             {%endif%}
+                             {%if case.item and case.item.nom == 'bomb'%}
+                                 <img id="bomb" src="{{asset('image/bomb.png')}}"/>
+                             {%endif%}</div>
+                             {% endfor%}
+                         </div>
+                         {% endfor %}

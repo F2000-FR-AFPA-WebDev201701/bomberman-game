@@ -1,53 +1,61 @@
 <?php
 
-namespace AppBundle\Entity;
-
-use AppBundle\Repository\PlayerRepository;
-use Doctrine\ORM\Mapping as ORM;
+namespace AppBundle\Model;
 
 /**
  * Player
  *
- * @ORM\Table(name="player")
- * @ORM\Entity(repositoryClass="PlayerRepository")
  */
 class Player {
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=255)
      */
     private $pseudo;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="score", type="integer", nullable=true)
      */
     private $score;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="hp", type="integer")
      */
     private $hp;
 
     /**
-     * Get id
+     * @var int
      *
-     * @return int
      */
+    private $y;
+
+    /**
+     * @var int
+     *
+     */
+    private $x;
+
+    /**
+     * @var int
+     *
+     */
+    private $idUser;
+
+    /**
+     * @var string
+     *
+     */
+    private $prevMouv;
+
     public function getId() {
         return $this->id;
     }
@@ -116,6 +124,66 @@ class Player {
      */
     public function getHp() {
         return $this->hp;
+    }
+
+    /**
+     * Set y
+     *
+     * @param integer $y
+     *
+     * @return Player
+     */
+    public function setY($y) {
+        $this->y = $y;
+
+        return $this;
+    }
+
+    /**
+     * Get y
+     *
+     * @return integer
+     */
+    public function getY() {
+        return $this->y;
+    }
+
+    /**
+     * Set x
+     *
+     * @param integer $x
+     *
+     * @return Player
+     */
+    public function setX($x) {
+        $this->x = $x;
+
+        return $this;
+    }
+
+    /**
+     * Get x
+     *
+     * @return integer
+     */
+    public function getX() {
+        return $this->x;
+    }
+
+    function getIdUser() {
+        return $this->idUser;
+    }
+
+    function setIdUser($idUser) {
+        $this->idUser = $idUser;
+    }
+
+    function getPrevMouv() {
+        return $this->prevMouv;
+    }
+
+    function setPrevMouv($prevMouv) {
+        $this->prevMouv = $prevMouv;
     }
 
 }

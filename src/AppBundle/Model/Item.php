@@ -1,44 +1,34 @@
 <?php
 
-namespace AppBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
+namespace AppBundle\Model;
 
 /**
  * Item
  *
- * @ORM\Table(name="item")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ItemRepository")
  */
 class Item {
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="coord", type="integer")
      */
     private $coordX;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="coordY", type="integer")
      */
     private $coordY;
 

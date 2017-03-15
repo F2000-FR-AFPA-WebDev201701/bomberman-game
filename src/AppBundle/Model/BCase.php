@@ -1,63 +1,46 @@
 <?php
 
-namespace AppBundle\Entity;
-
-use Doctrine\ORM\Mapping as ORM;
+namespace AppBundle\Model;
 
 /**
  * BCase
  *
- * @ORM\Table(name="b_case")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BCaseRepository")
  */
 class BCase {
 
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @var \stdClass
+     *
+     */
     private $x;
 
-    function getX() {
-        return $this->x;
-    }
-
-    function getY() {
-        return $this->y;
-    }
-
-    function setX($x) {
-        $this->x = $x;
-    }
-
-    function setY($y) {
-        $this->y = $y;
-    }
-
+    /**
+     * @var \stdClass
+     *
+     */
     private $y;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="item", type="object", nullable=true)
      */
     private $item;
 
     /**
      * @var \stdClass
      *
-     * @ORM\Column(name="player", type="object", nullable=true)
      */
     private $player;
 
     /**
      * Get id
      *
-     * @return int
      */
     public function getId() {
         return $this->id;
@@ -116,6 +99,46 @@ class BCase {
      */
     public function getPlayer() {
         return $this->player;
+    }
+
+    /**
+     * Get x
+     *
+     * @return \stdClass
+     */
+    function getX() {
+        return $this->x;
+    }
+
+    /**
+     * Get y
+     *
+     * @return \stdClass
+     */
+    function getY() {
+        return $this->y;
+    }
+
+    /**
+     * Set player
+     *
+     * @param \stdClass $x
+     *
+     * @return BCase
+     */
+    function setX($x) {
+        $this->x = $x;
+    }
+
+    /**
+     * Set player
+     *
+     * @param \stdClass $y
+     *
+     * @return BCase
+     */
+    function setY($y) {
+        $this->y = $y;
     }
 
 }

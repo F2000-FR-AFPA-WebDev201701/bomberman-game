@@ -1,7 +1,104 @@
-{% extends "::base.html.twig" %}
+{% extends "AppBundle::base.html.twig" %}
 
-{% block title %}AppBundle:Game:begin{% endblock %}
+{% block title %}Let's Play !!!!{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Game:begin page</h1>
+    <h2 class="text-center">Let's Play!</h2>
+    <div class="row jumbotron">
+        <section class="col-md-8" id="boardContainer">
+            {% if status == 0%}
+                <div id="waitContainer">
+                    <p id="attente">Vous êtes en attente pour la partie {{id}}</p>
+                </div>
+            {%endif%}
+            {{ render(controller('AppBundle:Game:refresh',{'id_game':id}))}}
+
+        </section>
+        <section class="col-md-4">
+            <img src="{{asset('image/hud_screenshot.png')}} "title="logo" alt="logo" />
+        </section>
+    </div>
+
 {% endblock %}
+{% block javascripts %}
+    <script>
+
+        $(document).ready(function () {
+
+            $(window).keyup(function (event) {
+                var keypress = event.which;
+                switch (keypress) {
+                    case 90:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: "{{ path('play', {'action': 'up', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            success: function (data) {
+                                $('#boardContainer').html(data);
+                            }
+                        });
+                        break;
+                    case 81:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: "{{ path('play', {'action': 'left', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            success: function (data) {
+                                $('#boardContainer').html(data);
+                            }
+                        });
+                        break;
+                    case 83:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: "{{ path('play', {'action': 'down', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            success: function (data) {
+                                $('#boardContainer').html(data);
+                            }
+                        });
+                        break;
+                    case 68:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: "{{ path('play', {'action': 'right', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            success: function (data) {
+                                $('#boardContainer').html(data);
+                            }
+                        });
+                        break;
+                    case 32:
+                        $.ajax({
+                            async: true,
+                            type: 'POST',
+                            url: "{{ path('play', {'action': 'bomb', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            success: function (data) {
+                                $('#boardContainer').html(data);
+                            }
+                        });
+                        break;
+                }
+                ;
+            });
+
+            function refresh() {
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    url: '{{ path('refresh', {'id_game': id }) }}',
+                    success: function (data) {
+                        if (status === 1) {
+                            $('#boardContainer').html(data);
+                        }
+                        ;
+                    }
+                });
+            }
+
+            setInterval(refresh, 7000);
+        });
+
+    </script>
+{% endblock %}
+
