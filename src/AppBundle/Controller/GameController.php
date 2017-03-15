@@ -79,12 +79,16 @@ class GameController extends Controller {
     public function joinAction($id_game, Request $request) {
         //recup game et user en BDD
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Game');
-        $oGame = $repo->findOneById($id_game);
-        $repoUser = $em->getRepository('AppBundle:User');
         $iIdUser = $request->getSession()->get('id_user');
-        $oUser = $repoUser->findOneById($iIdUser);
 
+        $repoGame = $this->getDoctrine()->getRepository('AppBundle:Game');
+        $oGame = $repoGame->find($id_game);
+
+        $repoUser = $this->getDoctrine()->getRepository('AppBundle:User');
+        $oUser = $repoUser->find($iIdUser);
+
+        $oGame->addUser($oUser);
+        $oUser->setGame($oGame);
 
         $oGame->addUser($oUser);
         $em->persist($oGame);
@@ -96,13 +100,15 @@ class GameController extends Controller {
 
         if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
             $oGame->setStatus(1);
-            $oBoard = unserialize($oGame->getData);
+
+            $oBoard = unserialize($oGame->getData());
             $oBoard->setPlayers($oGame->getUsers());
             $sSerial = serialize($oBoard);
             $oGame->setData($sSerial);
+
             $em->flush();
 
-            return $this->redirectToRoute('refresh', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('begin', array('id' => $oGame->getId()));
         }
 
         return $this->redirectToRoute('waiting', array('id' => $oGame->getId()));
