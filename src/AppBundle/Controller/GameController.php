@@ -93,10 +93,6 @@ class GameController extends Controller {
         $oGame->addUser($oUser);
         $em->persist($oGame);
         $em->flush();
-        dump($oGame->getUsers());
-        dump(count($oGame->getUsers()));
-        dump($oGame->getNbPlayers());
-        die;
 
         if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
             $oGame->setStatus(1);
