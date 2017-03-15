@@ -139,9 +139,9 @@ class GameController extends Controller {
         $oGame->setData($seriaBoard);
         $em->flush();
 
-        //$rend = $this->refreshAction($id_game);
-        $this->refreshAction($id_game);
-        //return $rend;
+        $rend = $this->refreshAction($id_game);
+        //$this->refreshAction($id_game);
+        return $rend;
     }
 
     /**
