@@ -1,6 +1,7 @@
 <?php
 
-namespace AppBundle\Controller;
+use Symfony\Component\HttpKernel\Tests\Controller;
+use Symfony\Component\Routing\Route;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
