@@ -213,10 +213,14 @@ class Board {
         return $aBoard;
     }
 
-    function doAction($action) {
-        $player = $this->players[0];
-        $playerY = $player->getY();
-        $playerX = $player->getX();
+    function doAction($action, $id_user) {
+        foreach ($this->players as $key => $value) {
+            if ($id_user == $value->getIdUser()) {
+                $player = $this->players[$key];
+                $playerY = $player->getY();
+                $playerX = $player->getX();
+            }
+        }
         $aBoard = $this->getGrid();
         switch ($action) {
             case 'up' :
@@ -231,7 +235,6 @@ class Board {
                 break;
             case 'down' :
                 $player->setPrevMouv($action);
-
                 if (!$aBoard[$playerY + 1][$playerX]->getItem()) {
 
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);

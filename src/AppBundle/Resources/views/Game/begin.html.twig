@@ -42,7 +42,7 @@
                         $.ajax({
                             async: true,
                             type: 'POST',
-                            url: "{{ path('play', {'action': 'up', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            url: "{{ path('play', {'action': 'left', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
                             }
@@ -52,7 +52,7 @@
                         $.ajax({
                             async: true,
                             type: 'POST',
-                            url: "{{ path('play', {'action': 'up', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            url: "{{ path('play', {'action': 'down', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
                             }
@@ -62,18 +62,17 @@
                         $.ajax({
                             async: true,
                             type: 'POST',
-                            url: "{{ path('play', {'action': 'up', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            url: "{{ path('play', {'action': 'right', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
                             }
                         });
                         break;
                     case 32:
-                        e.preventDefault();
                         $.ajax({
                             async: true,
                             type: 'POST',
-                            url: "{{ path('play', {'action': 'up', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
+                            url: "{{ path('play', {'action': 'bomb', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
                             }

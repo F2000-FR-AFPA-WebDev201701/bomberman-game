@@ -122,9 +122,9 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/play/{action}/{id_game}", name="play")
+     * @Route("/play/{action}/{id_game}/{id_user}", name="play")
      */
-    public function playAction($action, $id_game) {
+    public function playAction($action, $id_game, $id_user) {
         //recup game en BDD
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Game');
@@ -133,7 +133,7 @@ class GameController extends Controller {
         //unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
         //test doAction
-        $oBoard->doAction($action);
+        $oBoard->doAction($action, $id_user);
         //renvoie en BDD
         $seriaBoard = serialize($oBoard);
         $oGame->setData($seriaBoard);
