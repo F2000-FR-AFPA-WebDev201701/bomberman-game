@@ -85,9 +85,14 @@ class GameController extends Controller {
         $iIdUser = $request->getSession()->get('id_user');
         $oUser = $repoUser->findOneById($iIdUser);
 
-        $oGame->addUser($oUser);
 
+        $oGame->addUser($oUser);
+        $em->persist($oGame);
         $em->flush();
+        dump($oGame->getUsers());
+        dump(count($oGame->getUsers()));
+        dump($oGame->getNbPlayers());
+        die;
 
         if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
             $oGame->setStatus(1);

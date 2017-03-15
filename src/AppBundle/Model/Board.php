@@ -89,7 +89,7 @@ class Board {
             $players[$i] = $oPlayer;
             $i++;
         }
-        switch ($this->getPlayers()) {
+        switch ($this->players) {
             case '1':
                 $oPlayer->setY(1);
                 $oPlayer->setX(1);
