@@ -53,7 +53,7 @@ class BCase {
      *
      * @return BCase
      */
-    function setId($id) {
+    public function setId($id) {
         $this->id = $id;
     }
 

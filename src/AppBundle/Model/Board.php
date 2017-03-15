@@ -212,7 +212,7 @@ class Board {
         return $aBoard;
     }
 
-    public function bomb($player, $aBoard) {
+    public function bomb(Player $player, $aBoard) {
         $oItem = new Item();
         $oItem->setNom('bomb');
         $Y = $player->getY();
