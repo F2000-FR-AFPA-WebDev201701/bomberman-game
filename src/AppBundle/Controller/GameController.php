@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 class GameController extends Controller {
 
     /**
-     * @Route("/begin/{id}", name="begin")
+     * @Route("/begin/{id}/{status}", name="begin")
      */
-    public function beginAction($id) {
+    public function beginAction($id, $status) {
         $iGameId = $id;
-        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId
+        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId, 'status' => $status
                         // ...
         ));
     }
@@ -93,10 +93,7 @@ class GameController extends Controller {
         $oGame->addUser($oUser);
         $em->persist($oGame);
         $em->flush();
-        dump($oGame->getUsers());
-        dump(count($oGame->getUsers()));
-        dump($oGame->getNbPlayers());
-        die;
+
 
         if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
             $oGame->setStatus(1);
@@ -108,10 +105,10 @@ class GameController extends Controller {
 
             $em->flush();
 
-            return $this->redirectToRoute('begin', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
         }
 
-        return $this->redirectToRoute('waiting', array('id' => $oGame->getId()));
+        return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
 
     public function isReady($oGame) {

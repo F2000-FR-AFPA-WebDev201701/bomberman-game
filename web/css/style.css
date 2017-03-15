@@ -78,3 +78,21 @@ td>a:focus, td>a:hover, td>a {
     text-decoration: none;
 }
 
+.blur {
+    filter : blur(5px);
+}
+
+#attente {
+    z-index: 1;
+    position: absolute;
+    color: snow;
+    font-size: xx-large;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    margin-top: 30%;
+}
+
+#waitContainer {
+    background: #FFF;
+}
