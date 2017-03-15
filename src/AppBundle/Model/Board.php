@@ -220,50 +220,45 @@ class Board {
         $aBoard = $this->getGrid();
         switch ($action) {
             case 'up' :
-                $this->grid[$playerY][$playerX]->setPlayer(NULL);
                 $player->setPrevMouv($action);
 
                 if (!$aBoard[$playerY - 1][$playerX]->getItem()) {
                     $playerY = $playerY - 1;
                     $player->setY($playerY);
-                    $this->grid[$playerY][$playerX]->setPlayer($player);
-                } else {
+
+                    $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $this->grid[$playerY][$playerX]->setPlayer($player);
                 }
                 break;
             case 'down' :
-                $this->grid[$playerY][$playerX]->setPlayer(NULL);
                 $player->setPrevMouv($action);
 
                 if (!$aBoard[$playerY + 1][$playerX]->getItem()) {
                     $playerY = $playerY + 1;
                     $player->setY($playerY);
-                    $this->grid[$playerY][$playerX]->setPlayer($player);
-                } else {
+
+                    $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $this->grid[$playerY][$playerX]->setPlayer($player);
                 }
                 break;
             case 'right' :
-                $this->grid[$playerY][$playerX]->setPlayer(NULL);
+
                 $player->setPrevMouv($action);
 
                 if (!$aBoard[$playerY][$playerX + 1]->getItem()) {
                     $playerX = $playerX + 1;
                     $player->setX($playerX);
-                    $this->grid[$playerY][$playerX]->setPlayer($player);
-                } else {
+                    $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $this->grid[$playerY][$playerX]->setPlayer($player);
                 }
                 break;
             case 'left' :
-                $this->grid[$playerY][$playerX]->setPlayer(NULL);
                 $player->setPrevMouv($action);
 
                 if (!$aBoard[$playerY][$playerX - 1]->getItem()) {
                     $playerX = $playerX - 1;
                     $player->setX($playerX);
-                    $this->grid[$playerY][$playerX]->setPlayer($player);
-                } else {
+                    $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $this->grid[$playerY][$playerX]->setPlayer($player);
                 }
                 break;
