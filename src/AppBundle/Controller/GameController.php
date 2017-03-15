@@ -17,9 +17,7 @@ class GameController extends Controller {
      */
     public function beginAction($id) {
         $iGameId = $id;
-        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId
-                        // ...
-        ));
+        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId));
     }
 
     /**
@@ -129,7 +127,6 @@ class GameController extends Controller {
         $em->flush();
 
         $rend = $this->refreshAction($id_game);
-        //$this->refreshAction($id_game);
         return $rend;
     }
 
@@ -142,7 +139,6 @@ class GameController extends Controller {
         $repo = $em->getRepository('AppBundle:Game');
         $oGame = $repo->findOneById($id_game);
 
-        //unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
         $aBoard = $oBoard->getGrid();
 
