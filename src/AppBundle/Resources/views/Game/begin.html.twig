@@ -11,7 +11,7 @@
                     <p id="attente">Vous êtes en attente pour la partie {{id}}</p>
                 </div>
             {%endif%}
-            {{ render(controller('AppBundle:Game:refresh',{'id':id}))}}
+            {{ render(controller('AppBundle:Game:refresh',{'id_game':id}))}}
 
         </section>
         <section class="col-md-4">
@@ -24,6 +24,7 @@
     <script>
 
         $(document).ready(function () {
+
             $(window).keyup(function (event) {
                 var keypress = event.which;
                 switch (keypress) {
@@ -81,6 +82,22 @@
                 }
                 ;
             });
+
+            function refresh() {
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    url: '{{ path('refresh', {'id_game': id }) }}',
+                    success: function (data) {
+                        if (status === 1) {
+                            $('#boardContainer').html(data);
+                        }
+                        ;
+                    }
+                });
+            }
+
+            setInterval(refresh, 2400);
         });
 
     </script>
