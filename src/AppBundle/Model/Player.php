@@ -170,19 +170,19 @@ class Player {
         return $this->x;
     }
 
-    function getIdUser() {
+    public function getIdUser() {
         return $this->idUser;
     }
 
-    function setIdUser($idUser) {
+    public function setIdUser($idUser) {
         $this->idUser = $idUser;
     }
 
-    function getPrevMouv() {
+    public function getPrevMouv() {
         return $this->prevMouv;
     }
 
-    function setPrevMouv($prevMouv) {
+    public function setPrevMouv($prevMouv) {
         $this->prevMouv = $prevMouv;
     }
 

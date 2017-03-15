@@ -1,5 +1,6 @@
 {
     "name": "f2000/bomberman-game",
+    "description": "création d'un Bomberman-like utilisant le framework Symfony3 et ses composants",
     "license": "proprietary",
     "type": "project",
     "autoload": {
