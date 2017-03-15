@@ -106,7 +106,7 @@ class BCase {
      *
      * @return \stdClass
      */
-    function getX() {
+    public function getX() {
         return $this->x;
     }
 
@@ -115,7 +115,7 @@ class BCase {
      *
      * @return \stdClass
      */
-    function getY() {
+    public function getY() {
         return $this->y;
     }
 
@@ -126,7 +126,7 @@ class BCase {
      *
      * @return BCase
      */
-    function setX($x) {
+    public function setX($x) {
         $this->x = $x;
     }
 
@@ -137,7 +137,7 @@ class BCase {
      *
      * @return BCase
      */
-    function setY($y) {
+    public function setY($y) {
         $this->y = $y;
     }
 
