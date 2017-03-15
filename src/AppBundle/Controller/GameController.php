@@ -110,17 +110,6 @@ class GameController extends Controller {
         return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
 
-    public function isReady($oGame) {
-        $users = $oGame->getUsers();
-        $aUsers = explode(',', $users);
-
-        if ($oGame->getNbPlayers() == count($aUsers)) {
-            $oGame->setStatus(1);
-            $this->createBoard($oGame);
-            return $this->redirectToRoute('refresh', array('id' => $oGame->getId()));
-        }
-    }
-
     /**
      * @Route("/play/{action}/{id_game}/{id_user}", name="play")
      */
@@ -159,17 +148,6 @@ class GameController extends Controller {
         $idBoard = $oBoard->getIdGame();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $idBoard));
-    }
-
-    /**
-     *
-     * @param type $id
-     * @return type
-     *
-     * @Route("/waiting/{id}", name="waiting")
-     */
-    public function waitingGame($id) {
-        return $this->render('AppBundle:Game:waiting.html.twig', array('id' => $id));
     }
 
 }

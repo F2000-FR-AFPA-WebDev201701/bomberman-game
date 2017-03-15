@@ -126,7 +126,6 @@ class Board {
     public function setGrid() {
         // Génération de la grille 16X12
         $aBoard = [];
-        $i = 0;
         for ($y = 0; $y <= 12; $y++) {
             $aBoard[$y] = [];
             for ($x = 0; $x <= 16; $x++) {
@@ -157,7 +156,7 @@ class Board {
      *
      * @return Board
      */
-    public function setWalls() {
+    public function setWalls($walls) {
 
         $this->walls = $walls;
 
@@ -173,11 +172,11 @@ class Board {
         return $this->walls;
     }
 
-    function getIdGame() {
+    public function getIdGame() {
         return $this->idGame;
     }
 
-    function setIdGame($idGame) {
+    public function setIdGame($idGame) {
         $this->idGame = $idGame;
     }
 
@@ -213,7 +212,7 @@ class Board {
         return $aBoard;
     }
 
-    function doAction($action, $id_user) {
+    public function doAction($action, $id_user) {
         foreach ($this->players as $key => $value) {
             if ($id_user == $value->getIdUser()) {
                 $player = $this->players[$key];
@@ -226,7 +225,6 @@ class Board {
             case 'up' :
                 $player->setPrevMouv($action);
                 if (!$aBoard[$playerY - 1][$playerX]->getItem()) {
-
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY - 1;
                     $player->setY($playerY);
@@ -236,7 +234,6 @@ class Board {
             case 'down' :
                 $player->setPrevMouv($action);
                 if (!$aBoard[$playerY + 1][$playerX]->getItem()) {
-
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY + 1;
                     $player->setY($playerY);
@@ -244,11 +241,8 @@ class Board {
                 }
                 break;
             case 'right' :
-
                 $player->setPrevMouv($action);
-
                 if (!$aBoard[$playerY][$playerX + 1]->getItem()) {
-
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX + 1;
                     $player->setX($playerX);
@@ -257,20 +251,16 @@ class Board {
                 break;
             case 'left' :
                 $player->setPrevMouv($action);
-
                 if (!$aBoard[$playerY][$playerX - 1]->getItem()) {
-
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX - 1;
                     $player->setX($playerX);
                     $this->grid[$playerY][$playerX]->setPlayer($player);
                 }
                 break;
-
             case 'bomb':
                 $oItem = new Item();
                 $oItem->setNom('bomb');
-
                 switch ($player->getPrevMouv()) {
                     case 'up' :
                         if (!$aBoard[$playerY - 1][$playerX]->getItem()) {
@@ -293,7 +283,6 @@ class Board {
                         }
                         break;
                 }
-
                 break;
         }
     }
