@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 class GameController extends Controller {
 
     /**
-     * @Route("/begin/{id}/{status}", name="begin")
+     * @Route("/begin/{id}", name="begin")
      */
     public function beginAction($id, $status) {
         $iGameId = $id;
-        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId, 'status' => $status
+        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId
                         // ...
         ));
     }
@@ -145,9 +145,8 @@ class GameController extends Controller {
         //unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
         $aBoard = $oBoard->getGrid();
-        $idBoard = $oBoard->getIdGame();
 
-        return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $idBoard));
+        return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
 
 }
