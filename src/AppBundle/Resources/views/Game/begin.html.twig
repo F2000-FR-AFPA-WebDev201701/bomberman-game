@@ -6,7 +6,12 @@
     <h2 class="text-center">Let's Play!</h2>
     <div class="row jumbotron">
         <section class="col-md-8" id="boardContainer">
-            {{ render(controller('AppBundle:Game:refresh',{'id':id}))}}
+            {% if status == 0%}
+                <div id="waitContainer">
+                    <p id="attente">Vous êtes en attente pour la partie {{id}}</p>
+                </div>
+            {%endif%}
+            {{ render(controller('AppBundle:Game:refresh',{'id_game':id}))}}
 
         </section>
         <section class="col-md-4">
@@ -19,6 +24,7 @@
     <script>
 
         $(document).ready(function () {
+
             $(window).keyup(function (event) {
                 var keypress = event.which;
                 switch (keypress) {
@@ -76,6 +82,22 @@
                 }
                 ;
             });
+
+            function refresh() {
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    url: '{{ path('refresh', {'id_game': id }) }}',
+                    success: function (data) {
+                        if (status === 1) {
+                            $('#boardContainer').html(data);
+                        }
+                        ;
+                    }
+                });
+            }
+
+            setInterval(refresh, 2400);
         });
 
     </script>

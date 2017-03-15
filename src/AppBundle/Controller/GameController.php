@@ -13,11 +13,11 @@ use Symfony\Component\HttpFoundation\Request;
 class GameController extends Controller {
 
     /**
-     * @Route("/begin/{id}", name="begin")
+     * @Route("/begin/{id}/{status}", name="begin")
      */
-    public function beginAction($id) {
+    public function beginAction($id, $status) {
         $iGameId = $id;
-        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId
+        return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId, 'status' => $status
                         // ...
         ));
     }
@@ -104,10 +104,10 @@ class GameController extends Controller {
 
             $em->flush();
 
-            return $this->redirectToRoute('begin', array('id' => $oGame->getId()));
+            return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
         }
 
-        return $this->redirectToRoute('waiting', array('id' => $oGame->getId()));
+        return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
 
     public function isReady($oGame) {
@@ -145,13 +145,13 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/refresh/{id}", name="refresh")
+     * @Route("/refresh/{id_game}", name="refresh")
      */
-    public function refreshAction($id) {
+    public function refreshAction($id_game) {
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Game');
-        $oGame = $repo->findOneById($id);
+        $oGame = $repo->findOneById($id_game);
 
         //unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
