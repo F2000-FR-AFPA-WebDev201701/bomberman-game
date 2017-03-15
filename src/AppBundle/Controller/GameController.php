@@ -15,7 +15,7 @@ class GameController extends Controller {
     /**
      * @Route("/begin/{id}", name="begin")
      */
-    public function beginAction($id, $status) {
+    public function beginAction($id) {
         $iGameId = $id;
         return $this->render('AppBundle:Game:begin.html.twig', array('id' => $iGameId
                         // ...
