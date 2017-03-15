@@ -146,13 +146,13 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/refresh/{id}", name="refresh")
+     * @Route("/refresh/{id_game}", name="refresh")
      */
-    public function refreshAction($id) {
+    public function refreshAction($id_game) {
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Game');
-        $oGame = $repo->findOneById($id);
+        $oGame = $repo->findOneById($id_game);
 
         //unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
