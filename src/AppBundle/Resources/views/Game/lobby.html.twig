@@ -38,10 +38,18 @@
             {% for game in allGame%}
                 <tr>
                     <td>{{game.name}}</td>
-                    <td>{{game.nbPlayers}}</td>
-                    <td>Salut salut !</td>
+                    <td>{{ game.users|length }} sur {{game.nbPlayers}}</td>
                     <td>
-                        {% if app.request.session.get('isConnected')%}
+                        {% if game.status == 1 %}
+                            En cours
+                        {% elseif game.status == 2 %}
+                            Terminée
+                        {% else %}
+                            En attente
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if app.request.session.get('isConnected') and game.status == 0 %}
                             <a href="{{path('join', {'id_game':game.id})}}" class="btn btn-success active">Rejoindre</a>
                         {% else %}
                             <a href="{{path('join', {'id_game':game.id})}}" class="btn btn-success disabled">Rejoindre</a>
