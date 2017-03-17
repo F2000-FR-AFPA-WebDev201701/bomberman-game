@@ -4,7 +4,7 @@
         <a href="{{path('index')}}"><img class="col-md-3 col-md-offset-3" src="{{asset('image/title.png')}}" title="title" alt="title" /></a>
 
         {% if not app.request.session.get('isConnected')%}
-            <div class="col-md-offset-2 col-md-3">
+            <div class="well col-md-offset-2 col-md-3">
                 {{render(controller('AppBundle:User:login'))}}
             </div>
         {%else%}
