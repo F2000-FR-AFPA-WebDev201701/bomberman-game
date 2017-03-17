@@ -26,7 +26,7 @@ class UserController extends Controller {
         if ($oForm->isSubmitted()) {
             $repo = $this->getDoctrine()->getRepository('AppBundle:User');
             $oUser = $repo->findOneByLogin($sLogin);
-            if ($oUser && $oUser->getPassword() == $oUserForm->getPassword()) {
+            if ($oUser && $oUser->getPassword() == sha1($oUserForm->getPassword())) {
                 $request->getSession()->set('isConnected', 'true');
                 $sLog = $oUser->getLogin();
                 $iIdLog = $oUser->getId();
