@@ -25,6 +25,7 @@ class GameController extends Controller {
      * @Template
      */
     public function lobbyAction(Request $request) {
+
         $oGame = new Game;
         $oForm = $this->createForm(GameType::class, $oGame);
         $oForm->handleRequest($request);
@@ -143,6 +144,21 @@ class GameController extends Controller {
         $aBoard = $oBoard->getGrid();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
+    }
+
+    /**
+     * @Route("/close/{id_game}", name="close")
+     */
+    public function closeAction($id_game) {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id_game);
+
+        $oGame->setStatus(2);
+        $em->flush();
+
+        return $this->redirectToRoute('lobby');
     }
 
 }
