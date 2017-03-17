@@ -47,30 +47,23 @@ class UserController extends Controller {
      * @Template
      */
     public function modifUserAction(Request $request) {
-        $sLogin = $request->getSession()->get('login');
-
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:User');
-        $oUser = $repo->findOneByLogin($sLogin);
+        $oUser = $repo->findOneByLogin($request->getSession()->get('login'));
         $oUser->setPassword('');
-
         $oForm = $this->createFormBuilder($oUser)
                 ->add('login', TextType::class)
                 ->add('password', TextType::class)
                 ->add('save', SubmitType::class, array('label' => 'modifier'))
                 ->getForm();
         $oForm->handleRequest($request);
-
         if ($oForm->isSubmitted()) {
             $oUser->setPassword($this->cryptPwd($oUser->getPassword()));
             $em->flush();
-
-            $sLog = $oUserForm->getLogin();
+            $sLog = $oUser->getLogin();
             $request->getSession()->set('login', $sLog);
             return $this->redirectToRoute('index');
         }
-
-
         return array('form' => $oForm->createView());
     }
 
@@ -80,33 +73,22 @@ class UserController extends Controller {
      */
     public function createUserAction(Request $request) {
         $oUserForm = new User;
-        $oForm = $this->createFormBuilder($oUserForm)
-                ->add('login', TextType::class)
-                ->add('password', TextType::class)
-                ->add('save', SubmitType::class, array('label' => 'Soumettre'))
-                ->getForm();
+        $oForm = $this->createFormBuilder($oUserForm)->add('login', TextType::class)->add('password', TextType::class)->add('save', SubmitType::class, array('label' => 'Soumettre'))->getForm();
         $oForm->handleRequest($request);
-        $sLogin = $oUserForm->getLogin();
-
         if ($oForm->isSubmitted() && $oForm->isValid()) {
             $repo = $this->getDoctrine()->getRepository('AppBundle:User');
-            $oUser = $repo->findOneByLogin($sLogin);
+            $oUser = $repo->findOneByLogin($oUserForm->getLogin());
             if (!$oUser) {
                 $oUserForm->setPassword($this->cryptPwd($oUserForm->getPassword()));
-
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($oUserForm);
                 $em->flush();
-
                 $request->getSession()->set('isConnected', 'true');
-                $sLog = $oUserForm->getLogin();
-                $iIdLog = $oUserForm->getId();
-                $request->getSession()->set('login', $sLog);
-                $request->getSession()->set('id_user', $iIdLog);
+                $request->getSession()->set('login', $oUserForm->getLogin());
+                $request->getSession()->set('id_user', $oUserForm->getId());
                 return $this->redirectToRoute('index');
             }
         }
-
         return array('form' => $oForm->createView());
     }
 
