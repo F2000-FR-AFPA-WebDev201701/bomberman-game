@@ -1,15 +1,17 @@
 <header class="container-fluid">
     <div class="row">
-        <img class="col-md-1 col-xs-4" src="{{asset('image/logo.png')}}" title="logo" alt="logo"/>
-        <img class="col-md-3 col-md-offset-3" src="{{asset('image/title.png')}}" title="title" alt="title" />
+        <a href="{{path('index')}}"><img class="col-md-1 col-xs-4" src="{{asset('image/logo.png')}}" title="logo" alt="logo"/></a>
+        <a href="{{path('index')}}"><img class="col-md-3 col-md-offset-3" src="{{asset('image/title.png')}}" title="title" alt="title" /></a>
 
         {% if not app.request.session.get('isConnected')%}
-
-            {{render(controller('AppBundle:User:login'))}}
+            <div class="col-md-offset-2 col-md-3">
+                {{render(controller('AppBundle:User:login'))}}
+            </div>
         {%else%}
             <div class="well col-md-offset-2 col-md-3">
                 <span >Bonjour {{ app.request.session.get('login') }} !</span><br>
-                <a  href="{{path('logout')}}">Déconnexion</a>
+                <a  href="{{path('logout')}}">Déconnexion</a> |
+                <a  href="{{path('modifUser')}}">Modifier vos informations</a>
             </div>
         {%endif%}
 
@@ -33,7 +35,6 @@
                     <li class="active"><a href="{{path('index')}}">Accueil <span class="glyphicon glyphicon-home alert-success" aria-hidden="true"></span> <span class="sr-only">(current)</span></a></li>
                     <li><a href="{{path('lobby')}}">Lobby <span class="glyphicon glyphicon-piggy-bank alert-warning" aria-hidden="true"></span></a></li>
                     <li><a href="#">jeu <span class="glyphicon glyphicon-fire alert-danger" aria-hidden="true"></span></a></li>
-                    <li><a href="#">Contacts <span class="glyphicon glyphicon-earphone alert-info" aria-hidden="true"></span></a></li>
                 </ul>
             </div>
         </div>
