@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller {
 
     /**
-     * @Route("/index", name="index")
+     * @Route("/", name="index")
      */
     public function indexAction() {
         return $this->render("AppBundle::index.html.twig");
