@@ -71,6 +71,7 @@
                             url: "{{ path('play', {'action': 'bomb', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
+                                $('#bomb').attr('src', '{{asset('image/bomb2.png')}}').delay(1000).attr('src', '{{asset('image/bomb3.png')}}').delay(1000);
                             }
                         });
                         break;

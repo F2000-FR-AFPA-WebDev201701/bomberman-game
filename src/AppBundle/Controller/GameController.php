@@ -25,6 +25,7 @@ class GameController extends Controller {
      * @Template
      */
     public function lobbyAction(Request $request) {
+
         $oGame = new Game;
         $oForm = $this->createForm(GameType::class, $oGame);
         $oForm->handleRequest($request);
