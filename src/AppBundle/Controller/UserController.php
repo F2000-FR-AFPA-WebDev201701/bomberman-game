@@ -100,7 +100,7 @@ class UserController extends Controller {
 
                 $request->getSession()->set('isConnected', 'true');
                 $sLog = $oUserForm->getLogin();
-                $iIdLog = $oUser->getId();
+                $iIdLog = $oUserForm->getId();
                 $request->getSession()->set('login', $sLog);
                 $request->getSession()->set('id_user', $iIdLog);
                 return $this->redirectToRoute('index');
