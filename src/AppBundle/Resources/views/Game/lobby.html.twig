@@ -2,25 +2,30 @@
 
 {% block body %}
     <div class="row well">
-        <h3>Créez votre partie !!!</h3>
+        {% if not app.request.session.get('isConnected')%}
+            <h3 class="texte-center">Vous devez être connecté pour jouer</h3>
+        {% else %}
+            <h3>Créez votre partie !!!</h3>
 
-        {{form_start(form)}}
-        <div class="form-item">
-            {{form_widget(form.name, {'attr': {'placeholder': 'Nom de la partie'}})}}
+            {{form_start(form)}}
+            <div class="form-item">
+                {{form_widget(form.name, {'attr': {'placeholder': 'Nom de la partie'}})}}
+            </div>
+            <div class="form-item">
+                {{ form_label (form.nbPlayers, 'Nombre de joueurs', {'label_attr': {'class': 'attr'}}) }}
+                {{form_widget(form.nbPlayers)}}
+            </div>
+            <div class="form-item">
+                {% if app.request.session.get('isConnected')%}
+                    {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary active'}} )}}
+                {% else %}
+                    {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary disabled', 'disabled': 'disabled'}} )}}
+                {% endif %}
+            </div>
+            {{form_end(form)}}
         </div>
-        <div class="form-item">
-            {{ form_label (form.nbPlayers, 'Nombre de joueurs', {'label_attr': {'class': 'attr'}}) }}
-            {{form_widget(form.nbPlayers)}}
-        </div>
-        <div class="form-item">
-            {% if app.request.session.get('isConnected')%}
-                {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary active'}} )}}
-            {% else %}
-                {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary disabled', 'disabled': 'disabled'}} )}}
-            {% endif %}
-        </div>
-        {{form_end(form)}}
-    </div>
+
+    {% endif %}
     <div class="row">
         <table id="lobby" class="col-md-12 text-center">
             <tr>
@@ -33,9 +38,23 @@
             {% for game in allGame%}
                 <tr>
                     <td>{{game.name}}</td>
-                    <td>{{game.nbPlayers}}</td>
-                    <td>Salut salut !</td>
-                    <td><a href="{{path('join', {'id_game':game.id})}}" class="btn btn-success">Rejoindre</a></td>
+                    <td>{{ game.users|length }} sur {{game.nbPlayers}}</td>
+                    <td>
+                        {% if game.status == 1 %}
+                            En cours
+                        {% elseif game.status == 2 %}
+                            Terminée
+                        {% else %}
+                            En attente
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if app.request.session.get('isConnected') and game.status == 0 %}
+                            <a href="{{path('join', {'id_game':game.id})}}" class="btn btn-success active">Rejoindre</a>
+                        {% else %}
+                            <a href="{{path('join', {'id_game':game.id})}}" class="btn btn-success disabled">Rejoindre</a>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </table>

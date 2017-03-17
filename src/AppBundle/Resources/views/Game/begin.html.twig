@@ -12,6 +12,7 @@
         </section>
         <section class="col-md-4">
             <img src="{{asset('image/hud_screenshot.png')}} "title="logo" alt="logo" />
+            <a href="{{path('close', {'id_game':id})}}" class="btn btn-success active">Terminer</a>
         </section>
     </div>
 
@@ -71,6 +72,7 @@
                             url: "{{ path('play', {'action': 'bomb', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
+                                $('#bomb').attr('src', '{{asset('image/bomb2.png')}}').delay(1000).attr('src', '{{asset('image/bomb3.png')}}').delay(1000);
                             }
                         });
                         break;
@@ -89,7 +91,7 @@
                 });
             }
 
-            setInterval(refresh, 7000);
+            setInterval(refresh, 3000);
         });
 
     </script>

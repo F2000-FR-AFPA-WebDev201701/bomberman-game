@@ -3,9 +3,9 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type as FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type as FormType;
 
 class UserType extends AbstractType {
 
@@ -14,7 +14,7 @@ class UserType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('login')
-                ->add('password')
+                ->add('password', FormType\PasswordType::class)
                 ->add('save', FormType\SubmitType::class, array('label' => 'ok'));
     }
 
