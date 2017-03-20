@@ -263,6 +263,7 @@ class Board {
         if ($itemUp && $itemUp->getNom() != "wall") {
             $aBoard[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
         }
+        $aBoard[$Y][$X]->setBomb(NULL);
     }
 
     public function doAction($action, $id_user) {
