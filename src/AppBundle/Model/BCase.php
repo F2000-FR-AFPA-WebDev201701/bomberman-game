@@ -39,6 +39,12 @@ class BCase {
     private $player;
 
     /**
+     * @var \stdClass
+     *
+     */
+    private $bomb;
+
+    /**
      * Get id
      *
      */
@@ -139,6 +145,14 @@ class BCase {
      */
     public function setY($y) {
         $this->y = $y;
+    }
+
+    function getBomb() {
+        return $this->bomb;
+    }
+
+    function setBomb($bomb) {
+        $this->bomb = $bomb;
     }
 
 }
