@@ -219,7 +219,6 @@ class Board {
         $oBomb->setX($X);
         $oBomb->setY($Y);
         $aBoard[$Y][$X]->setBomb($oBomb);
-        $oBomb->setTimestamp(new \DateTime);
     }
 
     public function boom(Bomb $oBomb, $aBoard) {
