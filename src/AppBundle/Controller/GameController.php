@@ -147,6 +147,20 @@ class GameController extends Controller {
     }
 
     /**
+     * @Route("/hud/{id_game}", name="hud")
+     */
+    public function hudAction($id_game) {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id_game);
+
+        $oBoard = unserialize($oGame->getData());
+
+        return $this->render('AppBundle:Game:hud.html.twig', array('id' => $oGame->getId(), 'pseudo' => $oGame->getId(), 'status' => $oGame->getStatus(), 'players' => $oBoard->getPlayers()));
+    }
+
+    /**
      * @Route("/close/{id_game}", name="close")
      */
     public function closeAction($id_game) {

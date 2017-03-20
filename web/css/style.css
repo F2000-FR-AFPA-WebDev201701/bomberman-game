@@ -107,3 +107,23 @@ td>a:focus, td>a:hover, td>a {
 #waitContainer {
     background: #FFF;
 }
+
+.flexbox {
+    display: flex;
+}
+
+.hud {
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0.5em 0.3em;
+}
+
+.case_hud {
+    justify-content: space-around;
+    background: #FFF;
+    border: 2px solid black;
+}
+
+.case_hud>p {
+    margin-bottom: 0px;
+}

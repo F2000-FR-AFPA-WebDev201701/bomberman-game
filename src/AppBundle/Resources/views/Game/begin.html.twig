@@ -11,8 +11,9 @@
 
         </section>
         <section class="col-md-4">
-            <div class="hud"></div>
-            <a href="{{path('close', {'id_game':id})}}" class="btn-terminer btn btn-danger active">Terminer la partie</a>
+
+            {{ render(controller('AppBundle:Game:hud',{'id_game':id}))}}
+
         </section>
     </div>
 

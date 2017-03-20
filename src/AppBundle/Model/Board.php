@@ -98,6 +98,7 @@ class Board {
             $oPlayer->setX($pl_x);
             $oPlayer->setY($pl_y);
             $oPlayer->setIdUser($oUser->getId());
+            $oPlayer->setPseudo($oUser->getLogin());
 
             $aBoard[$pl_y][$pl_x]->setPlayer($oPlayer);
 
