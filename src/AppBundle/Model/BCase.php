@@ -147,11 +147,11 @@ class BCase {
         $this->y = $y;
     }
 
-    function getBomb() {
+    public function getBomb() {
         return $this->bomb;
     }
 
-    function setBomb($bomb) {
+    public function setBomb($bomb) {
         $this->bomb = $bomb;
     }
 
