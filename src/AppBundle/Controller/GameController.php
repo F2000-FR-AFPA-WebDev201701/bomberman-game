@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Game;
-use AppBundle\Form\GameType;
+use AppBundle\Form\Type\GameType;
 use AppBundle\Model\Board;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;

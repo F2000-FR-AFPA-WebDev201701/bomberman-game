@@ -1,21 +1,26 @@
 <?php
 
-namespace AppBundle\Form;
+namespace AppBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type as FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType {
+class GameType extends AbstractType {
 
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
-        $builder->add('login')
-                ->add('password', FormType\PasswordType::class)
-                ->add('save', FormType\SubmitType::class, array('label' => 'ok'));
+        $builder->add('name', FormType\TextType::class)
+                ->add('nbPlayers', FormType\ChoiceType::class, array('choices' => array(
+                        '1' => '1',
+                        '2' => '2',
+                        '3' => '3',
+                        '4' => '4')))
+                ->add('create', FormType\SubmitType::class, array('label' => 'create'))
+                ->getForm();
     }
 
     /**
@@ -23,7 +28,7 @@ class UserType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\User'
+            'data_class' => 'AppBundle\Entity\Game'
         ));
     }
 
@@ -31,7 +36,7 @@ class UserType extends AbstractType {
      * {@inheritdoc}
      */
     public function getBlockPrefix() {
-        return 'appbundle_user';
+        return 'appbundle_game';
     }
 
 }
