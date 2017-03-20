@@ -34,27 +34,27 @@ class Bomb {
      */
     private $y;
 
-    function getX() {
+    public function getX() {
         return $this->x;
     }
 
-    function getY() {
+    public function getY() {
         return $this->y;
     }
 
-    function setX($x) {
+    public function setX($x) {
         $this->x = $x;
     }
 
-    function setY($y) {
+    public function setY($y) {
         $this->y = $y;
     }
 
-    function getTimestamp() {
+    public function getTimestamp() {
         return $this->timestamp;
     }
 
-    function setTimestamp($timestamp) {
+    public function setTimestamp($timestamp) {
         $this->timestamp = $timestamp;
     }
 
