@@ -142,6 +142,10 @@ class GameController extends Controller {
 
         $oBoard = unserialize($oGame->getData());
         $oBoard->doCycle();
+        //renvoie en BDD
+        $seriaBoard = serialize($oBoard);
+        $oGame->setData($seriaBoard);
+        $em->flush();
         $aBoard = $oBoard->getGrid();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
