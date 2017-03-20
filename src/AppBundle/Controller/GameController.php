@@ -141,6 +141,7 @@ class GameController extends Controller {
         $oGame = $repo->findOneById($id_game);
 
         $oBoard = unserialize($oGame->getData());
+        $oBoard->doCycle();
         $aBoard = $oBoard->getGrid();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));

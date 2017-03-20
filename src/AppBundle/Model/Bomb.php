@@ -34,6 +34,18 @@ class Bomb {
      */
     private $y;
 
+    public function __construct() {
+        $this->timestamp = date('U');
+    }
+
+    public function isExploded() {
+        $sAdd = $this->timestamp + 10;
+        if (date('U') >= $sAdd) {
+            return true;
+        }
+        return false;
+    }
+
     public function getX() {
         return $this->x;
     }
