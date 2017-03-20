@@ -7,13 +7,13 @@
 {% for y, ligne in board%}
     <div class="ligne">
         {% for x, case in ligne %}
+            {% set caseSpecificClass = 'field' %}
+
             {% if case.item and case.item.nom == 'wall' %}
                 {% set caseSpecificClass = 'wall' %}
             {% elseif case.item and case.item.nom == 'destruwall' %}
                 {% set caseSpecificClass = 'destruwall' %}
-            {% else %}
-                {% set caseSpecificClass = 'field' %}
-            {%endif%}
+            {% endif %}
 
             <div id="case_{{x}}_{{y}}" class="case {{ caseSpecificClass }} ">
                 {% if case.player %}
@@ -22,7 +22,8 @@
 
                 {% if case.bomb %}
                     <img class="bomb" src="{{asset('image/bomb1.png')}}"/>
-                {% endif%}</div>
-            {% endfor%}
+                {% endif%}
+            </div>
+        {% endfor%}
     </div>
 {% endfor %}
