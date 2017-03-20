@@ -98,6 +98,7 @@ class Board {
             $oPlayer->setX($pl_x);
             $oPlayer->setY($pl_y);
             $oPlayer->setIdUser($oUser->getId());
+            $oPlayer->setPseudo($oUser->getLogin());
 
             $aBoard[$pl_y][$pl_x]->setPlayer($oPlayer);
 
@@ -212,33 +213,57 @@ class Board {
         return $aBoard;
     }
 
-    public function bomb(Player $player, $aBoard) {
-        $oItem = new Item();
-        $oItem->setNom('bomb');
+    public function setBomb(Bomb $oBomb, Player $player, $aBoard) {
         $Y = $player->getY();
         $X = $player->getX();
-        switch ($player->getPrevMouv()) {
-            case 'up' :
-                if (!$aBoard[$Y - 1][$X]->getItem()) {
-                    $aBoard[$Y - 1][$X]->setItem($oItem);
-                }
-                break;
-            case 'down' :
-                if (!$aBoard[$Y + 1][$X]->getItem()) {
-                    $aBoard[$Y + 1][$X]->setItem($oItem);
-                }
-                break;
-            case 'right' :
-                if (!$aBoard[$Y][$X + 1]->getItem($oItem)) {
-                    $aBoard[$Y][$X + 1]->setItem($oItem);
-                }
-                break;
-            case 'left' :
-                if (!$aBoard[$Y][$X - 1]->getItem($oItem)) {
-                    $aBoard[$Y][$X - 1]->setItem($oItem);
-                }
-                break;
+        $oBomb->setX($X);
+        $oBomb->setY($Y);
+        $aBoard[$Y][$X]->setBomb($oBomb);
+        /* switch ($player->getPrevMouv()) {
+          case 'up' :
+          if (!$aBoard[$Y - 1][$X]->getItem()) {
+          $aBoard[$Y - 1][$X]->setBomb($oBomb);
+          }
+          break;
+          case 'down' :
+          if (!$aBoard[$Y + 1][$X]->getItem()) {
+          $aBoard[$Y + 1][$X]->setBomb($oBomb);
+          }
+          break;
+          case 'right' :
+          if (!$aBoard[$Y][$X + 1]->getItem()) {
+          $aBoard[$Y][$X + 1]->setBomb($oBomb);
+          }
+          break;
+          case 'left' :
+          if (!$aBoard[$Y][$X - 1]->getItem()) {
+          $aBoard[$Y][$X - 1]->setBomb($oBomb);
+          }
+          break;
+          } */
+    }
+
+    public function boom(Bomb $oBomb, $aBoard) {
+
+        $X = $oBomb->getX();
+        $Y = $oBomb->getY();
+        $itemLeft = $aBoard[$Y][$X - $oBomb::STRENGTH]->getItem();
+        $itemRight = $aBoard[$Y][$X + $oBomb::STRENGTH]->getItem();
+        $itemUp = $aBoard[$Y - $oBomb::STRENGTH][$X]->getItem();
+        $itemDown = $aBoard[$Y + $oBomb::STRENGTH][$X]->getItem();
+        if ($itemDown && $itemDown->getNom() != "wall") {
+            $aBoard[$Y + $oBomb::STRENGTH][$X]->setItem(NULL);
         }
+        if ($itemLeft && $itemLeft->getNom() != "wall") {
+            $aBoard[$Y][$X - $oBomb::STRENGTH]->setItem(NULL);
+        }
+        if ($itemRight && $itemRight->getNom() != "wall") {
+            $aBoard[$Y][$X + $oBomb::STRENGTH]->setItem(NULL);
+        }
+        if ($itemUp && $itemUp->getNom() != "wall") {
+            $aBoard[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
+        }
+        $aBoard[$Y][$X]->setBomb(NULL);
     }
 
     public function doAction($action, $id_user) {
@@ -288,7 +313,9 @@ class Board {
                 }
                 break;
             case 'bomb':
-                $this->bomb($player, $aBoard);
+                $oBomb = new Bomb();
+                $this->setBomb($oBomb, $player, $aBoard);
+                $this->boom($oBomb, $aBoard);
                 break;
         }
     }

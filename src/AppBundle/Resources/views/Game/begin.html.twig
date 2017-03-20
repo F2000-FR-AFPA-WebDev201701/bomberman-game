@@ -11,8 +11,9 @@
 
         </section>
         <section class="col-md-4">
-            <img src="{{asset('image/hud_screenshot.png')}} "title="logo" alt="logo" />
-            <a href="{{path('close', {'id_game':id})}}" class="btn btn-success active">Terminer</a>
+
+            {{ render(controller('AppBundle:Game:hud',{'id_game':id}))}}
+
         </section>
     </div>
 
@@ -21,9 +22,10 @@
     <script>
 
         $(document).ready(function () {
-
-            $(window).keyup(function (event) {
+            $(window).keydown(function (event) {
+                event.preventDefault();
                 var keypress = event.which;
+
                 switch (keypress) {
                     case 90:
                         $.ajax({

@@ -20,7 +20,7 @@
                     <img class="player" src="{{asset('image/sprites/face.png')}}"/>
                 {% endif %}
 
-                {% if case.item and case.item.nom == 'bomb' %}
+                {% if case.bomb %}
                     <img class="bomb" src="{{asset('image/bomb1.png')}}"/>
                 {% endif%}</div>
             {% endfor%}

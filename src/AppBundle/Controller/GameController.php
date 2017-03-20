@@ -3,7 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Game;
-use AppBundle\Form\GameType;
+use AppBundle\Form\Type\GameType;
 use AppBundle\Model\Board;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -144,6 +144,20 @@ class GameController extends Controller {
         $aBoard = $oBoard->getGrid();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $aBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
+    }
+
+    /**
+     * @Route("/hud/{id_game}", name="hud")
+     */
+    public function hudAction($id_game) {
+
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('AppBundle:Game');
+        $oGame = $repo->findOneById($id_game);
+
+        $oBoard = unserialize($oGame->getData());
+
+        return $this->render('AppBundle:Game:hud.html.twig', array('id' => $oGame->getId(), 'pseudo' => $oGame->getId(), 'status' => $oGame->getStatus(), 'players' => $oBoard->getPlayers()));
     }
 
     /**
