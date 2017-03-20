@@ -219,28 +219,6 @@ class Board {
         $oBomb->setX($X);
         $oBomb->setY($Y);
         $aBoard[$Y][$X]->setBomb($oBomb);
-        /* switch ($player->getPrevMouv()) {
-          case 'up' :
-          if (!$aBoard[$Y - 1][$X]->getItem()) {
-          $aBoard[$Y - 1][$X]->setBomb($oBomb);
-          }
-          break;
-          case 'down' :
-          if (!$aBoard[$Y + 1][$X]->getItem()) {
-          $aBoard[$Y + 1][$X]->setBomb($oBomb);
-          }
-          break;
-          case 'right' :
-          if (!$aBoard[$Y][$X + 1]->getItem()) {
-          $aBoard[$Y][$X + 1]->setBomb($oBomb);
-          }
-          break;
-          case 'left' :
-          if (!$aBoard[$Y][$X - 1]->getItem()) {
-          $aBoard[$Y][$X - 1]->setBomb($oBomb);
-          }
-          break;
-          } */
     }
 
     public function boom(Bomb $oBomb, $aBoard) {
