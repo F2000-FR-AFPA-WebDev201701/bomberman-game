@@ -1,0 +1,11 @@
+
+<div class="hud flexbox">
+    {% for player in players %}
+        <div class="flexbox case_hud">
+            <p>{{ player.pseudo }} </p>
+            <p>nombre de kill : {{ player.score }} </p>
+        </div>
+
+    {% endfor %}
+</div>
+<a href="{{path('close', {'id_game':id})}}" class="btn-terminer btn btn-danger active">Terminer la partie</a>
