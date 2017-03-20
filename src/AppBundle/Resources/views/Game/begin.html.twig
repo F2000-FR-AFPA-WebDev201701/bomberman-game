@@ -21,8 +21,8 @@
     <script>
 
         $(document).ready(function () {
-
             $(window).keyup(function (event) {
+                event.preventDefault();
                 var keypress = event.which;
                 switch (keypress) {
                     case 90:
