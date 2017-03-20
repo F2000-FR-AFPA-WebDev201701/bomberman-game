@@ -37,9 +37,23 @@ class Board {
      *
      */
     private $players;
+
+    /**
+     * @var array
+     *
+     */
+    private $aBomb;
+
+    /**
+     * @var integer
+     *
+     */
     private $idGame;
 
     public function __construct() {
+        $this->players = [];
+        $this->aBombs = [];
+
         $this->setGrid();
     }
 
@@ -126,17 +140,18 @@ class Board {
      */
     public function setGrid() {
         // Génération de la grille 16X12
-        $aBoard = [];
+        $this->grid = [];
         for ($y = 0; $y <= 12; $y++) {
-            $aBoard[$y] = [];
+            $this->grid[$y] = [];
             for ($x = 0; $x <= 16; $x++) {
-                $aBoard[$y][$x] = new BCase();
-                $aBoard[$y][$x]->setX($x);
-                $aBoard[$y][$x]->setY($y);
+                $this->grid[$y][$x] = new BCase();
+                $this->grid[$y][$x]->setX($x);
+                $this->grid[$y][$x]->setY($y);
             }
         }
-        $this->grid = $this->generateWall($aBoard);
-        $this->grid = $this->generateDestruWall($aBoard);
+
+        $this->generateWall();
+        $this->generateDestruWall();
 
         return $this;
     }
@@ -181,68 +196,73 @@ class Board {
         $this->idGame = $idGame;
     }
 
-    public function generateWall($aBoard) {
+    public function generateWall() {
         for ($y = 0; $y <= 12; $y++) {
             for ($x = 0; $x <= 16; $x++) {
                 if ($y == 0 || $y == 12 || $x == 0 || $x == 16) {
                     $oItem = new Item();
                     $oItem->setNom('wall');
-                    $aBoard[$y][$x]->setItem($oItem);
+
+                    $this->grid[$y][$x]->setItem($oItem);
                 } elseif ($x % 2 == 0 && $y % 2 == 0) {
                     $oItem = new Item();
                     $oItem->setNom('wall');
-                    $aBoard[$y][$x]->setItem($oItem);
+
+                    $this->grid[$y][$x]->setItem($oItem);
                 }
             }
         }
-        return $aBoard;
     }
 
-    public function generateDestruWall($aBoard) {
+    public function generateDestruWall() {
         for ($y = 0; $y <= 12; $y++) {
             for ($x = 0; $x <= 16; $x++) {
                 if ($y > 4 && $y < 8 || $x > 4 && $x < 12) {
-                    if (!$aBoard[$y][$x]->getItem()) {
+                    if (!$this->grid[$y][$x]->getItem()) {
                         $oItem = new Item();
                         $oItem->setNom('destruwall');
-                        $aBoard[$y][$x]->setItem($oItem);
+
+                        $this->grid[$y][$x]->setItem($oItem);
                     }
                 }
             }
         }
-        return $aBoard;
     }
 
-    public function setBomb(Bomb $oBomb, Player $player, $aBoard) {
+    public function setBomb(Player $player) {
+        $oBomb = new Bomb();
+
         $Y = $player->getY();
         $X = $player->getX();
         $oBomb->setX($X);
         $oBomb->setY($Y);
-        $aBoard[$Y][$X]->setBomb($oBomb);
-        $oBomb->setTimestamp(new \DateTime);
+
+        $this->grid[$Y][$X]->setBomb($oBomb);
+
+        $this->aBombs[] = $oBomb;
     }
 
-    public function boom(Bomb $oBomb, $aBoard) {
+    public function boom(Bomb $oBomb) {
 
         $X = $oBomb->getX();
         $Y = $oBomb->getY();
-        $itemLeft = $aBoard[$Y][$X - $oBomb::STRENGTH]->getItem();
-        $itemRight = $aBoard[$Y][$X + $oBomb::STRENGTH]->getItem();
-        $itemUp = $aBoard[$Y - $oBomb::STRENGTH][$X]->getItem();
-        $itemDown = $aBoard[$Y + $oBomb::STRENGTH][$X]->getItem();
+        $itemLeft = $this->grid[$Y][$X - $oBomb::STRENGTH]->getItem();
+        $itemRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getItem();
+        $itemUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getItem();
+        $itemDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getItem();
         if ($itemDown && $itemDown->getNom() != "wall") {
-            $aBoard[$Y + $oBomb::STRENGTH][$X]->setItem(NULL);
+            $this->grid[$Y + $oBomb::STRENGTH][$X]->setItem(NULL);
         }
         if ($itemLeft && $itemLeft->getNom() != "wall") {
-            $aBoard[$Y][$X - $oBomb::STRENGTH]->setItem(NULL);
+            $this->grid[$Y][$X - $oBomb::STRENGTH]->setItem(NULL);
         }
         if ($itemRight && $itemRight->getNom() != "wall") {
-            $aBoard[$Y][$X + $oBomb::STRENGTH]->setItem(NULL);
+            $this->grid[$Y][$X + $oBomb::STRENGTH]->setItem(NULL);
         }
         if ($itemUp && $itemUp->getNom() != "wall") {
-            $aBoard[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
+            $this->grid[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
         }
-        $aBoard[$Y][$X]->setBomb(NULL);
+        $this->grid[$Y][$X]->setBomb(NULL);
     }
 
     public function doAction($action, $id_user) {
@@ -253,11 +273,11 @@ class Board {
                 $playerX = $player->getX();
             }
         }
-        $aBoard = $this->getGrid();
+
         switch ($action) {
             case 'up' :
                 $player->setPrevMouv($action);
-                if (!$aBoard[$playerY - 1][$playerX]->getItem()) {
+                if (!$this->grid[$playerY - 1][$playerX]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY - 1;
                     $player->setY($playerY);
@@ -266,7 +286,7 @@ class Board {
                 break;
             case 'down' :
                 $player->setPrevMouv($action);
-                if (!$aBoard[$playerY + 1][$playerX]->getItem()) {
+                if (!$this->grid[$playerY + 1][$playerX]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY + 1;
                     $player->setY($playerY);
@@ -275,7 +295,7 @@ class Board {
                 break;
             case 'right' :
                 $player->setPrevMouv($action);
-                if (!$aBoard[$playerY][$playerX + 1]->getItem()) {
+                if (!$this->grid[$playerY][$playerX + 1]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX + 1;
                     $player->setX($playerX);
@@ -284,7 +304,7 @@ class Board {
                 break;
             case 'left' :
                 $player->setPrevMouv($action);
-                if (!$aBoard[$playerY][$playerX - 1]->getItem()) {
+                if (!$this->grid[$playerY][$playerX - 1]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX - 1;
                     $player->setX($playerX);
@@ -292,10 +312,16 @@ class Board {
                 }
                 break;
             case 'bomb':
-                $oBomb = new Bomb();
-                $this->setBomb($oBomb, $player, $aBoard);
-                $this->boom($oBomb, $aBoard);
+                $this->setBomb($player);
                 break;
+        }
+    }
+
+    public function doCycle() {
+        foreach ($this->aBombs as $oBomb) {
+            if ($oBomb->isExploded()) {
+                $this->boom($oBomb);
+            }
         }
     }
 
