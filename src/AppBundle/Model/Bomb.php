@@ -17,6 +17,12 @@ class Bomb {
     const STRENGTH = 1;
 
     /**
+     * @var string
+     *
+     */
+    private $timestamp;
+
+    /**
      * @var int
      *
      */
@@ -42,6 +48,14 @@ class Bomb {
 
     function setY($y) {
         $this->y = $y;
+    }
+
+    function getTimestamp() {
+        return $this->timestamp;
+    }
+
+    function setTimestamp($timestamp) {
+        $this->timestamp = $timestamp;
     }
 
 }
