@@ -280,7 +280,6 @@ class Board {
 
         switch ($action) {
             case 'up' :
-                $player->setPrevMouv($action);
                 if (!$this->grid[$playerY - 1][$playerX]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY - 1;
@@ -289,7 +288,6 @@ class Board {
                 }
                 break;
             case 'down' :
-                $player->setPrevMouv($action);
                 if (!$this->grid[$playerY + 1][$playerX]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY + 1;
@@ -298,7 +296,6 @@ class Board {
                 }
                 break;
             case 'right' :
-                $player->setPrevMouv($action);
                 if (!$this->grid[$playerY][$playerX + 1]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX + 1;
@@ -307,7 +304,6 @@ class Board {
                 }
                 break;
             case 'left' :
-                $player->setPrevMouv($action);
                 if (!$this->grid[$playerY][$playerX - 1]->getItem()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX - 1;
