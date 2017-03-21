@@ -115,6 +115,8 @@ class Board {
             $oPlayer = new Player;
             $oPlayer->setX($pl_x);
             $oPlayer->setY($pl_y);
+            $oPlayer->setInitX($pl_x);
+            $oPlayer->setInitY($pl_y);
             $oPlayer->setIdUser($oUser->getId());
             $oPlayer->setPseudo($oUser->getLogin());
 
@@ -258,17 +260,45 @@ class Board {
         $playerRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getPlayer();
         $playerUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getPlayer();
         $playerDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getPlayer();
-        if ($itemDown && $itemDown->getNom() != "wall" || $playerDown) {
+        if ($itemDown && $itemDown->getNom() != "wall") {
             $this->grid[$Y + $oBomb::STRENGTH][$X]->setItem(NULL);
+            $this->grid[$Y + $oBomb::STRENGTH][$X]->setPlayer(NULL);
         }
-        if ($itemLeft && $itemLeft->getNom() != "wall" || $playerLeft) {
+        if ($itemLeft && $itemLeft->getNom() != "wall") {
             $this->grid[$Y][$X - $oBomb::STRENGTH]->setItem(NULL);
+            $this->grid[$Y][$X - $oBomb::STRENGTH]->setPlayer(NULL);
         }
-        if ($itemRight && $itemRight->getNom() != "wall" || $playerRight) {
+        if ($itemRight && $itemRight->getNom() != "wall") {
             $this->grid[$Y][$X + $oBomb::STRENGTH]->setItem(NULL);
+            $this->grid[$Y][$X + $oBomb::STRENGTH]->setPlayer(NULL);
         }
-        if ($itemUp && $itemUp->getNom() != "wall" || $playerUp) {
+        if ($itemUp && $itemUp->getNom() != "wall") {
             $this->grid[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
+            $this->grid[$Y - $oBomb::STRENGTH][$X]->setPlayer(NULL);
+        }
+        if ($playerDown) {
+            $this->grid[$Y + $oBomb::STRENGTH][$X]->setPlayer(NULL);
+            $playerDown->setY($playerDown->getInitY());
+            $playerDown->setX($playerDown->getInitX());
+            $this->grid[$playerDown->getInitY()][$playerDown->getInitX()]->setPlayer($playerDown);
+        }
+        if ($playerLeft) {
+            $this->grid[$Y][$X - $oBomb::STRENGTH]->setPlayer(NULL);
+            $playerLeft->setY($playerLeft->getInitY());
+            $playerLeft->setX($playerLeft->getInitX());
+            $this->grid[$playerLeft->getInitY()][$playerLeft->getInitX()]->setPlayer($playerLeft);
+        }
+        if ($playerRight) {
+            $this->grid[$Y][$X + $oBomb::STRENGTH]->setPlayer(NULL);
+            $playerRight->setY($playerRight->getInitY());
+            $playerRight->setX($playerRight->getInitX());
+            $this->grid[$playerRight->getInitY()][$playerRight->getInitX()]->setPlayer($playerRight);
+        }
+        if ($playerUp) {
+            $this->grid[$Y - $oBomb::STRENGTH][$X]->setPlayer(NULL);
+            $playerUp->setY($playerUp->getInitY());
+            $playerUp->setX($playerUp->getInitX());
+            $this->grid[$playerUp->getInitY()][$playerUp->getInitX()]->setPlayer($playerUp);
         }
         $this->grid[$Y][$X]->setBomb(NULL);
     }
