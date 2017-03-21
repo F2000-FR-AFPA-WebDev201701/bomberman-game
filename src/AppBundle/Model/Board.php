@@ -254,16 +254,20 @@ class Board {
         $itemRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getItem();
         $itemUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getItem();
         $itemDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getItem();
-        if ($itemDown && $itemDown->getNom() != "wall") {
+        $playerLeft = $this->grid[$Y][$X - $oBomb::STRENGTH]->getPlayer();
+        $playerRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getPlayer();
+        $playerUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getPlayer();
+        $playerDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getPlayer();
+        if ($itemDown && $itemDown->getNom() != "wall" || $playerDown) {
             $this->grid[$Y + $oBomb::STRENGTH][$X]->setItem(NULL);
         }
-        if ($itemLeft && $itemLeft->getNom() != "wall") {
+        if ($itemLeft && $itemLeft->getNom() != "wall" || $playerLeft) {
             $this->grid[$Y][$X - $oBomb::STRENGTH]->setItem(NULL);
         }
-        if ($itemRight && $itemRight->getNom() != "wall") {
+        if ($itemRight && $itemRight->getNom() != "wall" || $playerRight) {
             $this->grid[$Y][$X + $oBomb::STRENGTH]->setItem(NULL);
         }
-        if ($itemUp && $itemUp->getNom() != "wall") {
+        if ($itemUp && $itemUp->getNom() != "wall" || $playerUp) {
             $this->grid[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
         }
         $this->grid[$Y][$X]->setBomb(NULL);
