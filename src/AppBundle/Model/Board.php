@@ -42,7 +42,7 @@ class Board {
      * @var array
      *
      */
-    private $aBomb;
+    private $aBombs;
 
     /**
      * @var integer
@@ -55,6 +55,10 @@ class Board {
         $this->aBombs = [];
 
         $this->setGrid();
+    }
+
+    public function getABombs() {
+        return $this->aBombs;
     }
 
     /**
@@ -318,9 +322,10 @@ class Board {
     }
 
     public function doCycle() {
-        foreach ($this->aBombs as $oBomb) {
+        foreach ($this->aBombs as $key => $oBomb) {
             if ($oBomb->isExploded()) {
                 $this->boom($oBomb);
+                unset($this->aBombs[$key]);
             }
         }
     }

@@ -4,7 +4,7 @@
     </div>
 {%endif%}
 
-{% for y, ligne in board%}
+{% for y, ligne in grid%}
     <div class="ligne">
         {% for x, case in ligne %}
             {% set caseSpecificClass = 'field' %}
