@@ -45,6 +45,12 @@ class Board {
     private $aBombs;
 
     /**
+     * @var array
+     *
+     */
+    private $aAnim;
+
+    /**
      * @var integer
      *
      */
@@ -194,6 +200,14 @@ class Board {
         return $this->walls;
     }
 
+    public function getAAnim() {
+        return $this->aAnim;
+    }
+
+    public function setAAnim($aAnim) {
+        $this->aAnim = $aAnim;
+    }
+
     public function getIdGame() {
         return $this->idGame;
     }
@@ -300,6 +314,13 @@ class Board {
             $playerUp->setX($playerUp->getInitX());
             $this->grid[$playerUp->getInitY()][$playerUp->getInitX()]->setPlayer($playerUp);
         }
+        $this->aAnim = [
+            'caseB' => [$Y, $X],
+            'impactL' => [$Y, $X - $oBomb::STRENGTH],
+            'impactR' => [$Y, $X + $oBomb::STRENGTH],
+            'impactU' => [$Y - $oBomb::STRENGTH, $X],
+            'impactD' => [$Y + $oBomb::STRENGTH, $X]
+        ];
         $this->grid[$Y][$X]->setBomb(NULL);
     }
 

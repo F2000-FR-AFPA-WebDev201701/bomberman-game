@@ -4,9 +4,9 @@
     </div>
 {%endif%}
 
-{{ dump(player) }}
+{{ dump(board.getAAnim) }}
 
-{% for y, ligne in grid%}
+{% for y, ligne in board.grid%}
     <div class="ligne">
         {% for x, case in ligne %}
             {% set caseSpecificClass = 'field' %}

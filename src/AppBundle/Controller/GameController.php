@@ -148,7 +148,7 @@ class GameController extends Controller {
         $em->flush();
         $aBoard = $oBoard->getGrid();
 
-        return $this->render('AppBundle:Game:refresh.html.twig', array('player' => $oBoard->getPlayers(), 'grid' => $aBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
+        return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $oBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
 
     /**
