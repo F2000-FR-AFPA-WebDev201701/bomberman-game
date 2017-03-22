@@ -48,7 +48,7 @@ class Board {
      * @var array
      *
      */
-    private $aAnim;
+    private $aExplosions;
 
     /**
      * @var integer
@@ -59,8 +59,13 @@ class Board {
     public function __construct() {
         $this->players = [];
         $this->aBombs = [];
+        $this->aExplosions = [];
 
         $this->setGrid();
+    }
+
+    function getAExplosions() {
+        return $this->aExplosions;
     }
 
     public function getABombs() {
@@ -314,17 +319,37 @@ class Board {
             $playerUp->setX($playerUp->getInitX());
             $this->grid[$playerUp->getInitY()][$playerUp->getInitX()]->setPlayer($playerUp);
         }
-        $this->aAnim = [
-            'caseB' => [$Y, $X],
-            'impactL' => [$Y, $X - $oBomb::STRENGTH],
-            'impactR' => [$Y, $X + $oBomb::STRENGTH],
-            'impactU' => [$Y - $oBomb::STRENGTH, $X],
-            'impactD' => [$Y + $oBomb::STRENGTH, $X]
+
+        $aExplosion = [
+            'origin' => [
+                'x' => $X,
+                'y' => $Y,
+            ],
+            'impacts' => []
         ];
+
+        for ($i = 1; $i <= $oBomb::STRENGTH; $i++) {
+            $aExplosion['impacts'][$i] = $this->getAroundPos($X, $Y, $i);
+        }
+
+        $this->aExplosions[] = $aExplosion;
+        /*
+
+         */
         $this->grid[$Y][$X]->setBomb(NULL);
     }
 
+    private function getAroundPos($X, $Y, $i) {
+        return [
+            ['x' => $X + $i, 'y' => $Y],
+            ['x' => $X - $i, 'y' => $Y],
+            ['x' => $X, 'y' => $Y + $i],
+            ['x' => $X, 'y' => $Y - $i],
+        ];
+    }
+
     public function doAction($action, $id_user) {
+        $this->aExplosions = [];
         foreach ($this->players as $key => $value) {
             if ($id_user == $value->getIdUser()) {
                 $player = $this->players[$key];
