@@ -96,7 +96,7 @@ class Player {
      * @return Player
      */
     public function setScore($score) {
-        $this->score = $score;
+        $this->score += $score;
 
         return $this;
     }
