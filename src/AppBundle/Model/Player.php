@@ -48,6 +48,18 @@ class Player {
      * @var int
      *
      */
+    private $initY;
+
+    /**
+     * @var int
+     *
+     */
+    private $initX;
+
+    /**
+     * @var int
+     *
+     */
     private $idUser;
 
     public function getId() {
@@ -162,6 +174,22 @@ class Player {
      */
     public function getX() {
         return $this->x;
+    }
+
+    public function getInitY() {
+        return $this->initY;
+    }
+
+    public function getInitX() {
+        return $this->initX;
+    }
+
+    public function setInitY($initY) {
+        $this->initY = $initY;
+    }
+
+    public function setInitX($initX) {
+        $this->initX = $initX;
     }
 
     public function getIdUser() {

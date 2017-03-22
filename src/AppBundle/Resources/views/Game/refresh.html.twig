@@ -4,7 +4,7 @@
     </div>
 {%endif%}
 
-{% for y, ligne in grid%}
+{% for y, ligne in board.grid%}
     <div class="ligne">
         {% for x, case in ligne %}
             {% set caseSpecificClass = 'field' %}
@@ -16,6 +16,7 @@
             {% endif %}
 
             <div id="case_{{x}}_{{y}}" class="case {{ caseSpecificClass }} ">
+
                 {% if case.player %}
                     <img class="player" src="{{asset('image/sprites/face.png')}}"/>
                 {% endif %}
@@ -27,3 +28,10 @@
         {% endfor%}
     </div>
 {% endfor %}
+
+<script>
+    {% for explosion in board.getAExplosions %}
+        $('<img />', {'class': 'boom', 'src': '{{asset('image/bomb4.png')}}'}).appendTo('#case_{{ explosion.origin.x }}_{{ explosion.origin.y }}');
+
+    {% endfor %}
+</script>
