@@ -148,3 +148,8 @@ td>a:focus, td>a:hover, td>a {
 .case_hud>p {
     margin-bottom: 0px;
 }
+
+#countdown {
+    font-size: 1.3em;
+    padding: 10px;
+}
