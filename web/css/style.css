@@ -103,11 +103,18 @@ td>a:focus, td>a:hover, td>a {
     filter : blur(5px);
 }
 
+#section_hud {
+    border: solid black 2px;
+    padding: 0;
+}
+
+#finish {
+    border-radius: 0;
+}
+
 .hud {
     background: url("../image/fondHUD.png");
-    height: 475px;
-    border: solid 2px black;
-    border-radius: 2px;
+    height: 436px;
 }
 
 .btn-terminer {

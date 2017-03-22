@@ -11,7 +11,7 @@
             {{ render(controller('AppBundle:Game:refresh',{'id_game':id}))}}
 
         </section>
-        <section class="col-md-4">
+        <section id="section_hud" class="col-md-4">
 
             {{ render(controller('AppBundle:Game:hud',{'id_game':id}))}}
 
@@ -94,7 +94,7 @@
                 });
             }
 
-            setInterval(refresh, 3000);
+            // setInterval(refresh, 3000);
 
             function startTimer(duration, display) {
                 var timer = duration, minutes, seconds;
