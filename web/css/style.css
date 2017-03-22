@@ -44,6 +44,7 @@ body{
 .wall {
     background: url("../image/wall.png") no-repeat;
     background-size: cover;
+    z-index: 3;
 }
 
 .destruwall {
@@ -66,6 +67,14 @@ body{
     top: 0;
     left: 0;
     z-index: 1;
+}
+
+.boom {
+    position: relative;
+    z-index: 2;
+    left: -31px;
+    top: -31px;
+    width: 286%;
 }
 
 .form-item {

@@ -349,7 +349,6 @@ class Board {
     }
 
     public function doAction($action, $id_user) {
-        $this->aExplosions = [];
         foreach ($this->players as $key => $value) {
             if ($id_user == $value->getIdUser()) {
                 $player = $this->players[$key];
@@ -398,6 +397,7 @@ class Board {
     }
 
     public function doCycle() {
+        $this->aExplosions = [];
         foreach ($this->aBombs as $key => $oBomb) {
             if ($oBomb->isExploded()) {
                 $this->boom($oBomb);

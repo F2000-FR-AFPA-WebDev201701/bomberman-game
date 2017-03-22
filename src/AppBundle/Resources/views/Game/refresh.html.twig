@@ -4,8 +4,6 @@
     </div>
 {%endif%}
 
-{{ dump(board.getAExplosions) }}
-
 {% for y, ligne in board.grid%}
     <div class="ligne">
         {% for x, case in ligne %}
@@ -33,10 +31,7 @@
 
 <script>
     {% for explosion in board.getAExplosions %}
-        {% for depth, coords in explosion.impacts %}
-            {% for coord in coords %}
-                $('<img />', {'class': 'boom', 'src': '{{asset('image/boom.png')}}'}).appendTo('#case_{{ coord.x }}_{{ coord.y }}');
-            {% endfor %}
-        {% endfor %}
+        $('<img />', {'class': 'boom', 'src': '{{asset('image/bomb4.png')}}'}).appendTo('#case_{{ explosion.origin.x }}_{{ explosion.origin.y }}');
+
     {% endfor %}
 </script>
