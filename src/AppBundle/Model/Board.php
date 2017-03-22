@@ -268,88 +268,18 @@ class Board {
     }
 
     public function boom(Bomb $oBomb) {
-
         $X = $oBomb->getX();
         $Y = $oBomb->getY();
-        $itemLeft = $this->grid[$Y][$X - $oBomb::STRENGTH]->getItem();
-        $itemRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getItem();
-        $itemUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getItem();
-        $itemDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getItem();
-        $playerLeft = $this->grid[$Y][$X - $oBomb::STRENGTH]->getPlayer();
-        $playerRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getPlayer();
-        $playerUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getPlayer();
-        $playerDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getPlayer();
-        if ($itemDown && $itemDown->getNom() != "wall") {
-            $this->grid[$Y + $oBomb::STRENGTH][$X]->setItem(NULL);
-            $this->grid[$Y + $oBomb::STRENGTH][$X]->setPlayer(NULL);
-        }
-        if ($itemLeft && $itemLeft->getNom() != "wall") {
-            $this->grid[$Y][$X - $oBomb::STRENGTH]->setItem(NULL);
-            $this->grid[$Y][$X - $oBomb::STRENGTH]->setPlayer(NULL);
-        }
-        if ($itemRight && $itemRight->getNom() != "wall") {
-            $this->grid[$Y][$X + $oBomb::STRENGTH]->setItem(NULL);
-            $this->grid[$Y][$X + $oBomb::STRENGTH]->setPlayer(NULL);
-        }
-        if ($itemUp && $itemUp->getNom() != "wall") {
-            $this->grid[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
-            $this->grid[$Y - $oBomb::STRENGTH][$X]->setPlayer(NULL);
-        }
-        if ($playerDown) {
-            $this->grid[$Y + $oBomb::STRENGTH][$X]->setPlayer(NULL);
-            $playerDown->setY($playerDown->getInitY());
-            $playerDown->setX($playerDown->getInitX());
-            $this->grid[$playerDown->getInitY()][$playerDown->getInitX()]->setPlayer($playerDown);
-            $this->doScore($oBomb, $playerDown);
-        }
-        if ($playerLeft) {
-            $this->grid[$Y][$X - $oBomb::STRENGTH]->setPlayer(NULL);
-            $playerLeft->setY($playerLeft->getInitY());
-            $playerLeft->setX($playerLeft->getInitX());
-            $this->grid[$playerLeft->getInitY()][$playerLeft->getInitX()]->setPlayer($playerLeft);
-            $this->doScore($oBomb, $playerLeft);
-        }
-        if ($playerRight) {
-            $this->grid[$Y][$X + $oBomb::STRENGTH]->setPlayer(NULL);
-            $playerRight->setY($playerRight->getInitY());
-            $playerRight->setX($playerRight->getInitX());
-            $this->grid[$playerRight->getInitY()][$playerRight->getInitX()]->setPlayer($playerRight);
-            $this->doScore($oBomb, $playerRight);
-        }
-        if ($playerUp) {
-            $this->grid[$Y - $oBomb::STRENGTH][$X]->setPlayer(NULL);
-            $playerUp->setY($playerUp->getInitY());
-            $playerUp->setX($playerUp->getInitX());
-            $this->grid[$playerUp->getInitY()][$playerUp->getInitX()]->setPlayer($playerUp);
-            $this->doScore($oBomb, $playerUp);
-        }
-
+        $this->boomItem($oBomb);
+        $this->boomPlayer($oBomb);
         $aExplosion = [
             'origin' => [
                 'x' => $X,
                 'y' => $Y,
-            ],
-            'impacts' => []
+            ]
         ];
-
-        for ($i = 1; $i <= $oBomb::STRENGTH; $i++) {
-            $aExplosion['impacts'][$i] = $this->getAroundPos($X, $Y, $i);
-        }
-
         $this->aExplosions[] = $aExplosion;
-        /*
-
-         */
         $this->grid[$Y][$X]->setBomb(NULL);
-    }
-
-    private function getAroundPos($X, $Y, $i) {
-        return [
-            ['x' => $X + $i, 'y' => $Y],
-            ['x' => $X - $i, 'y' => $Y],
-            ['x' => $X, 'y' => $Y + $i],
-            ['x' => $X, 'y' => $Y - $i],
-        ];
     }
 
     public function doAction($action, $id_user) {
@@ -412,6 +342,66 @@ class Board {
 
     private function doScore(Bomb $oBomb, Player $oPlayer) {
         ($oBomb->getIdPlayer() == $oPlayer->getId()) ? $oPlayer->setScore(-1) : $oPlayer->setScore(1);
+    }
+
+    private function boomItem(Bomb $oBomb) {
+        $X = $oBomb->getX();
+        $Y = $oBomb->getY();
+        $itemLeft = $this->grid[$Y][$X - $oBomb::STRENGTH]->getItem();
+        $itemRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getItem();
+        $itemUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getItem();
+        $itemDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getItem();
+        if ($itemDown && $itemDown->getNom() != "wall") {
+            $this->grid[$Y + $oBomb::STRENGTH][$X]->setItem(NULL);
+            $this->grid[$Y + $oBomb::STRENGTH][$X]->setPlayer(NULL);
+        }
+        if ($itemLeft && $itemLeft->getNom() != "wall") {
+            $this->grid[$Y][$X - $oBomb::STRENGTH]->setItem(NULL);
+            $this->grid[$Y][$X - $oBomb::STRENGTH]->setPlayer(NULL);
+        }
+        if ($itemRight && $itemRight->getNom() != "wall") {
+            $this->grid[$Y][$X + $oBomb::STRENGTH]->setItem(NULL);
+            $this->grid[$Y][$X + $oBomb::STRENGTH]->setPlayer(NULL);
+        }
+        if ($itemUp && $itemUp->getNom() != "wall") {
+            $this->grid[$Y - $oBomb::STRENGTH][$X]->setItem(NULL);
+            $this->grid[$Y - $oBomb::STRENGTH][$X]->setPlayer(NULL);
+        }
+    }
+
+    private function boomPlayer(Bomb $oBomb) {
+        $X = $oBomb->getX();
+        $Y = $oBomb->getY();
+        $playerLeft = $this->grid[$Y][$X - $oBomb::STRENGTH]->getPlayer();
+        $playerRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getPlayer();
+        $playerUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getPlayer();
+        $playerDown = $this->grid[$Y + $oBomb::STRENGTH][$X]->getPlayer();
+        if ($playerDown) {
+            $this->grid[$Y + $oBomb::STRENGTH][$X]->setPlayer(NULL);
+            $this->hitPlayer($playerDown);
+            $this->doScore($oBomb, $playerDown);
+        }
+        if ($playerLeft) {
+            $this->grid[$Y][$X - $oBomb::STRENGTH]->setPlayer(NULL);
+            $this->hitPlayer($playerLeft);
+            $this->doScore($oBomb, $playerLeft);
+        }
+        if ($playerRight) {
+            $this->grid[$Y][$X + $oBomb::STRENGTH]->setPlayer(NULL);
+            $this->hitPlayer($playerRight);
+            $this->doScore($oBomb, $playerRight);
+        }
+        if ($playerUp) {
+            $this->grid[$Y - $oBomb::STRENGTH][$X]->setPlayer(NULL);
+            $this->hitPlayer($playerUp);
+            $this->doScore($oBomb, $playerUp);
+        }
+    }
+
+    private function hitPlayer(Player $player) {
+        $player->setY($player->getInitY());
+        $player->setX($player->getInitX());
+        $this->grid[$player->getInitY()][$player->getInitX()]->setPlayer($player);
     }
 
 }
