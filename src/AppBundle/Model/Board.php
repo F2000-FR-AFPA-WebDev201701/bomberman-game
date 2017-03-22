@@ -64,7 +64,7 @@ class Board {
         $this->setGrid();
     }
 
-    function getAExplosions() {
+    public function getAExplosions() {
         return $this->aExplosions;
     }
 
@@ -203,14 +203,6 @@ class Board {
      */
     public function getWalls() {
         return $this->walls;
-    }
-
-    public function getAAnim() {
-        return $this->aAnim;
-    }
-
-    public function setAAnim($aAnim) {
-        $this->aAnim = $aAnim;
     }
 
     public function getIdGame() {
