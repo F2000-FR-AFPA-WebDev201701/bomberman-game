@@ -146,7 +146,6 @@ class GameController extends Controller {
         $seriaBoard = serialize($oBoard);
         $oGame->setData($seriaBoard);
         $em->flush();
-        $aBoard = $oBoard->getGrid();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $oBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
@@ -178,6 +177,16 @@ class GameController extends Controller {
         $em->flush();
 
         return $this->redirectToRoute('lobby');
+    }
+
+    /**
+     * @Route("/end/{players}", name="endGame")
+     */
+    public function endGameAction($players) {
+
+
+
+        return $this->render('AppBundle:Game:endGame.html.twig', array('board' => $players));
     }
 
 }
