@@ -5,6 +5,7 @@
 {% block body %}
     <h2 class="text-center">Let's Play!</h2>
     <div class="row jumbotron">
+        <div id="countdown" class="text-center"></div>
         <section class="col-md-8" id="boardContainer">
 
             {{ render(controller('AppBundle:Game:refresh',{'id_game':id}))}}
@@ -94,6 +95,29 @@
             }
 
             setInterval(refresh, 3000);
+
+            function startTimer(duration, display) {
+                var timer = duration, minutes, seconds;
+                setInterval(function () {
+                    minutes = parseInt(timer / 60, 10);
+                    seconds = parseInt(timer % 60, 10);
+
+                    minutes = minutes < 10 ? "0" + minutes : minutes;
+                    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                    display.text(minutes + ":" + seconds);
+
+                    if (--timer < 0) {
+                        timer = duration;
+                    }
+                }, 1000);
+            }
+
+            jQuery(function ($) {
+                var fiveMinutes = 60 * 5,
+                        display = $('#countdown');
+                startTimer(fiveMinutes, display);
+            });
         });
 
     </script>
