@@ -42,7 +42,7 @@ class User {
      * @var integer
      *
      * @ORM\ManyToOne(targetEntity="Game", inversedBy="users")
-     * @ORM\JoinColumn(name="game_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="game", referencedColumnName="id")
      */
     private $game;
 
