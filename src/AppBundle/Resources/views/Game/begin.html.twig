@@ -92,9 +92,17 @@
                         $('#boardContainer').html(data);
                     }
                 });
+                $.ajax({
+                    async: true,
+                    type: 'POST',
+                    url: '{{ path('hud', {'id_game': id }) }}',
+                    success: function (data) {
+                        $('#section_hud').html(data);
+                    }
+                });
             }
 
-            // setInterval(refresh, 3000);
+            setInterval(refresh, 3000);
 
             function startTimer(duration, display) {
                 var timer = duration, minutes, seconds;
