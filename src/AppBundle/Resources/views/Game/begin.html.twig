@@ -4,6 +4,9 @@
 
 {% block body %}
     <h2 class="text-center">Let's Play!</h2>
+    <audio autoplay="autoplay">
+        <source src="{{asset('son/Demis.mp3')}}" type="audio/mp3" />
+    </audio>
     <div class="row jumbotron">
         <div id="countdown" class="text-center"></div>
         <section class="col-md-8" id="boardContainer">
