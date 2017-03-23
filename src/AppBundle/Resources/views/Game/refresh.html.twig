@@ -27,10 +27,13 @@
         {% endfor%}
     </div>
 {% endfor %}
+<audio id="boomSound">
+    <source src="{{asset('son/boom.mp3')}}" type="audio/mp3" />
+</audio>
 
 <script>
     {% for explosion in board.getAExplosions %}
         $('<img />', {'class': 'boom', 'src': '{{asset('image/bomb4.png')}}'}).appendTo('#case_{{ explosion.origin.x }}_{{ explosion.origin.y }}');
-
+        document.getElementById("boomSound").play();
     {% endfor %}
 </script>
