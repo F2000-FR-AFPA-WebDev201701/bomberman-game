@@ -113,9 +113,9 @@ class Board {
     public function setPlayers($aUsers) {
         $aPos = [
             ['x' => 1, 'y' => 1],
+            ['x' => 15, 'y' => 11],
             ['x' => 15, 'y' => 1],
             ['x' => 1, 'y' => 11],
-            ['x' => 15, 'y' => 11],
         ];
 
         $aBoard = $this->getGrid();
