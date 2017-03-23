@@ -17,26 +17,6 @@
 
         </section>
     </div>
-    <div id="endGame" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-
-            <!-- Modal content-->
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">C'est la victoiiiiiiire !</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Et voici les scores</p>
-                    <img alt="not-bad" src="{{asset('image/Computer-kid.gif'}}">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
 {% endblock %}
 {% block javascripts %}
     <script>
@@ -94,7 +74,6 @@
                             url: "{{ path('play', {'action': 'bomb', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
-                                $('#bomb').attr('src', '{{asset('image/bomb2.png')}}').delay(1000).attr('src', '{{asset('image/bomb3.png')}}').delay(1000);
                             }
                         });
                         break;
@@ -121,7 +100,10 @@
                 });
             }
 
-            setInterval(refresh, 3000);
+            var myInterval = setInterval(function () {
+                refresh();
+            }, 3000);
+
 
             function startTimer(duration, display) {
                 var timer = duration, minutes, seconds;
@@ -135,8 +117,8 @@
                     display.text(minutes + ":" + seconds);
 
                     if (--timer < 0) {
-                        //timer = duration;
-                        $("#endGame").modal();
+                        clearInterval(myInterval);
+                        $("#endGame").modal({backdrop: "static"});
                     }
                 }, 1000);
             }
