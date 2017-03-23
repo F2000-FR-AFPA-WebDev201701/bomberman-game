@@ -108,7 +108,6 @@ class GameController extends Controller {
 
         $repoGame = $this->getDoctrine()->getRepository('AppBundle:Game');
         $oGame = $repoGame->find($id_game);
-
         $repoUser = $this->getDoctrine()->getRepository('AppBundle:User');
         $oUser = $repoUser->find($iIdUser);
 
@@ -121,7 +120,6 @@ class GameController extends Controller {
 
         if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
             $oGame->setStatus(1);
-
             $oBoard = unserialize($oGame->getData());
             $oBoard->setPlayers($oGame->getUsers());
             $sSerial = serialize($oBoard);
@@ -131,7 +129,6 @@ class GameController extends Controller {
 
             return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
         }
-
         return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
 
