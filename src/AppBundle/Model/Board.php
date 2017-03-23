@@ -119,11 +119,14 @@ class Board {
         ];
 
         $aBoard = $this->getGrid();
+        $i = 0;
         foreach ($aUsers as $idx => $oUser) {
             $pl_x = $aPos[$idx]['x'];
             $pl_y = $aPos[$idx]['y'];
+            $i++;
 
             $oPlayer = new Player;
+            $oPlayer->setId($i);
             $oPlayer->setX($pl_x);
             $oPlayer->setY($pl_y);
             $oPlayer->setInitX($pl_x);
