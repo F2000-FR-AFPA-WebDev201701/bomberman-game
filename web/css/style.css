@@ -16,6 +16,9 @@ section {
 
 header {
     background: url("../image/Super-Bomberman-R.jpg") no-repeat 0px -200px;
+    background-size: 100%;
+    width: 100%;
+    margin: auto;
 }
 
 body{
