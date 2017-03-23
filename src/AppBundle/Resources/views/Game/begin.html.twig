@@ -20,7 +20,6 @@
 
         </section>
     </div>
-
 {% endblock %}
 {% block javascripts %}
     <script>
@@ -78,7 +77,6 @@
                             url: "{{ path('play', {'action': 'bomb', 'id_game': id, 'id_user': app.session.get('id_user')}) }}",
                             success: function (data) {
                                 $('#boardContainer').html(data);
-                                $('#bomb').attr('src', '{{asset('image/bomb2.png')}}').delay(1000).attr('src', '{{asset('image/bomb3.png')}}').delay(1000);
                             }
                         });
                         break;
@@ -105,7 +103,10 @@
                 });
             }
 
-            setInterval(refresh, 3000);
+            var myInterval = setInterval(function () {
+                refresh();
+            }, 3000);
+
 
             function startTimer(duration, display) {
                 var timer = duration, minutes, seconds;
@@ -119,13 +120,14 @@
                     display.text(minutes + ":" + seconds);
 
                     if (--timer < 0) {
-                        timer = duration;
+                        clearInterval(myInterval);
+                        $("#endGame").modal({backdrop: "static"});
                     }
                 }, 1000);
             }
 
             jQuery(function ($) {
-                var fiveMinutes = 60 * 5,
+                var fiveMinutes = 60,
                         display = $('#countdown');
                 startTimer(fiveMinutes, display);
             });
