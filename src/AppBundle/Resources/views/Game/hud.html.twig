@@ -37,7 +37,7 @@
 {% block javascripts %}
     <script>
         $('#quitGame').on('click', function () {
-            window.location = '{{ path('close', {'id_game':id}) }}';
+            window.location = '{{ path('index') }}';
         });
     </script>
 {% endblock %}
