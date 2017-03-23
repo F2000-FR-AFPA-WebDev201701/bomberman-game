@@ -33,8 +33,10 @@ class Bomb {
      *
      */
     private $y;
+    private $idPlayer;
 
-    public function __construct() {
+    public function __construct($idPlayer) {
+        $this->idPlayer = $idPlayer;
         $this->timestamp = date('U');
     }
 
@@ -68,6 +70,14 @@ class Bomb {
 
     public function setTimestamp($timestamp) {
         $this->timestamp = $timestamp;
+    }
+
+    public function getIdPlayer() {
+        return $this->idPlayer;
+    }
+
+    public function setIdPlayer($idPlayer) {
+        $this->idPlayer = $idPlayer;
     }
 
 }

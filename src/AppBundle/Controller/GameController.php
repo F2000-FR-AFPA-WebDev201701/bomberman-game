@@ -29,23 +29,49 @@ class GameController extends Controller {
         $oGame = new Game;
         $oForm = $this->createForm(GameType::class, $oGame);
         $oForm->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
 
 
         if ($oForm->isSubmitted() && $oForm->isValid()) {
             $oGame->setStatus(0);
-            $em = $this->getDoctrine()->getManager();
             $em->persist($oGame);
             $em->flush();
             // renvoie sur la route createAction($oGame)
             return $this->redirectToRoute('create', array('id_game' => $oGame->getId()));
         }
 
-        $repo = $this->getDoctrine()->getRepository('AppBundle:Game');
-        $oAllGame = $repo->findAll();
+        $repoGame = $this->getDoctrine()->getRepository('AppBundle:Game');
+        $repoUser = $em->getRepository('AppBundle:User');
+        $oAllGame = $repoGame->findAll();
+
+        $oNewDate = new \DateTime();
+        if ($oAllGame) {
+
+            foreach ($oAllGame as $Game) {
+
+                $timeGame = $Game->getDate();
+                $interval = $timeGame->diff($oNewDate);
+
+                if ($interval->format('%a') >= 10) {
+
+
+                    $oUser = $repoUser->findByGame($Game->getId());
+
+                    foreach ($oUser as $user) {
+                        $user->setGame();
+                    }
+
+                    $em->flush();
+                    $em->remove($Game);
+                    $em->flush();
+                    $oAllGame = $repoGame->findAll();
+                }
+            }
+        }
 
         return array(
             'form' => $oForm->createView(),
-            'allGame' => $oAllGame
+            'allGame' => $oAllGame,
         );
     }
 
@@ -146,7 +172,6 @@ class GameController extends Controller {
         $seriaBoard = serialize($oBoard);
         $oGame->setData($seriaBoard);
         $em->flush();
-        $aBoard = $oBoard->getGrid();
 
         return $this->render('AppBundle:Game:refresh.html.twig', array('board' => $oBoard, 'id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
@@ -171,8 +196,8 @@ class GameController extends Controller {
     public function closeAction($id_game) {
 
         $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('AppBundle:Game');
-        $oGame = $repo->findOneById($id_game);
+        $repoGame = $em->getRepository('AppBundle:Game');
+        $oGame = $repoGame->findOneById($id_game);
 
         $oGame->setStatus(2);
         $em->flush();

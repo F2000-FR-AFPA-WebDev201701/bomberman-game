@@ -16,6 +16,9 @@ section {
 
 header {
     background: url("../image/Super-Bomberman-R.jpg") no-repeat 0px -200px;
+    background-size: 100%;
+    width: 100%;
+    margin: auto;
 }
 
 body{
@@ -103,11 +106,18 @@ td>a:focus, td>a:hover, td>a {
     filter : blur(5px);
 }
 
+#section_hud {
+    border: solid black 2px;
+    padding: 0;
+}
+
+#finish {
+    border-radius: 0;
+}
+
 .hud {
     background: url("../image/fondHUD.png");
-    height: 475px;
-    border: solid 2px black;
-    border-radius: 2px;
+    height: 436px;
 }
 
 .btn-terminer {
@@ -115,7 +125,7 @@ td>a:focus, td>a:hover, td>a {
 }
 
 #attente {
-    z-index: 1;
+    z-index: 5;
     position: absolute;
     color: snow;
     font-size: xx-large;
@@ -147,4 +157,9 @@ td>a:focus, td>a:hover, td>a {
 
 .case_hud>p {
     margin-bottom: 0px;
+}
+
+#countdown {
+    font-size: 1.5em;
+    padding: 10px;
 }
