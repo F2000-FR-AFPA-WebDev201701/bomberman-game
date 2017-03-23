@@ -22,6 +22,12 @@ class Game {
     private $id;
 
     /**
+     *
+     * @ORM\Column(name="date",type="datetime")
+     */
+    private $date;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -62,6 +68,11 @@ class Game {
      */
     public function __construct() {
         $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->date = new \DateTime();
+    }
+
+    function getDate() {
+        return $this->date;
     }
 
     /**
