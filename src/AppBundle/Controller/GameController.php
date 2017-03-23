@@ -179,14 +179,4 @@ class GameController extends Controller {
         return $this->redirectToRoute('lobby');
     }
 
-    /**
-     * @Route("/end/{players}", name="endGame")
-     */
-    public function endGameAction($players) {
-
-
-
-        return $this->render('AppBundle:Game:endGame.html.twig', array('board' => $players));
-    }
-
 }

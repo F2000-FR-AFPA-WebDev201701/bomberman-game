@@ -17,7 +17,26 @@
 
         </section>
     </div>
+    <div id="endGame" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">C'est la victoiiiiiiire !</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Et voici les scores</p>
+                    <img alt="not-bad" src="{{asset('image/Computer-kid.gif'}}">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
 {% block javascripts %}
     <script>
@@ -116,13 +135,14 @@
                     display.text(minutes + ":" + seconds);
 
                     if (--timer < 0) {
-                        timer = duration;
+                        //timer = duration;
+                        $("#endGame").modal();
                     }
                 }, 1000);
             }
 
             jQuery(function ($) {
-                var fiveMinutes = 60 * 5,
+                var fiveMinutes = 60,
                         display = $('#countdown');
                 startTimer(fiveMinutes, display);
             });
