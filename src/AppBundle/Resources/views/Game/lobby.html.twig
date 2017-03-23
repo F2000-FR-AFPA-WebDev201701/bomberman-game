@@ -1,6 +1,9 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
+    <audio autoplay="autoplay" loop="loop">
+        <source src="{{asset('son/Shooting_Stars1.mp3')}}" type="audio/mp3" />
+    </audio>
     <div class="row well">
         {% if not app.request.session.get('isConnected')%}
             <h3 class="texte-center">Vous devez être connecté pour jouer</h3>
