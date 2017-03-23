@@ -119,11 +119,14 @@ class Board {
         ];
 
         $aBoard = $this->getGrid();
+        $i = 0;
         foreach ($aUsers as $idx => $oUser) {
             $pl_x = $aPos[$idx]['x'];
             $pl_y = $aPos[$idx]['y'];
+            $i++;
 
             $oPlayer = new Player;
+            $oPlayer->setId($i);
             $oPlayer->setX($pl_x);
             $oPlayer->setY($pl_y);
             $oPlayer->setInitX($pl_x);
@@ -285,7 +288,7 @@ class Board {
 
         switch ($action) {
             case 'up' :
-                if (!$this->grid[$playerY - 1][$playerX]->getItem()) {
+                if (!$this->grid[$playerY - 1][$playerX]->getItem() && !$this->grid[$playerY - 1][$playerX]->getBomb()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY - 1;
                     $player->setY($playerY);
@@ -293,7 +296,7 @@ class Board {
                 }
                 break;
             case 'down' :
-                if (!$this->grid[$playerY + 1][$playerX]->getItem()) {
+                if (!$this->grid[$playerY + 1][$playerX]->getItem() && !$this->grid[$playerY + 1][$playerX]->getBomb()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerY = $playerY + 1;
                     $player->setY($playerY);
@@ -301,7 +304,7 @@ class Board {
                 }
                 break;
             case 'right' :
-                if (!$this->grid[$playerY][$playerX + 1]->getItem()) {
+                if (!$this->grid[$playerY][$playerX + 1]->getItem() && !$this->grid[$playerY][$playerX + 1]->getBomb()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX + 1;
                     $player->setX($playerX);
@@ -309,7 +312,7 @@ class Board {
                 }
                 break;
             case 'left' :
-                if (!$this->grid[$playerY][$playerX - 1]->getItem()) {
+                if (!$this->grid[$playerY][$playerX - 1]->getItem() && !$this->grid[$playerY][$playerX - 1]->getBomb()) {
                     $this->grid[$playerY][$playerX]->setPlayer(NULL);
                     $playerX = $playerX - 1;
                     $player->setX($playerX);
@@ -364,6 +367,7 @@ class Board {
     private function boomPlayer(Bomb $oBomb) {
         $X = $oBomb->getX();
         $Y = $oBomb->getY();
+        $playerIn = $this->grid[$Y][$X]->getPlayer();
         $playerLeft = $this->grid[$Y][$X - $oBomb::STRENGTH]->getPlayer();
         $playerRight = $this->grid[$Y][$X + $oBomb::STRENGTH]->getPlayer();
         $playerUp = $this->grid[$Y - $oBomb::STRENGTH][$X]->getPlayer();
@@ -387,6 +391,11 @@ class Board {
             $this->grid[$Y - $oBomb::STRENGTH][$X]->setPlayer(NULL);
             $this->hitPlayer($playerUp);
             $this->doScore($oBomb, $playerUp);
+        }
+        if ($playerIn) {
+            $this->grid[$Y][$X]->setPlayer(NULL);
+            $this->hitPlayer($playerIn);
+            $this->doScore($oBomb, $playerIn);
         }
     }
 

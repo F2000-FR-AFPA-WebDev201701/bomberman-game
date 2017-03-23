@@ -52,7 +52,7 @@ class GameController extends Controller {
                 $timeGame = $Game->getDate();
                 $interval = $timeGame->diff($oNewDate);
 
-                if ($interval->format('%i') >= 10) {
+                if ($interval->format('%a') >= 10) {
 
 
                     $oUser = $repoUser->findByGame($Game->getId());
@@ -203,16 +203,6 @@ class GameController extends Controller {
         $em->flush();
 
         return $this->redirectToRoute('lobby');
-    }
-
-    /**
-     * @Route("/end/{players}", name="endGame")
-     */
-    public function endGameAction($players) {
-
-
-
-        return $this->render('AppBundle:Game:endGame.html.twig', array('board' => $players));
     }
 
 }

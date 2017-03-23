@@ -17,7 +17,7 @@
             <div id="case_{{x}}_{{y}}" class="case {{ caseSpecificClass }} ">
 
                 {% if case.player %}
-                    <img class="player" src="{{asset('image/sprites/face.png')}}"/>
+                    <img class="player" src="{{asset('image/sprites/player' ~ case.player.id ~ '.png')}}"/>
                 {% endif %}
 
                 {% if case.bomb %}
