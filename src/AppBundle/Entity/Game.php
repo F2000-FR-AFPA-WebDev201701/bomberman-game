@@ -71,7 +71,7 @@ class Game {
         $this->date = new \DateTime();
     }
 
-    function getDate() {
+    public function getDate() {
         return $this->date;
     }
 

@@ -15,6 +15,13 @@ class DefaultController extends Controller {
     }
 
     /**
+     * @Route("/lobby", name="lobby")
+     */
+    public function lobbyAction() {
+        return $this->render("AppBundle::lobby.html.twig");
+    }
+
+    /**
      * @Route("/mentions", name="mentions")
      */
     public function mentionsAction() {

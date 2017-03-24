@@ -9,6 +9,7 @@
     font-style: normal;
 
 }
+/* -------------- Général --------------  */
 
 section {
     margin-bottom: 10px;
@@ -19,11 +20,16 @@ header {
     background-size: 100%;
     width: 100%;
     margin: auto;
+    max-height: 400px;
+    min-height: 220px;
 }
 
 body{
     height: 800px;
 }
+
+
+/* --------------------- Board ------------------------ */
 
 .jeu {
     display: flex;
@@ -85,6 +91,8 @@ body{
     margin: 2px;
 }
 
+/* --------------------- Lobby --------------------------*/
+
 principal-container {
     margin-top: 15px;
 }
@@ -102,9 +110,11 @@ td>a:focus, td>a:hover, td>a {
     text-decoration: none;
 }
 
-.blur {
-    filter : blur(5px);
+#reload {
+    margin: 0.3em;
 }
+
+/* ------------------- HUD -----------------------*/
 
 #section_hud {
     border: solid black 2px;
@@ -162,4 +172,8 @@ td>a:focus, td>a:hover, td>a {
 #countdown {
     font-size: 1.5em;
     padding: 10px;
+}
+
+.text-center{
+    text-align: center;
 }

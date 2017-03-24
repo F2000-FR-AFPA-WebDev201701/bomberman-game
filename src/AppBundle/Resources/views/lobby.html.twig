@@ -1,0 +1,21 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block body %}
+    <audio autoplay="autoplay" loop="loop">
+        <source src="{{asset('son/Shooting_Stars1.mp3')}}" type="audio/mp3" />
+    </audio>
+    <div class="row well">
+        {{ render(controller('AppBundle:Game:lobbyForm'))}}
+    </div>
+    <div class="row">
+        <button id="reload" class="btn btn-success">Recharger</>
+    </div>
+    <div class="row">
+        {{ render(controller('AppBundle:Game:lobbyTab'))}}
+    </div>
+    <script>
+        $("#reload").click(function () {
+            location.reload();
+        });
+    </script>
+{% endblock %}

@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Game;
 use AppBundle\Form\Type\GameType;
 use AppBundle\Model\Board;
+use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,6 +16,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/begin/{id}", name="begin")
+     * @Method({"GET", "POST"})
      */
     public function beginAction($id) {
         $iGameId = $id;
@@ -21,10 +24,11 @@ class GameController extends Controller {
     }
 
     /**
-     * @Route("/lobby", name="lobby")
+     * @Route("/lobbyForm", name="lobbyForm")
+     * @Method({"GET", "POST"})
      * @Template
      */
-    public function lobbyAction(Request $request) {
+    public function lobbyFormAction(Request $request) {
 
         $oGame = new Game;
         $oForm = $this->createForm(GameType::class, $oGame);
@@ -36,15 +40,21 @@ class GameController extends Controller {
             $oGame->setStatus(0);
             $em->persist($oGame);
             $em->flush();
-            // renvoie sur la route createAction($oGame)
+// renvoie sur la route createAction($oGame)
             return $this->redirectToRoute('create', array('id_game' => $oGame->getId()));
         }
 
-        $repoGame = $this->getDoctrine()->getRepository('AppBundle:Game');
-        $repoUser = $em->getRepository('AppBundle:User');
-        $oAllGame = $repoGame->findAll();
 
-        $oNewDate = new \DateTime();
+
+        return array(
+            'form' => $oForm->createView(),
+        );
+    }
+
+    private function deleteGames($em, $oAllGame, $repoUser) {
+
+        $oNewDate = new DateTime();
+
         if ($oAllGame) {
 
             foreach ($oAllGame as $Game) {
@@ -64,19 +74,36 @@ class GameController extends Controller {
                     $em->flush();
                     $em->remove($Game);
                     $em->flush();
-                    $oAllGame = $repoGame->findAll();
                 }
             }
         }
+    }
+
+    /**
+     * @Route("/lobbyTab", name="lobbyTab")
+     * @Method({"GET", "POST"})
+     * @Template
+     */
+    public function lobbyTabAction() {
+
+        $em = $this->getDoctrine()->getManager();
+        $repoGame = $this->getDoctrine()->getRepository('AppBundle:Game');
+        $repoUser = $em->getRepository('AppBundle:User');
+        $oAllGame = $repoGame->findAll();
+
+        $this->deleteGames($em, $oAllGame, $repoUser);
+
+
+        $oAllGame = $repoGame->findAll();
 
         return array(
-            'form' => $oForm->createView(),
             'allGame' => $oAllGame,
         );
     }
 
     /**
      * @Route("/create/{id_game}", name="create")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function createAction($id_game) {
@@ -99,16 +126,15 @@ class GameController extends Controller {
 
     /**
      * @Route("/join/{id_game}", name="join")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function joinAction($id_game, Request $request) {
-        //recup game et user en BDD
         $em = $this->getDoctrine()->getManager();
         $iIdUser = $request->getSession()->get('id_user');
 
         $repoGame = $this->getDoctrine()->getRepository('AppBundle:Game');
         $oGame = $repoGame->find($id_game);
-
         $repoUser = $this->getDoctrine()->getRepository('AppBundle:User');
         $oUser = $repoUser->find($iIdUser);
 
@@ -121,34 +147,32 @@ class GameController extends Controller {
 
         if ($oGame->getNbPlayers() == count($oGame->getUsers())) {
             $oGame->setStatus(1);
-
             $oBoard = unserialize($oGame->getData());
             $oBoard->setPlayers($oGame->getUsers());
-            $sSerial = serialize($oBoard);
-            $oGame->setData($sSerial);
+            $oGame->setData(serialize($oBoard));
 
             $em->flush();
 
             return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
         }
-
         return $this->redirectToRoute('begin', array('id' => $oGame->getId(), 'status' => $oGame->getStatus()));
     }
 
     /**
      * @Route("/play/{action}/{id_game}/{id_user}", name="play")
+     * @Method({"GET", "POST"})
      */
     public function playAction($action, $id_game, $id_user) {
-        //recup game en BDD
+//recup game en BDD
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('AppBundle:Game');
         $oGame = $repo->findOneById($id_game);
 
-        //unserialize $oGame->data
+//unserialize $oGame->data
         $oBoard = unserialize($oGame->getData());
-        //test doAction
+//test doAction
         $oBoard->doAction($action, $id_user);
-        //renvoie en BDD
+//renvoie en BDD
         $seriaBoard = serialize($oBoard);
         $oGame->setData($seriaBoard);
         $em->flush();
@@ -159,6 +183,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/refresh/{id_game}", name="refresh")
+     * @Method({"GET", "POST"})
      */
     public function refreshAction($id_game) {
 
@@ -168,7 +193,7 @@ class GameController extends Controller {
 
         $oBoard = unserialize($oGame->getData());
         $oBoard->doCycle();
-        //renvoie en BDD
+//renvoie en BDD
         $seriaBoard = serialize($oBoard);
         $oGame->setData($seriaBoard);
         $em->flush();
@@ -178,6 +203,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/hud/{id_game}", name="hud")
+     * @Method({"GET", "POST"})
      */
     public function hudAction($id_game) {
 
@@ -192,6 +218,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/close/{id_game}", name="close")
+     * @Method({"GET", "POST"})
      */
     public function closeAction($id_game) {
 
