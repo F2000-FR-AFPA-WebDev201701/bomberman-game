@@ -173,3 +173,7 @@ td>a:focus, td>a:hover, td>a {
     font-size: 1.5em;
     padding: 10px;
 }
+
+.text-center{
+    text-align: center;
+}
