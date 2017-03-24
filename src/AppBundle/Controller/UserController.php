@@ -16,6 +16,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/login", name="login")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function loginAction(Request $request) {
@@ -45,6 +46,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/modifUser", name="modifUser")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function modifUserAction(Request $request) {
@@ -70,6 +72,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/createUser", name="createUser")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function createUserAction(Request $request) {
@@ -95,6 +98,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/logout", name="logout")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function logoutAction(Request $request) {

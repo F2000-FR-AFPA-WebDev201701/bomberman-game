@@ -14,6 +14,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/begin/{id}", name="begin")
+     * @Method({"GET", "POST"})
      */
     public function beginAction($id) {
         $iGameId = $id;
@@ -22,6 +23,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/lobby", name="lobby")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function lobbyAction(Request $request) {
@@ -77,6 +79,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/create/{id_game}", name="create")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function createAction($id_game) {
@@ -99,6 +102,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/join/{id_game}", name="join")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function joinAction($id_game, Request $request) {
@@ -132,6 +136,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/play/{action}/{id_game}/{id_user}", name="play")
+     * @Method({"GET", "POST"})
      */
     public function playAction($action, $id_game, $id_user) {
         //recup game en BDD
@@ -154,6 +159,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/refresh/{id_game}", name="refresh")
+     * @Method({"GET", "POST"})
      */
     public function refreshAction($id_game) {
 
@@ -173,6 +179,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/hud/{id_game}", name="hud")
+     * @Method({"GET", "POST"})
      */
     public function hudAction($id_game) {
 
@@ -187,6 +194,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/close/{id_game}", name="close")
+     * @Method({"GET", "POST"})
      */
     public function closeAction($id_game) {
 
