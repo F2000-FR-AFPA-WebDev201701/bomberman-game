@@ -30,6 +30,9 @@
 
     {% endif %}
     <div class="row">
+        <button id="reload" class="btn btn-success">Recharger</>
+    </div>
+    <div class="row">
         <table id="lobby" class="col-md-12 text-center">
             <tr>
 
@@ -62,4 +65,10 @@
             {% endfor %}
         </table>
     </div>
+    <script>
+        $("#reload").click(function () {
+            console.log('hey!');
+            location.reload();
+        });
+    </script>
 {% endblock %}
