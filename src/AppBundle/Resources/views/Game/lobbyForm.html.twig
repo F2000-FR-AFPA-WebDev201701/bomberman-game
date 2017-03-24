@@ -1,0 +1,22 @@
+{% if not app.request.session.get('isConnected')%}
+    <h3 class="texte-center">Vous devez être connecté pour jouer</h3>
+{% else %}
+    <h3>Créez votre partie !!!</h3>
+
+    {{form_start(form, {'action' : path('lobbyForm')} ) }}
+    <div class="form-item">
+        {{form_widget(form.name, {'attr': {'placeholder': 'Nom de la partie'}})}}
+    </div>
+    <div class="form-item">
+        {{ form_label (form.nbPlayers, 'Nombre de joueurs', {'label_attr': {'class': 'attr'}}) }}
+        {{form_widget(form.nbPlayers)}}
+    </div>
+    <div class="form-item">
+        {% if app.request.session.get('isConnected')%}
+            {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary active'}} )}}
+        {% else %}
+            {{form_widget(form.create, {'attr': {'class': 'btn-md btn-primary disabled', 'disabled': 'disabled'}} )}}
+        {% endif %}
+    </div>
+    {{form_end(form)}}
+{% endif %}
