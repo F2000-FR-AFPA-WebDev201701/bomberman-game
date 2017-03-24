@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Game;
 use AppBundle\Form\Type\GameType;
 use AppBundle\Model\Board;
+use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -59,7 +61,7 @@ class GameController extends Controller {
 
     private function deleteGames($em, $oAllGame, $repoUser) {
 
-        $oNewDate = new \DateTime();
+        $oNewDate = new DateTime();
 
         if ($oAllGame) {
 

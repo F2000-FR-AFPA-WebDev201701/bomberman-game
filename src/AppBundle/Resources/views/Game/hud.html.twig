@@ -2,7 +2,7 @@
 <div class="hud flexbox">
     {% for player in players %}
         <div class="flexbox case_hud">
-            <p>{{ player.pseudo }} </p>
+            <p><img src="{{asset('image/sprites/player' ~ player.id ~ '.png')}}"/> {{ player.pseudo }}</p>
             <p>nombre de kill : {{ player.score }} </p>
         </div>
 
