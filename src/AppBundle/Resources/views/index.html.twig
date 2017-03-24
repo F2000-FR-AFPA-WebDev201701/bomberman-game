@@ -1,27 +1,25 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body %}
-    <h2 class="text-center">Le jeu</h2>
+    <h2 class="text-center">Bienvenue sur BomberManGame !</h2>
     <audio autoplay="autoplay" loop="loop">
         <source src="{{asset('son/Bomba.mp3')}}" type="audio/mp3" />
     </audio>
     <section>
-        <p>Bomberman est un jeux vidéo multi où les joueurs incarnent un poseur de bombes,
-            le but étant de faire exploser les adversaires pour gagner.</p>
+        <p>Partez à la découverte de ce <strong>SPECTACULAIRE</strong> Bomberman-like développé sous Symfony.
+            L'objectif de ce jeu (dont l'origine remonte aux années 80) est de poser des bombes
+            afin de détruire ses adversaires. Le joueur ayant le plus de points gagne la partie à la fin du temps imparti.</p>
     </section>
     <section>
         <div class="row">
-            <img class="col-md-4 col-md-offset-1" src="{{asset('image/Bomberman_.png')}}" title="screenshot" alt="screenshot"/>
-            <img class="col-md-4 col-md-offset-1" src="{{asset('image/Bomberman_.png')}}" title="screenshot" alt="screenshot"/>
-        </div>
-    </section>
-    <section>
-        <div class="row">
-            <img class="col-md-4 col-md-offset-1" src="{{asset('image/Bomberman_.png')}}" title="screenshot" alt="screenshot"/>
-            <p class="col-md-4 col-md-offset-1">
-                Modern versions of assistive technologies will announce CSS generated content,
-                as well as specific Unicode characters. To avoid unintended and confusing output in screen readers
-            </p>
+            <img class="col-md-4" src="{{asset('image/capture_ecran_jeu.png')}}" title="screenshot" alt="screenshot"/>
+            <p class="col-md-4">Une partie dure 5 min, le nombre de bombes est illimité et les touches sont les suivantes :</p>
+            <div class="col-md-4">
+                <img src="" title="Z" alt="Z"/>
+                <img src="" title="Q" alt="Q"/>
+                <img src="" title="S" alt="S"/>
+                <img src="" title="D" alt="D"/>
+            </div>
         </div>
     </section>
 {% endblock %}
