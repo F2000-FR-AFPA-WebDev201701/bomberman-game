@@ -46,7 +46,21 @@ class GameController extends Controller {
         $repoUser = $em->getRepository('AppBundle:User');
         $oAllGame = $repoGame->findAll();
 
+        $this->deleteGames($em, $oAllGame, $repoUser);
+
+
+        $oAllGame = $repoGame->findAll();
+
+        return array(
+            'form' => $oForm->createView(),
+            'allGame' => $oAllGame,
+        );
+    }
+
+    private function deleteGames($em, $oAllGame, $repoUser) {
+
         $oNewDate = new \DateTime();
+
         if ($oAllGame) {
 
             foreach ($oAllGame as $Game) {
@@ -66,15 +80,9 @@ class GameController extends Controller {
                     $em->flush();
                     $em->remove($Game);
                     $em->flush();
-                    $oAllGame = $repoGame->findAll();
                 }
             }
         }
-
-        return array(
-            'form' => $oForm->createView(),
-            'allGame' => $oAllGame,
-        );
     }
 
     /**
