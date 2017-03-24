@@ -102,7 +102,6 @@ class GameController extends Controller {
      * @Template
      */
     public function joinAction($id_game, Request $request) {
-        //recup game et user en BDD
         $em = $this->getDoctrine()->getManager();
         $iIdUser = $request->getSession()->get('id_user');
 
@@ -122,8 +121,7 @@ class GameController extends Controller {
             $oGame->setStatus(1);
             $oBoard = unserialize($oGame->getData());
             $oBoard->setPlayers($oGame->getUsers());
-            $sSerial = serialize($oBoard);
-            $oGame->setData($sSerial);
+            $oGame->setData(serialize($oBoard));
 
             $em->flush();
 
