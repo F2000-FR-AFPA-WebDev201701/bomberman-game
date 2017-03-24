@@ -41,7 +41,7 @@ class Bomb {
     }
 
     public function isExploded() {
-        $sAdd = $this->timestamp + 10;
+        $sAdd = $this->timestamp + 4;
         if (date('U') >= $sAdd) {
             return true;
         }

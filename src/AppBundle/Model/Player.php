@@ -62,6 +62,10 @@ class Player {
      */
     private $idUser;
 
+    public function __construct() {
+        $this->score = 0;
+    }
+
     public function getId() {
         return $this->id;
     }
