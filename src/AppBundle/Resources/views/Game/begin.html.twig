@@ -125,12 +125,13 @@
                     }
                 }, 1000);
             }
-
-            jQuery(function ($) {
-                var fiveMinutes = 60 * 5,
-                        display = $('#countdown');
-                startTimer(fiveMinutes, display);
-            });
+            if ({{app.request.query.get('status')}} == 1) {
+                jQuery(function ($) {
+                    var fiveMinutes = 60 * 5,
+                            display = $('#countdown');
+                    startTimer(fiveMinutes, display);
+                });
+            }
         });
 
     </script>
