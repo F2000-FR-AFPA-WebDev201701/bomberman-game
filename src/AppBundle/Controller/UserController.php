@@ -7,6 +7,7 @@ use AppBundle\Form\Type\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -73,7 +74,7 @@ class UserController extends Controller {
      */
     public function createUserAction(Request $request) {
         $oUserForm = new User;
-        $oForm = $this->createFormBuilder($oUserForm)->add('login', TextType::class)->add('password', TextType::class)->add('save', SubmitType::class, array('label' => 'Soumettre'))->getForm();
+        $oForm = $this->createFormBuilder($oUserForm)->add('login', TextType::class)->add('password', PasswordType::class)->add('save', SubmitType::class, array('label' => 'Soumettre'))->getForm();
         $oForm->handleRequest($request);
         if ($oForm->isSubmitted() && $oForm->isValid()) {
             $repo = $this->getDoctrine()->getRepository('AppBundle:User');
