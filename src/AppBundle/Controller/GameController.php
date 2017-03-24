@@ -5,6 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Game;
 use AppBundle\Form\Type\GameType;
 use AppBundle\Model\Board;
+use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,6 +16,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/begin/{id}", name="begin")
+     * @Method({"GET", "POST"})
      */
     public function beginAction($id) {
         $iGameId = $id;
@@ -22,6 +25,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/lobbyForm", name="lobbyForm")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function lobbyFormAction(Request $request) {
@@ -49,7 +53,7 @@ class GameController extends Controller {
 
     private function deleteGames($em, $oAllGame, $repoUser) {
 
-        $oNewDate = new \DateTime();
+        $oNewDate = new DateTime();
 
         if ($oAllGame) {
 
@@ -77,6 +81,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/lobbyTab", name="lobbyTab")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function lobbyTabAction() {
@@ -98,6 +103,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/create/{id_game}", name="create")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function createAction($id_game) {
@@ -120,6 +126,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/join/{id_game}", name="join")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function joinAction($id_game, Request $request) {
@@ -153,6 +160,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/play/{action}/{id_game}/{id_user}", name="play")
+     * @Method({"GET", "POST"})
      */
     public function playAction($action, $id_game, $id_user) {
 //recup game en BDD
@@ -175,6 +183,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/refresh/{id_game}", name="refresh")
+     * @Method({"GET", "POST"})
      */
     public function refreshAction($id_game) {
 
@@ -194,6 +203,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/hud/{id_game}", name="hud")
+     * @Method({"GET", "POST"})
      */
     public function hudAction($id_game) {
 
@@ -208,6 +218,7 @@ class GameController extends Controller {
 
     /**
      * @Route("/close/{id_game}", name="close")
+     * @Method({"GET", "POST"})
      */
     public function closeAction($id_game) {
 

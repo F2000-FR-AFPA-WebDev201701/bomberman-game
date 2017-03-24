@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\Type\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,6 +17,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/login", name="login")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function loginAction(Request $request) {
@@ -45,6 +47,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/modifUser", name="modifUser")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function modifUserAction(Request $request) {
@@ -70,6 +73,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/createUser", name="createUser")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function createUserAction(Request $request) {
@@ -95,6 +99,7 @@ class UserController extends Controller {
 
     /**
      * @Route("/logout", name="logout")
+     * @Method({"GET", "POST"})
      * @Template
      */
     public function logoutAction(Request $request) {

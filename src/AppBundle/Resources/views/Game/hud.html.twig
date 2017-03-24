@@ -2,7 +2,7 @@
 <div class="hud flexbox">
     {% for player in players %}
         <div class="flexbox case_hud">
-            <p>{{ player.pseudo }} </p>
+            <p><img src="{{asset('image/sprites/player' ~ player.id ~ '.png')}}"/> {{ player.pseudo }}</p>
             <p>nombre de kill : {{ player.score }} </p>
         </div>
 
@@ -13,14 +13,14 @@
 
 
 <div id="endGame" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">C'est la fin !</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body text-center">
                 <p>Et voici les scores</p>
                 {% for player in players %}
                     <p>{{ player.pseudo }} : {{ player.score }} </p>
