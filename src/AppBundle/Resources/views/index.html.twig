@@ -6,20 +6,26 @@
         <source src="{{asset('son/Bomba.mp3')}}" type="audio/mp3" />
     </audio>
     <section>
-        <p>Partez à la découverte de ce <strong>SPECTACULAIRE</strong> Bomberman-like développé sous Symfony.
-            L'objectif de ce jeu (dont l'origine remonte aux années 80) est de poser des bombes
-            afin de détruire ses adversaires. Le joueur ayant le plus de points gagne la partie à la fin du temps imparti.</p>
+        <p>Partez à la découverte de ce <strong>SPECTACULAIRE</strong> Bomberman-like développé sous Symfony.</p>
     </section>
     <section>
         <div class="row">
-            <img class="col-md-4" src="{{asset('image/capture_ecran_jeu.png')}}" title="screenshot" alt="screenshot"/>
-            <p class="col-md-4">Une partie dure 5 min, le nombre de bombes est illimité et les touches sont les suivantes :</p>
-            <div class="col-md-4">
-                <img src="" title="Z" alt="Z"/>
-                <img src="" title="Q" alt="Q"/>
-                <img src="" title="S" alt="S"/>
-                <img src="" title="D" alt="D"/>
+            <img class="col-md-6" src="{{asset('image/capture_ecran_jeu.png')}}" title="screenshot" alt="screenshot"/>
+
+            <div class="col-md-offset-1 col-md-5">
+                <p>L'objectif de ce jeu (dont l'origine remonte aux années 80) est de poser des bombes
+                    afin de <strong>détruire ses adversaires</strong> (les parties comportent <strong>entre 2 et 4 joueurs</strong>).</p>
+                <p>Le joueur ayant le plus de points gagne la partie à la fin du temps imparti.
+                    Une partie dure <strong>5 min</strong> et il n'y a pas de limites au nombre de <strong>bombes à placer</strong> !</p>
+                <p>Bon jeu à tous !</p>
             </div>
         </div>
-    </section>
+        <div class="row">
+            <span class="col-md-offset-1 col-md-2">Touches pour se déplacer...</span>
+            <img class="col-md-2 col-md-offset-1" src="{{asset('image/zqsd_blue_cherry_mx_large.jpg')}}" title="Touches" alt="ZQSD"/>
+            <span class="col-md-offset-1 col-md-2">...et pour poser la bombe !</span>
+            <img class="col-md-2 col-md-offset-1" src="{{asset('image/spacebar.png')}}" title="Spacebar" alt="spacebar"/>
+        </div>
+    </div>
+</section>
 {% endblock %}

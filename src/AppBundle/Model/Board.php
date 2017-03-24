@@ -336,7 +336,15 @@ class Board {
     }
 
     private function doScore(Bomb $oBomb, Player $oPlayer) {
-        ($oBomb->getIdPlayer() == $oPlayer->getId()) ? $oPlayer->setScore(-1) : $oPlayer->setScore(1);
+        if ($oBomb->getIdPlayer() == $oPlayer->getId()) {
+            $oPlayer->setScore(-1);
+        } else {
+            foreach ($this->players as $Player) {
+                if ($oBomb->getIdPlayer() == $Player->getId()) {
+                    $Player->setScore(1);
+                }
+            }
+        }
     }
 
     private function boomItem(Bomb $oBomb) {
